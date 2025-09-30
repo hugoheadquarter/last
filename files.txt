@@ -36,7 +36,7 @@ class Config:
     IMAGE_TOP_PADDING = 150
     TEXT_START_Y = 1270  # 150 + 1080 + 40
     TEXT_SPACING = 78    # 30px between lines + 48px font size
-    FONT_SIZE = 48
+    FONT_SIZE = 50
     TEXT_COLOR = (255, 255, 255)  # White
     
     @classmethod
@@ -125,6 +125,63 @@ class DataRetriever:
             self.supabase.download_audio_file(song.audio_file_path, audio_path)
         
         return song, all_lyrics, target_lyrics, audio_path
+===./agents/reference_selector.py===
+from utils.claude_client import ClaudeClient
+from models.data_models import LyricLine, StyleGuide
+from typing import List
+from pathlib import Path
+
+class ReferenceSelector:
+    def __init__(self):
+        self.claude = ClaudeClient()
+        
+    def select_references(self, 
+                        previous_prompts: List[str],
+                        previous_paths: List[Path],
+                        current_lyric: dict,
+                        style_guide: StyleGuide,
+                        line_number: int) -> dict:
+        """
+        Intelligently select 1-3 reference images that provide style consistency
+        without causing compositional repetition
+        """
+        
+        if len(previous_prompts) == 0:
+            return {'paths': [], 'indices': [], 'reasoning': 'First image, no references'}
+        
+        # Format previous prompts for analysis
+        prompts_analysis = "\n".join([
+            f"Image {i}: {prompt[:150]}..."
+            for i, prompt in enumerate(previous_prompts)
+        ])
+        
+        # Ask Claude to select optimal references
+        selection = self.claude.select_reference_images(
+            prompts_analysis,
+            current_lyric,
+            style_guide.dict(),
+            line_number,
+            len(previous_prompts)
+        )
+        
+        # Extract selected indices
+        selected_indices = selection.get('selected_indices', [])
+        reasoning = selection.get('reasoning', 'No reasoning provided')
+        
+        print(f"  → Reference selection: {selected_indices}")
+        print(f"  → Reasoning: {reasoning[:100]}...")
+        
+        # Map indices to paths
+        selected_paths = []
+        for idx in selected_indices:
+            if 0 <= idx < len(previous_paths):
+                selected_paths.append(previous_paths[idx])
+        
+        return {
+            'paths': selected_paths,
+            'indices': selected_indices,
+            'reasoning': reasoning
+        }
 ===./agents/video_compositor.py===
 from moviepy.editor import (
     VideoFileClip, ImageClip, TextClip, CompositeVideoClip,
@@ -136,7 +193,11 @@ from pathlib import Path
 from config.settings import config
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-from utils.text_utils import korean_to_romanization  # Add this import
+from utils.text_utils import korean_to_romanization
+
+# Fix for Pillow 10.0.0+ compatibility with MoviePy
+if not hasattr(Image, 'ANTIALIAS'):
+    Image.ANTIALIAS = Image.LANCZOS
 
 class VideoCompositor:
     def __init__(self):
@@ -258,7 +319,9 @@ class VideoCompositor:
 ===./agents/image_director.py===
 from utils.claude_client import ClaudeClient
 from utils.seedream_client import SeedreamClient
-from models.data_models import LyricLine, StyleGuide, GeneratedImage, ImagePromptDecision
+from agents.reference_selector import ReferenceSelector
+from utils.generation_logger import GenerationLogger  # NEW
+from models.data_models import LyricLine, StyleGuide, GeneratedImage
 from typing import List, Optional
 from pathlib import Path
 from config.settings import config
@@ -269,6 +332,7 @@ class ImageDirector:
     def __init__(self):
         self.claude = ClaudeClient()
         self.seedream = SeedreamClient()
+        self.reference_selector = ReferenceSelector()
     
     def generate_all_images(self, target_lyrics: List[LyricLine],
                            style_guide: StyleGuide,
@@ -276,15 +340,25 @@ class ImageDirector:
         """Generate all images for the lyric lines"""
         
         generated_images = []
-        previous_image_path = None
-        previous_prompt = None
+        previous_image_paths = []
+        previous_prompts = []
         
-        # Create output directory for this song
         frames_dir = config.FRAMES_DIR / song_id
         frames_dir.mkdir(parents=True, exist_ok=True)
         
+        # Initialize logger
+        log_path = config.VIDEOS_DIR / f"generation_log_{song_id}.txt"
+        logger = GenerationLogger(log_path)
+        logger.log_style_guide(style_guide.dict())
+        
+        total_lines = len(target_lyrics)
+        pipeline_start = time.time()
+        
         for idx, lyric in enumerate(tqdm(target_lyrics, desc="Generating images")):
             print(f"\n🎨 Generating image for Line {lyric.line_number}: {lyric.english_text}")
+            
+            # Log line start
+            logger.log_line_start(lyric.line_number, lyric.english_text, lyric.korean_text)
             
             start_time = time.time()
             
@@ -296,53 +370,93 @@ class ImageDirector:
                     style_guide.dict()
                 )
                 use_reference = False
+                reference_paths = None
+                
+                logger.log_prompt_generation(prompt)
+                
             else:
-                # Subsequent images - use previous as reference
-                print(f"  → Creating image with reference to line {target_lyrics[idx-1].line_number}")
+                # Generate prompt first
+                print(f"  → Creating image with intelligent reference selection")
                 decision = self.claude.generate_next_prompt(
-                    previous_prompt,
+                    previous_prompts,
                     lyric.dict(),
-                    style_guide.dict()
+                    style_guide.dict(),
+                    line_number=lyric.line_number,
+                    total_lines=total_lines
                 )
                 prompt = decision['seedream_prompt']
+                reasoning = decision['creative_reasoning']
                 use_reference = decision['use_previous_as_reference']
-                print(f"  → Reasoning: {decision['creative_reasoning']}")
+                
+                print(f"  → Reasoning: {reasoning[:150]}...")
+                logger.log_prompt_generation(prompt, reasoning)
+                
+                # Use Reference Selector to pick optimal images
+                if use_reference:
+                    selection = self.reference_selector.select_references(
+                        previous_prompts,
+                        previous_image_paths,
+                        lyric.dict(),
+                        style_guide,
+                        lyric.line_number
+                    )
+                    reference_paths = selection['paths']
+                    
+                    logger.log_reference_selection(
+                        selection['indices'],
+                        selection['reasoning'],
+                        len(previous_prompts)
+                    )
+                else:
+                    reference_paths = None
             
             # Generate image
             print(f"  → Calling Seedream API...")
-            result = self.seedream.generate_image(
-                prompt=prompt,
-                reference_image_path=previous_image_path if use_reference else None
-            )
+            try:
+                result = self.seedream.generate_image(
+                    prompt=prompt,
+                    reference_image_paths=reference_paths
+                )
+                
+                # Download image
+                image_url = result['data'][0]['url']
+                image_filename = f"line_{lyric.line_number:03d}.jpg"
+                image_path = frames_dir / image_filename
+                
+                self.seedream.download_image(image_url, image_path)
+                
+                generation_time = time.time() - start_time
+                print(f"  ✓ Generated in {generation_time:.2f}s → {image_path}")
+                
+                logger.log_generation_result(True, generation_time, str(image_path))
+                
+                # Store metadata
+                generated_images.append(GeneratedImage(
+                    line_number=lyric.line_number,
+                    image_path=str(image_path),
+                    prompt_used=prompt,
+                    start_time=lyric.start_time_seconds,
+                    end_time=lyric.end_time_seconds,
+                    used_reference=use_reference,
+                    reference_image=str(reference_paths) if reference_paths else None,
+                    generation_time=generation_time
+                ))
+                
+                # Add to history
+                previous_image_paths.append(image_path)
+                previous_prompts.append(prompt)
+                
+            except Exception as e:
+                logger.log_generation_result(False, time.time() - start_time, f"ERROR: {str(e)}")
+                raise
             
-            # Download image
-            image_url = result['data'][0]['url']
-            image_filename = f"line_{lyric.line_number:03d}.jpg"
-            image_path = frames_dir / image_filename
-            
-            self.seedream.download_image(image_url, image_path)
-            
-            generation_time = time.time() - start_time
-            print(f"  ✓ Generated in {generation_time:.2f}s → {image_path}")
-            
-            # Store metadata
-            generated_images.append(GeneratedImage(
-                line_number=lyric.line_number,
-                image_path=str(image_path),
-                prompt_used=prompt,
-                start_time=lyric.start_time_seconds,
-                end_time=lyric.end_time_seconds,
-                used_reference=use_reference,
-                reference_image=str(previous_image_path) if previous_image_path else None,
-                generation_time=generation_time
-            ))
-            
-            # Update state for next iteration
-            previous_image_path = image_path
-            previous_prompt = prompt
-            
-            # Rate limiting
             time.sleep(1)
+        
+        # Log final summary
+        total_time = time.time() - pipeline_start
+        logger.log_summary(len(generated_images), total_time)
+        
+        print(f"\n📝 Generation log saved to: {log_path}")
         
         return generated_images
 ===./utils/text_utils.py===
@@ -363,7 +477,7 @@ import requests
 import base64
 from pathlib import Path
 from config.settings import config
-from typing import Optional
+from typing import Optional, List
 import time
 
 class SeedreamClient:
@@ -376,12 +490,20 @@ class SeedreamClient:
         }
     
     def generate_image(self, prompt: str, 
-                      reference_image_path: Optional[Path] = None,
+                      reference_image_paths: Optional[List[Path]] = None,
                       size: str = "1080x1080") -> dict:
-        """Generate image with Seedream API"""
+        """Generate image with Seedream API supporting up to 10 reference images"""
+        
+        # Build negative prompt to prevent unwanted elements
+        negative_prompt = (
+            "speech bubble, text overlay, korean text, english text, "
+            "subtitles, words, letters, captions, typography"
+        )
+        
         payload = {
             "model": "seedream-4-0-250828",
             "prompt": prompt,
+            "negative_prompt": negative_prompt,
             "size": size,
             "sequential_image_generation": "disabled",
             "response_format": "url",
@@ -389,33 +511,144 @@ class SeedreamClient:
             "stream": False
         }
         
-        # Add reference image if provided
-        if reference_image_path and reference_image_path.exists():
-            with open(reference_image_path, "rb") as img_file:
-                img_data = base64.b64encode(img_file.read()).decode()
-                # Determine image format
-                ext = reference_image_path.suffix.lower().replace('.', '')
-                payload["image"] = f"data:image/{ext};base64,{img_data}"
+        # Add multiple reference images if provided (max 10)
+        if reference_image_paths and len(reference_image_paths) > 0:
+            try:
+                images_data = []
+                
+                # Filter valid paths and limit to 10
+                valid_paths = [p for p in reference_image_paths if p.exists()][:10]
+                
+                for img_path in valid_paths:
+                    with open(img_path, "rb") as img_file:
+                        img_data = base64.b64encode(img_file.read()).decode()
+                        
+                        # Determine image format
+                        ext = img_path.suffix.lower().replace('.', '')
+                        if ext == 'jpg':
+                            ext = 'jpeg'
+                        
+                        images_data.append(f"data:image/{ext};base64,{img_data}")
+                
+                if len(images_data) > 0:
+                    # Seedream expects string for 1 image, array for multiple
+                    if len(images_data) == 1:
+                        payload["image"] = images_data[0]
+                    else:
+                        payload["image"] = images_data
+                    
+                    print(f"  → Using {len(images_data)} reference image(s) for style consistency")
+                    
+            except Exception as e:
+                print(f"  ⚠️  Could not load reference images: {e}")
+                # Continue without reference
         
-        response = requests.post(
-            self.endpoint,
-            headers=self.headers,
-            json=payload,
-            timeout=120
-        )
-        
-        response.raise_for_status()
-        return response.json()
+        try:
+            response = requests.post(
+                self.endpoint,
+                headers=self.headers,
+                json=payload,
+                timeout=120
+            )
+            
+            response.raise_for_status()
+            return response.json()
+            
+        except requests.exceptions.RequestException as e:
+            print(f"  ❌ Seedream API error: {e}")
+            if hasattr(e, 'response') and e.response is not None:
+                try:
+                    error_detail = e.response.json()
+                    print(f"  Error details: {error_detail}")
+                except:
+                    print(f"  Response text: {e.response.text[:200]}")
+            raise
     
     def download_image(self, url: str, output_path: Path) -> Path:
         """Download generated image from URL"""
-        response = requests.get(url, timeout=60)
-        response.raise_for_status()
+        try:
+            response = requests.get(url, timeout=60)
+            response.raise_for_status()
+            
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_bytes(response.content)
+            
+            return output_path
+            
+        except requests.exceptions.RequestException as e:
+            print(f"  ❌ Image download error: {e}")
+            raise
+===./utils/generation_logger.py===
+from pathlib import Path
+from datetime import datetime
+from typing import List
+
+class GenerationLogger:
+    def __init__(self, output_path: Path):
+        self.output_path = output_path
+        self.output_path.parent.mkdir(parents=True, exist_ok=True)
         
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_bytes(response.content)
-        
-        return output_path
+        # Clear file if exists
+        with open(self.output_path, 'w', encoding='utf-8') as f:
+            f.write("=" * 80 + "\n")
+            f.write("LYRIC VIDEO GENERATION LOG\n")
+            f.write("=" * 80 + "\n\n")
+    
+    def log(self, content: str):
+        """Append content to log file"""
+        with open(self.output_path, 'a', encoding='utf-8') as f:
+            f.write(content + "\n")
+    
+    def log_section(self, title: str):
+        """Log a section header"""
+        self.log("\n" + "=" * 80)
+        self.log(title)
+        self.log("=" * 80 + "\n")
+    
+    def log_subsection(self, title: str):
+        """Log a subsection header"""
+        self.log("\n" + "-" * 80)
+        self.log(title)
+        self.log("-" * 80 + "\n")
+    
+    def log_style_guide(self, style_guide: dict):
+        """Log the style guide"""
+        self.log_section("STYLE GUIDE GENERATION")
+        self.log(f"Visual Style:\n{style_guide['visual_style']}\n")
+        self.log(f"Story Context:\n{style_guide['segment_story']}\n")
+    
+    def log_line_start(self, line_number: int, english: str, korean: str):
+        """Log the start of a new line generation"""
+        self.log_section(f"LINE {line_number}: {english}")
+        self.log(f"Korean: {korean}\n")
+    
+    def log_prompt_generation(self, prompt: str, reasoning: str = None):
+        """Log the generated prompt"""
+        self.log_subsection("CLAUDE PROMPT GENERATION")
+        if reasoning:
+            self.log(f"Creative Reasoning:\n{reasoning}\n")
+        self.log(f"Seedream Prompt:\n{prompt}\n")
+    
+    def log_reference_selection(self, selected_indices: List[int], reasoning: str, total_available: int):
+        """Log reference selection decision"""
+        self.log_subsection("REFERENCE SELECTION")
+        self.log(f"Available images: 0-{total_available-1}")
+        self.log(f"Selected indices: {selected_indices}")
+        self.log(f"Reasoning:\n{reasoning}\n")
+    
+    def log_generation_result(self, success: bool, generation_time: float, image_path: str):
+        """Log the generation result"""
+        self.log_subsection("GENERATION RESULT")
+        self.log(f"Status: {'SUCCESS' if success else 'FAILED'}")
+        self.log(f"Generation Time: {generation_time:.2f}s")
+        self.log(f"Image Path: {image_path}\n")
+    
+    def log_summary(self, total_images: int, total_time: float):
+        """Log final summary"""
+        self.log_section("GENERATION SUMMARY")
+        self.log(f"Total Images Generated: {total_images}")
+        self.log(f"Total Time: {total_time:.2f}s")
+        self.log(f"Average Time per Image: {total_time/total_images:.2f}s\n")
 ===./utils/__init__.py===
 
 ===./utils/supabase_client.py===
@@ -424,6 +657,7 @@ from config.settings import config
 from models.data_models import SongMetadata, LyricLine
 from typing import List, Optional
 import requests
+import json
 from pathlib import Path
 
 class SupabaseClient:
@@ -460,7 +694,15 @@ class SupabaseClient:
             query = query.gte("line_number", start_line)
         
         response = query.execute()
-        return [LyricLine(**line) for line in response.data]
+        
+        # Parse breakdown_data from JSON string to dict
+        lyrics = []
+        for line in response.data:
+            if line.get('breakdown_data') and isinstance(line['breakdown_data'], str):
+                line['breakdown_data'] = json.loads(line['breakdown_data'])
+            lyrics.append(LyricLine(**line))
+        
+        return lyrics
     
     def get_all_lyrics_for_context(self, song_id: str) -> List[LyricLine]:
         """Fetch ALL lyrics for context understanding"""
@@ -471,35 +713,153 @@ class SupabaseClient:
             .order("line_number")
             .execute()
         )
-        return [LyricLine(**line) for line in response.data]
-    
+        
+        # Parse breakdown_data from JSON string to dict
+        lyrics = []
+        for line in response.data:
+            if line.get('breakdown_data') and isinstance(line['breakdown_data'], str):
+                line['breakdown_data'] = json.loads(line['breakdown_data'])
+            lyrics.append(LyricLine(**line))
+        
+        return lyrics
+        
     def download_audio_file(self, audio_path: str, output_path: Path) -> Path:
         """Download audio file from Supabase storage"""
-        # Extract bucket and file path
-        # audio_path format: "albums/{album_id}/audio/{filename}"
-        bucket_name = audio_path.split('/')[0]
-        file_path = '/'.join(audio_path.split('/')[1:])
+        base_url = config.SUPABASE_URL.rstrip('/rest/v1')
         
-        # Get public URL
-        url = self.client.storage.from_(bucket_name).get_public_url(file_path)
+        # Try multiple URL patterns (the stored path might be the full path in the audio bucket)
+        possible_urls = [
+            f"{base_url}/storage/v1/object/public/audio/{audio_path}",
+            f"{base_url}/storage/v1/object/public/{audio_path}",
+            f"{base_url}/storage/v1/object/public/audio/{audio_path.replace('albums/', '')}",
+        ]
         
-        # Download file
-        response = requests.get(url)
-        response.raise_for_status()
+        successful_download = False
         
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_bytes(response.content)
+        for url in possible_urls:
+            try:
+                print(f"  Trying: {url[:80]}...")
+                response = requests.get(url, timeout=30)
+                response.raise_for_status()
+                
+                # Success! Save the file
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_bytes(response.content)
+                print(f"  ✓ Downloaded from: {url[:80]}...")
+                successful_download = True
+                break
+                
+            except requests.exceptions.HTTPError as e:
+                print(f"  ✗ Failed with status {e.response.status_code}")
+                continue
+            except Exception as e:
+                print(f"  ✗ Failed: {str(e)}")
+                continue
+        
+        if not successful_download:
+            raise Exception(f"Could not download audio from any URL pattern. Path: {audio_path}")
         
         return output_path
 ===./utils/claude_client.py===
 from anthropic import Anthropic
 from config.settings import config
 import json
+import re
+from typing import List
 
 class ClaudeClient:
     def __init__(self):
         self.client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
         self.model = "claude-sonnet-4-5"
+
+    def select_reference_images(self, 
+                            prompts_analysis: str,
+                            current_lyric: dict,
+                            style_guide: dict,
+                            line_number: int,
+                            total_previous: int) -> dict:
+        """Select optimal reference images to avoid compositional repetition"""
+        
+        prompt = f"""You're selecting reference images for AI image generation.
+
+STORY CONTEXT: {style_guide['segment_story']}
+CURRENT LYRIC (Line {line_number}): "{current_lyric['english_text']} / {current_lyric['korean_text']}"
+
+PREVIOUS IMAGES:
+{prompts_analysis}
+
+CRITICAL UNDERSTANDING:
+Reference images provide style (art style, colors, character designs) to Seedream, BUT Seedream often COPIES compositional elements too. This is a problem.
+
+Example of what goes wrong:
+- Reference has "man's back in foreground, woman in background"
+- Seedream generates "man's back in foreground, woman in background" again
+- Result: duplicate characters, boring repetition
+
+YOUR TASK:
+Select 1-3 references that provide style WITHOUT compositional problems.
+
+AVOID SELECTING images with:
+- "Over-shoulder" framing
+- "From behind" angles
+- "Person's back" in foreground
+- "Foreground blur" with person
+- "POV" shots
+- Complex layered compositions
+
+These cause Seedream to copy the framing, creating duplicates.
+
+PREFER SELECTING images with:
+- Simple, clean compositions
+- Both characters clearly visible (no backs/foreground elements)
+- Straightforward framing
+
+OTHER RULES:
+- Character count must match (2 people scene → pick refs with 2 people)
+- Pick compositionally diverse refs (don't pick 3 similar images)
+- Prefer recent images (last 5) unless they're all similar
+- If all recent are similar → pick only 1
+- Fewer refs = safer (less compositional reinforcement)
+
+Respond in JSON:
+{{
+"selected_indices": [0, 1, 2],
+"reasoning": "Why these refs provide style without compositional problems"
+}}
+
+Indices are 0-based (0 = first image, {total_previous-1} = most recent)
+"""
+    
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=800,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return self._extract_json(response.content[0].text)
+        
+    def _extract_json(self, text: str) -> dict:
+        """Extract JSON from Claude's response, handling markdown code blocks"""
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            pass
+        
+        json_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', text, re.DOTALL)
+        if json_match:
+            try:
+                return json.loads(json_match.group(1))
+            except json.JSONDecodeError:
+                pass
+        
+        json_match = re.search(r'\{.*\}', text, re.DOTALL)
+        if json_match:
+            try:
+                return json.loads(json_match.group(0))
+            except json.JSONDecodeError:
+                pass
+        
+        raise ValueError(f"Could not extract JSON from response: {text[:200]}")
     
     def create_style_guide(self, song_metadata: dict, 
                           all_lyrics: str, target_lyrics: str) -> dict:
@@ -533,7 +893,7 @@ Keep it simple - just style and vibe. No rigid rules about characters or setting
             messages=[{"role": "user", "content": prompt}]
         )
         
-        return json.loads(response.content[0].text)
+        return self._extract_json(response.content[0].text)
     
     def generate_first_prompt(self, lyric_line: dict, style_guide: dict) -> str:
         """Generate prompt for the first image"""
@@ -542,10 +902,19 @@ Story context: {style_guide['segment_story']}
 
 First lyric line: "{lyric_line['english_text']} / {lyric_line['korean_text']}"
 
-What should the opening image show? Generate a detailed Seedream prompt.
-The image will be 1080x1080 pixels (square format, 1:1).
+Create an opening image focused on the CHARACTERS. The people should be the primary visual element.
+- Characters should fill a significant portion of the frame
+- Environment is present but secondary (provides context, not the focus)
+- Avoid wide shots where people are small in the frame
 
-Respond with ONLY the Seedream prompt text, no JSON, no explanation.
+Image specs: 1080x1080 pixels (square format, 1:1).
+
+RULES:
+- NO speech bubbles
+- NO text overlays
+- Characters are the visual priority
+
+Respond with ONLY the Seedream prompt.
 """
         
         response = self.client.messages.create(
@@ -555,39 +924,67 @@ Respond with ONLY the Seedream prompt text, no JSON, no explanation.
         )
         
         return response.content[0].text.strip()
-    
-    def generate_next_prompt(self, previous_prompt: str, 
+        
+    def generate_next_prompt(self, previous_prompts: List[str], 
                             current_lyric: dict, 
-                            style_guide: dict) -> dict:
-        """Generate prompt for subsequent images with creative reasoning"""
-        prompt = f"""Previous image prompt: "{previous_prompt}"
+                            style_guide: dict,
+                            line_number: int,
+                            total_lines: int) -> dict:
+        """Generate prompt for subsequent images with full visual history"""
+        
+        prompts_history = "\n".join([
+            f"Image {i+1}: {prompt[:120]}..."
+            for i, prompt in enumerate(previous_prompts)
+        ])
+        
+        prompt = f"""You're creating image #{line_number} of {total_lines} in a cinematic sequence.
+
+STORY CONTEXT: {style_guide['segment_story']}
+
+ALL PREVIOUS IMAGES:
+{prompts_history}
 
 Current lyric: "{current_lyric['english_text']} / {current_lyric['korean_text']}"
+Base visual style: {style_guide['visual_style']}
 
-Style guide: {style_guide['visual_style']}
+UNDERSTANDING REFERENCES:
+Reference images will be provided to Seedream (the image generator). These are ONLY for maintaining consistent art style, colors, and character designs. DO NOT copy any compositional elements from references:
+- Don't copy camera angles
+- Don't copy character positions
+- Don't copy framing (like "person's back in foreground")
+- Don't copy scene layout
 
-Looking at what you just generated, what should come next?
-Consider:
-- Should the scene continue or change?
-- What stays the same? What's different?
-- Does the lyric suggest movement, emotion shift, or location change?
-- How do you keep visual interest while maintaining flow?
+If a reference shows someone's back, DON'T put someone's back in your image.
+If a reference is over-shoulder, DON'T make yours over-shoulder.
+References = style guide only, NOT composition guide.
 
-Respond in JSON format:
+SCENE CONTINUITY:
+- If ongoing conversation → keep characters together
+- If lyric references "you/your" → other person must be present
+- If journey/progression → scene can change
+
+CRITICAL REQUIREMENT:
+Each image must be VISUALLY DISTINCT from previous ones. Not just different facial expressions - genuinely different compositions.
+
+RULES:
+- NO text in image
+- Maintain art style and character designs
+
+Respond in JSON:
 {{
-  "creative_reasoning": "your thought process",
-  "seedream_prompt": "detailed prompt for Seedream (1080x1080, square)",
-  "use_previous_as_reference": true
+"creative_reasoning": "How is this image compositionally different from previous ones?",
+"seedream_prompt": "Describe the image with original composition, not copying any framing from references",
+"use_previous_as_reference": true
 }}
 """
         
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=800,
+            max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
         
-        return json.loads(response.content[0].text)
+        return self._extract_json(response.content[0].text)
 ===./models/__init__.py===
 
 ===./models/data_models.py===
@@ -676,6 +1073,8 @@ def log(message, level="INFO"):
 def test_environment():
     """Test environment variables"""
     log("Testing environment variables...", "TEST")
+
+    from config.settings import config
     
     required_vars = [
         "SUPABASE_URL",
@@ -1187,7 +1586,7 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
 
 if __name__ == "__main__":
     # Example usage
-    song_id = "8e36b8ba-a752-4717-8f55-78f1d4996c8c"  # "Help Me!" song
+    song_id = "390a8ccd-f314-4ad0-95c6-07245ccbe7b3"  # "Help Me!" song
     
     # Generate lines 1-10
     generate_lyric_video(

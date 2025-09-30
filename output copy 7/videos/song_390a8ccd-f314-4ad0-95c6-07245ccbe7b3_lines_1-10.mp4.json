@@ -1,0 +1,114 @@
+{
+  "song_id": "390a8ccd-f314-4ad0-95c6-07245ccbe7b3",
+  "title": "What's your name?",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 10,
+  "total_images": 10,
+  "style_guide": {
+    "visual_style": "Bright, friendly flat illustration style with pastel colors (soft pinks, mint greens, warm yellows, sky blues). Clean, modern Korean cafe aesthetic with playful hand-drawn elements. Warm and inviting mood with pops of color for emphasis on key words. Typography mix of rounded sans-serif for English and clear hangul fonts.",
+    "segment_story": "Two people meeting for the first time at a cafe or casual setting, exchanging friendly introductions and compliments. They discover common interests and the conversation flows naturally from getting-to-know-you questions to a warm invitation to become friends over coffee. The vibe progresses from curious/polite to genuinely excited about the new connection."
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_001.jpg",
+      "prompt_used": "Two young Korean friends meeting at a cafe table, close-up view showing them from waist up, one person with short bob haircut wearing pastel pink sweater gesturing warmly with open hand, other person with shoulder-length hair in mint green cardigan smiling back with curious friendly expression, both seated close together across small cafe table with coffee cups barely visible at bottom of frame, warm yellow cafe lighting creating intimate atmosphere, soft bokeh background showing blurred cafe interior with plants, bright friendly flat illustration style, pastel color palette of soft pinks mint greens warm yellows sky blues, clean modern Korean aesthetic, playful hand-drawn linework, warm inviting mood, characters fill 70% of frame, eye-level perspective, natural friendly body language showing openness and interest, square 1080x1080 format",
+      "start_time": 7.015,
+      "end_time": 12.874,
+      "used_reference": false,
+      "reference_image": null,
+      "generation_time": 14.283103942871094
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg",
+      "prompt_used": "Close-up view of a young Korean person with short bob haircut, face filling most of the frame, looking slightly to the side with a warm, genuine smile and bright sparkling eyes showing delight. Soft natural lighting from a cafe window illuminating their face. Bright friendly flat illustration style with pastel colors, clean lines. Blurred soft bokeh background suggesting cafe interior with warm yellows and mint greens. The person's expression radiates genuine happiness and friendliness, as if paying a sincere compliment. Warm and inviting mood with soft pink and peach tones in the lighting.",
+      "start_time": 12.874,
+      "end_time": 17.013,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_001.jpg')]",
+      "generation_time": 33.56897306442261
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_003.jpg",
+      "prompt_used": "Wide side view of two young Korean friends sitting across from each other at a small round cafe table, both visible in full seated position from a side angle at table height. One person has short bob haircut wearing pastel pink top, the other has shoulder-length hair in loose waves wearing mint green cardigan. Coffee cups and small pastries on the table between them. Bright modern Korean cafe interior with plants and soft natural lighting through windows. Warm, friendly atmosphere. Flat illustration style with pastel colors - soft pinks, mint greens, warm yellows, sky blues. Clean lines, playful hand-drawn aesthetic, inviting mood.",
+      "start_time": 17.013,
+      "end_time": 21.302,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg')]",
+      "generation_time": 33.064030170440674
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, angled top-down bird's eye view looking down at a small round cafe table from above, two young Korean friends sitting across from each other visible from overhead showing tops of their heads, one with short bob haircut and one with longer hair, coffee cups and pastries on the table between them, their hands resting on the table surface, warm yellow and soft pink tones, clean modern Korean cafe aesthetic with playful hand-drawn style, mint green accents, cozy and inviting atmosphere",
+      "start_time": 21.302,
+      "end_time": 25.245,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg')]",
+      "generation_time": 30.176058053970337
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_005.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, close-up detail shot of hands gesturing expressively over a cafe table surface, one person's hands animated mid-conversation gesture explaining their hobbies, warm skin tones, fingernails with subtle polish, delicate silver rings, coffee cups partially visible at edges of frame, smooth wooden table texture in soft warm brown, scattered cafe items like napkin and sugar packets, shallow depth of field effect with background softly blurred in mint green and soft pink tones, warm natural lighting, cozy intimate atmosphere, focus on the expressive hand movement and body language of enthusiastic conversation",
+      "start_time": 25.245,
+      "end_time": 29.854,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg')]",
+      "generation_time": 36.67820405960083
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_006.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, split screen composition with vertical divider line down the center of the frame, left panel shows young Korean person with short bob haircut smiling warmly with eyes sparkling, right panel shows young Korean person with shoulder-length hair smiling back with equal enthusiasm, both shown from shoulders up in matching close-up framing, soft pink background on left side, mint green background on right side, clean geometric split creating perfect symmetry, modern Korean cafe aesthetic, playful and warm mood showing mutual agreement and excitement, pastel color palette with soft pinks mint greens and warm yellows",
+      "start_time": 29.854,
+      "end_time": 33.973,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg')]",
+      "generation_time": 37.490509033203125
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, medium three-quarter angle view slightly elevated looking down at two young Korean friends in a modern cafe, one person on the left gesturing with an open hand toward the other person's stylish outfit on the right, the person being complimented is wearing a distinctive pastel pink cardigan with decorative buttons, both people are smiling warmly, soft mint green and cream colored cafe interior background with potted plants, warm yellow lighting, clean modern Korean aesthetic, playful hand-drawn style, inviting atmosphere with sky blue and peach accents, focus on the clothing and friendly admiring gesture",
+      "start_time": 33.973,
+      "end_time": 38.138,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_006.jpg')]",
+      "generation_time": 47.49039101600647
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_008.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, side profile view of a young Korean person with short bob haircut, face showing genuine delighted smile and slightly bashful pleased expression, eyes sparkling with joy, one hand gently touching their cheek in a flattered gesture, soft pink blush on cheeks, warm yellow and soft pink dreamy bokeh circles floating in the background creating a glowing atmosphere, mint green and peach color accents, clean modern illustration style with smooth lines, warm and sweet mood capturing the feeling of receiving a sincere compliment",
+      "start_time": 38.138,
+      "end_time": 42.068,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg')]",
+      "generation_time": 40.604015827178955
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_009.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, frontal straight-on view of a young Korean person with short bob haircut looking directly at viewer with warm genuine smile, one hand extended forward toward camera in friendly welcoming gesture as if offering friendship, hand in mid-reach creating depth, other hand resting naturally at side, wearing casual mint green sweater, soft bokeh cafe background with blurred warm yellow lights and pastel pink elements, shallow depth of field effect keeping focus on person's face and extended hand, warm inviting atmosphere, gentle expression with hopeful eyes, clean modern illustration style with soft shadows",
+      "start_time": 42.068,
+      "end_time": 49.933,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_008.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg')]",
+      "generation_time": 41.36964988708496
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_010.jpg",
+      "prompt_used": "Bright friendly flat illustration in pastel colors, low angle view looking slightly upward at two young Korean friends standing up from their cafe table together, both figures shown from knees up in full view, one person with short bob haircut wearing a soft pink cardigan, the other with shoulder-length hair in a mint green top, both smiling warmly at each other as they rise from their seats, the small round cafe table visible in lower foreground with two coffee cups still on it, chairs pushed back slightly, warm yellow and soft blue background suggesting cafe interior, sense of movement and positive energy, clean modern illustration style with smooth shapes and gentle shadows, inviting and joyful atmosphere",
+      "start_time": 49.933,
+      "end_time": 56.794,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_009.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg')]",
+      "generation_time": 39.271302938461304
+    }
+  ]
+}

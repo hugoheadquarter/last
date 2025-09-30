@@ -28,6 +28,7 @@ class SongMetadata(BaseModel):
 class StyleGuide(BaseModel):
     visual_style: str
     segment_story: str
+    is_conversation: bool = True 
 
 class ImagePromptDecision(BaseModel):
     line_number: int

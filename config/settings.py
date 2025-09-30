@@ -33,7 +33,7 @@ class Config:
     IMAGE_TOP_PADDING = 150
     TEXT_START_Y = 1270  # 150 + 1080 + 40
     TEXT_SPACING = 78    # 30px between lines + 48px font size
-    FONT_SIZE = 50
+    FONT_SIZE = 55
     TEXT_COLOR = (255, 255, 255)  # White
     
     @classmethod

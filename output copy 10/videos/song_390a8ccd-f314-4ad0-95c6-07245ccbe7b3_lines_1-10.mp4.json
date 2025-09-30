@@ -1,0 +1,115 @@
+{
+  "song_id": "390a8ccd-f314-4ad0-95c6-07245ccbe7b3",
+  "title": "What's your name?",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 10,
+  "total_images": 10,
+  "style_guide": {
+    "visual_style": "Bright, cheerful animation style with warm pastel colors (soft pinks, yellows, blues). Clean, modern aesthetic with a friendly, approachable mood. Simple but expressive character designs suitable for educational content.",
+    "segment_story": "A male and female character meet for the first time in a casual cafe setting. They sit at a table getting to know each other through friendly conversation - exchanging names, asking about age and hobbies, complimenting each other's appearance. The interaction progresses naturally as they discover common interests and the male character suggests becoming friends over coffee. The scene captures the excitement and warmth of making a new friend.",
+    "is_conversation": true
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_001.jpg",
+      "prompt_used": "A friendly male and female character sitting across from each other at a small round table in a cozy cafe, warm pastel color palette with soft pinks yellows and blues, bright cheerful animation style, they are facing each other with open welcoming expressions, coffee cups on the wooden table between them, cafe interior with blurred windows and plants in background, warm natural lighting, clean modern aesthetic, simple expressive character designs, the two characters fill most of the frame as main focus, approachable friendly mood, educational animation style, soft shadows, inviting atmosphere, both characters have curious excited expressions for first meeting",
+      "start_time": 7.015,
+      "end_time": 12.874,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 24.45745587348938
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg",
+      "prompt_used": "Over-the-shoulder shot from behind the male character showing the female character's face in medium close-up as she smiles warmly and looks slightly bashful, her eyes bright and pleased. She sits across the cafe table, wearing the same outfit from the reference portrait. The male character's shoulder and back of his head visible in soft focus in the foreground left side. Cozy cafe interior with warm lighting, blurred cafe details in background including windows, plants, and warm pendant lights. Bright cheerful animation style with warm pastel colors - soft pinks, yellows and blues. Clean modern aesthetic with friendly approachable mood, simple expressive character design suitable for educational content.",
+      "start_time": 12.874,
+      "end_time": 17.013,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 31.372561931610107
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_003.jpg",
+      "prompt_used": "Close-up side profile shot of the male character from the reference portrait, showing him from the shoulders up as he speaks with a friendly, curious expression, slight smile, eyes engaged. The female character from the reference portrait is visible across the small round cafe table in the softer-focused background, creating depth. Warm cafe interior with soft natural window light, coffee cups and small details on the wooden table surface between them. Bright, cheerful animation style with warm pastel colors - soft pinks, yellows, and blues. Clean modern aesthetic with friendly approachable mood, simple but expressive character designs.",
+      "start_time": 17.013,
+      "end_time": 21.302,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 25.680397033691406
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg",
+      "prompt_used": "Medium close-up frontal shot of the male and female characters from the reference portraits sitting across from each other at a cafe table, both visible in frame from chest up. The male character on the left side is leaning forward slightly with a friendly, observant expression as he speaks. The female character on the right side has a surprised but pleased smile, perhaps touching her face in a modest gesture. Warm cafe interior visible in soft focus behind them with pendant lights, potted plants on shelves, and warm wood tones. Soft natural light from a window creates a warm glow. The composition captures both their faces clearly as they make eye contact. Bright, cheerful animation style with warm pastel colors, clean modern aesthetic, friendly and approachable mood.",
+      "start_time": 21.302,
+      "end_time": 25.245,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 30.791222095489502
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_005.jpg",
+      "prompt_used": "Wide angle shot of a cozy modern cafe interior with the male and female characters from the reference portraits sitting at a small round table in the center-left of frame. The male character leans forward enthusiastically with both hands raised in an animated, questioning gesture as he asks about hobbies, his expression curious and engaged. The female character sits across from him, leaning slightly back with an interested smile, hands resting on the table. The cafe has warm lighting, with other small tables and chairs visible in the background, potted plants on windowsills, pendant lights hanging from the ceiling, and a counter with a coffee machine in the soft-focus background. Warm pastel color palette with soft pinks, yellows, and cream tones. Bright, cheerful animation style with clean lines and friendly aesthetic.",
+      "start_time": 25.245,
+      "end_time": 29.854,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 30.140109062194824
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_006.jpg",
+      "prompt_used": "Medium shot from a slightly elevated angle showing the male and female characters from the reference portraits sitting across from each other at a small round cafe table, both leaning forward with enthusiastic, engaged body language as they discover a shared interest. The female character has her hands gesturing expressively near her chest, while the male character leans in with an warm smile and attentive posture. On the wooden table between them are coffee cups, a small potted plant, and casual cafe items. The background shows soft-focused cafe interior with warm pendant lighting, blurred windows, and cozy seating areas. Bright, cheerful animation style with warm pastel color palette of soft pinks, yellows, and blues. Clean modern aesthetic with friendly, approachable mood capturing the excitement of connection.",
+      "start_time": 29.854,
+      "end_time": 33.973,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 33.016122817993164
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg",
+      "prompt_used": "Close-up detail shot in a cozy modern cafe showing the female character from the reference portrait from chest to lap level, wearing a stylish pastel-colored blouse or cardigan with delicate details, her hands resting on the table near a coffee cup. The male character from the reference portrait is visible but slightly blurred in the background across the table, leaning forward with an admiring expression. Warm afternoon sunlight streaming through cafe windows illuminates the fabric texture of her clothing. Soft bokeh effect on background. Bright cheerful animation style with warm pastel colors, clean modern aesthetic, simple expressive character designs.",
+      "start_time": 33.973,
+      "end_time": 38.138,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 27.000564098358154
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_008.jpg",
+      "prompt_used": "Close-up shot from the male character's point of view showing the female character from the reference portrait in soft romantic focus, seated at the cafe table with warm afternoon sunlight streaming through a nearby window creating a gentle glow around her. She has a slightly surprised but pleased expression, looking down shyly with a subtle smile. The background cafe interior is softly blurred with bokeh effects showing warm golden lights and pastel-colored walls. Her hands are visible resting on the table near a coffee cup. The lighting is warm and ethereal with soft pinks and golden tones. Bright, cheerful animation style with warm pastel colors, clean modern aesthetic, friendly approachable mood.",
+      "start_time": 38.138,
+      "end_time": 42.068,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 34.3344087600708
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_009.jpg",
+      "prompt_used": "Low angle shot from near table level looking up at the male character from the reference portrait as he leans forward across a small round cafe table with an warm, inviting smile, his hand extended forward in a friendly gesture toward camera. The female character's hands and lower torso visible in the foreground bottom of frame reaching toward him in response. Cozy modern cafe interior with soft window light, hanging plants and warm wooden elements visible in the background above and behind the characters. Bright cheerful animation style with warm pastel colors, soft pinks and yellows. Clean modern aesthetic with expressive character design. Cinematic composition emphasizing the moment of connection.",
+      "start_time": 42.068,
+      "end_time": 49.933,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 29.26761794090271
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_010.jpg",
+      "prompt_used": "Bird's eye view shot looking straight down at a small round wooden cafe table from directly above. Two white ceramic coffee cups with latte art sit on the table with small spoons beside them. The male character from the reference portrait's hands are visible reaching toward one cup from the bottom of frame, wearing a casual long-sleeved shirt. The female character from the reference portrait's hands reach toward the other cup from the top of frame, wearing her characteristic outfit. Napkins, sugar packets, and a small potted succulent plant are arranged on the table between them. Warm wooden table surface with natural cafe lighting. Bright, cheerful animation style with warm pastel colors and clean modern aesthetic. Cozy, friendly atmosphere capturing the moment of agreement to share coffee together.",
+      "start_time": 49.933,
+      "end_time": 56.794,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 32.01872515678406
+    }
+  ]
+}

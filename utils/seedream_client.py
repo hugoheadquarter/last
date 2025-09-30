@@ -2,7 +2,7 @@ import requests
 import base64
 from pathlib import Path
 from config.settings import config
-from typing import Optional
+from typing import Optional, List
 import time
 
 class SeedreamClient:
@@ -15,15 +15,14 @@ class SeedreamClient:
         }
     
     def generate_image(self, prompt: str, 
-                      reference_image_path: Optional[Path] = None,
+                      reference_image_paths: Optional[List[Path]] = None,
                       size: str = "1080x1080") -> dict:
-        """Generate image with Seedream API"""
+        """Generate image with Seedream API supporting up to 10 reference images"""
         
         # Build negative prompt to prevent unwanted elements
         negative_prompt = (
             "text overlay, korean text, english text, "
-            "subtitles, words, letters, captions, typography, "
-            "same composition, same angle, same pose, identical framing"
+            "subtitles, words, letters, captions, typography"
         )
         
         payload = {
@@ -37,19 +36,36 @@ class SeedreamClient:
             "stream": False
         }
         
-        # Add reference image if provided (for style consistency)
-        if reference_image_path and reference_image_path.exists():
+        # Add multiple reference images if provided (max 10)
+        if reference_image_paths and len(reference_image_paths) > 0:
             try:
-                with open(reference_image_path, "rb") as img_file:
-                    img_data = base64.b64encode(img_file.read()).decode()
-                    # Determine image format
-                    ext = reference_image_path.suffix.lower().replace('.', '')
-                    if ext == 'jpg':
-                        ext = 'jpeg'
-                    payload["image"] = f"data:image/{ext};base64,{img_data}"
-                    print(f"  → Using reference image for style consistency")
+                images_data = []
+                
+                # Filter valid paths and limit to 10
+                valid_paths = [p for p in reference_image_paths if p.exists()][:10]
+                
+                for img_path in valid_paths:
+                    with open(img_path, "rb") as img_file:
+                        img_data = base64.b64encode(img_file.read()).decode()
+                        
+                        # Determine image format
+                        ext = img_path.suffix.lower().replace('.', '')
+                        if ext == 'jpg':
+                            ext = 'jpeg'
+                        
+                        images_data.append(f"data:image/{ext};base64,{img_data}")
+                
+                if len(images_data) > 0:
+                    # Seedream expects string for 1 image, array for multiple
+                    if len(images_data) == 1:
+                        payload["image"] = images_data[0]
+                    else:
+                        payload["image"] = images_data
+                    
+                    print(f"  → Using {len(images_data)} reference image(s) for style consistency")
+                    
             except Exception as e:
-                print(f"  ⚠️  Could not load reference image: {e}")
+                print(f"  ⚠️  Could not load reference images: {e}")
                 # Continue without reference
         
         try:

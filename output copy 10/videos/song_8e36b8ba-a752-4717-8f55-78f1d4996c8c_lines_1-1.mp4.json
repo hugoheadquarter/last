@@ -1,0 +1,24 @@
+{
+  "song_id": "8e36b8ba-a752-4717-8f55-78f1d4996c8c",
+  "title": "Help Me!",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 1,
+  "total_images": 1,
+  "style_guide": {
+    "visual_style": "Bright, friendly cartoon style with bold outlines and high contrast colors - vibrant reds, yellows, and blues against clean white backgrounds. The mood is urgent but not frightening - like a helpful educational poster. Modern, clean aesthetic with playful Korean street scene elements.",
+    "segment_story": "The opening moment of realization - a traveler in a busy Korean street suddenly realizes they need assistance. The scene captures that universal 'uh oh' moment when you're lost or confused in a new place, setting up the helpful language lesson to follow."
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/8e36b8ba-a752-4717-8f55-78f1d4996c8c/line_001.jpg",
+      "prompt_used": "A worried but friendly cartoon traveler with wide eyes and raised hands stands in the center of a vibrant Korean street scene, surrounded by colorful Korean shop signs with Hangul text, bright red and yellow storefront awnings, and simplified silhouettes of Korean buildings. The traveler has a speech bubble above their head showing both \"Help me!\" in English and \"\ub3c4\uc640\uc8fc\uc138\uc694!\" in Korean with bold, playful typography. The background features a busy street with simplified cartoon figures walking by, street vendor carts with red umbrellas, and traditional Korean architectural elements mixed with modern city vibes. Bold black outlines define all elements. Color palette: vibrant reds, sunny yellows, sky blues, and clean white backgrounds with high contrast. The traveler's expression shows confusion mixed with hope - eyebrows raised, mouth in an \"O\" shape, one hand scratching head, other hand gesturing for help. Style: bright educational poster aesthetic, friendly cartoon illustration, modern flat design with depth through color blocking, urgent but approachable mood, clean vector-style artwork. Square composition with the traveler prominently centered, Korean street elements framing the sides and top, creating a sense of being surrounded but not overwhelmed. Lighting: bright and even, cheerful daytime atmosphere.",
+      "start_time": 0.0,
+      "end_time": 3.837,
+      "used_reference": false,
+      "reference_image": null,
+      "generation_time": 17.999831199645996
+    }
+  ]
+}

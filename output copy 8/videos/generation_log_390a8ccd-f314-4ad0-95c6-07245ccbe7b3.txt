@@ -1,0 +1,381 @@
+================================================================================
+LYRIC VIDEO GENERATION LOG
+================================================================================
+
+
+================================================================================
+STYLE GUIDE GENERATION
+================================================================================
+
+Visual Style:
+Bright, cheerful animated illustration style with warm pastel colors (soft pinks, yellows, blues). Clean, friendly Korean webtoon-inspired aesthetic with gentle lighting. Casual, inviting mood that feels approachable and educational.
+
+Story Context:
+A friendly conversation between a young woman and a young man meeting for the first time at a cozy café. They sit across from each other at a small table with coffee cups, getting to know each other through introductory questions. The woman asks questions while the man responds warmly. The scene progresses from initial introductions (names, age) to discussing interests (hobbies) and compliments (about clothing), building toward a friendship invitation over coffee. The café setting has warm wooden tables, potted plants, and natural window lighting.
+
+
+================================================================================
+LINE 1: What's your name
+================================================================================
+
+Korean: 이름이 뭐예요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Seedream Prompt:
+A bright cheerful Korean webtoon style illustration of a young woman and young man sitting across from each other at a small wooden table in a cozy café, warm pastel colors with soft pinks yellows and blues, two coffee cups on the table between them, the woman has a friendly curious expression looking at the man, the man has a warm welcoming smile, both characters fill significant frame space in medium shot, café interior background with potted plants on shelves, large windows with natural sunlight streaming in, more wooden tables visible in background, warm inviting atmosphere, clean friendly aesthetic with gentle lighting, approachable and educational mood, characters centered in the same unified space, single cohesive scene
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 12.88s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_001.jpg
+
+
+================================================================================
+LINE 2: Your name is pretty
+================================================================================
+
+Korean: 이름이 예뻐요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Image 1 showed them sitting across from each other at the table in a wider establishing shot. For Image 2, I'll create a compositionally different angle by showing a closer view focused on the woman's face and upper body as she smiles warmly while speaking the compliment about his name. The man will be partially visible across from her (perhaps shoulder/side of face) to maintain the conversation context. This creates visual distinction through closer framing and different perspective while keeping them in the same real café environment with wooden table, coffee cups, and background café details like plants and window light visible but softer/out of focus.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, closer view of a young woman with a warm genuine smile on her face, sitting at a wooden café table, the young man partially visible across from her showing his shoulder and side profile, coffee cups on the table between them, soft focus café interior in background with potted plants and natural window lighting, warm pastel color palette with soft pinks and yellows, clean friendly aesthetic, the woman appears to be speaking kindly, cozy intimate café atmosphere, gentle lighting on her face
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-0
+Selected indices: [0]
+Reasoning:
+Selecting only Image 0 as it matches the scene requirements: 2 people (young woman and young man) sitting across from each other at a small table in a cozy café with straightforward framing where both characters are clearly visible. Since this is only Line 2 and Image 0 is the most recent (from Line 1), it will provide consistent Korean webtoon style, colors, and character designs without introducing compositional conflicts. Using a single reference is safer to avoid reinforcing any specific framing elements that could cause Seedream to copy composition rather than just style. The scene context remains similar (café conversation), so one strong reference is sufficient.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 32.80s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg
+
+
+================================================================================
+LINE 3: How old are you
+================================================================================
+
+Korean: 몇살이에요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Images 1 and 2 showed the establishing wide shot and the woman's close-up. For image 3, I need a compositionally different angle that shows the man responding to the age question. This will be a medium shot from the woman's perspective across the table, showing the young man from chest-up as he answers her question with a friendly expression. The café environment remains visible with warm wooden table elements, the coffee cups between them, and soft window lighting from the side. This angle creates visual variety by switching focus to the male character while maintaining the intimate conversational setting. The composition is unified with both the man as the primary focus and environmental context clearly visible around him.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, medium shot of a young man sitting at a café table, viewed from across the table. He has a friendly, open expression as he's speaking, slight smile. Dark neat hair, casual comfortable clothing. The wooden café table is visible in the foreground with coffee cups on it. Warm natural window light from the side creates a soft glow. Cozy café interior visible in background with warm tones, potted plants on windowsill. The composition shows him from chest-up, creating an intimate conversational perspective. Soft pastel color palette with warm yellows, gentle browns, and soft lighting. Clean, inviting Korean webtoon art style with smooth lines and gentle shading.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-1
+Selected indices: [0]
+Reasoning:
+Image 0 shows both characters sitting across from each other at a café table with a clean, straightforward composition - no over-shoulder shots, backs, or foreground elements. Image 1 is a closer view of just the woman, which could cause Seedream to generate a single-character close-up instead of showing both people interacting. Since both available images have similar café table compositions, selecting only Image 0 is safer to avoid reinforcing the same framing. Image 0 provides the Korean webtoon style, warm café environment, and two-character setup without problematic compositional elements that would be copied.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 33.41s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_003.jpg
+
+
+================================================================================
+LINE 4: You look so young
+================================================================================
+
+Korean: 너무 어려보여요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Images 1-3 showed: 1) wide establishing shot of both at table, 2) close-up of woman's face, 3) medium shot of man at table. For image 4 with the lyric 'You look so young', I'll create a DIFFERENT composition: an over-the-shoulder perspective from behind the woman (showing her shoulder/side of head in foreground) looking at the man across the table who has a slightly surprised but flattered expression. This creates depth and shows her perspective of observing him. The real café environment includes the wooden table between them with coffee cups, window with natural light in background, and café interior details like plants and shelving. This is compositionally distinct - it's neither a wide shot, nor a close-up of one face, but an over-shoulder POV that connects both characters in one unified frame within the real café space.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, over-the-shoulder perspective from behind a young woman (showing her shoulder and side of head with dark hair in foreground, slightly blurred) looking across a small wooden café table at a young man who sits facing the camera with a slightly surprised, flattered smile. The man has short neat hair and wears a casual sweater. Between them on the wooden table are two coffee cups with latte art. The café interior background shows warm natural window light streaming in, potted green plants on shelves, and cozy café ambiance. Soft pastel color palette with warm pinks, yellows, and blues. Clean friendly webtoon aesthetic with gentle lighting. Single unified scene composition showing both characters in the same real café space.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-2
+Selected indices: [0]
+Reasoning:
+Image 0 shows both characters sitting across from each other at a café table with a simple, clean composition - no backs, no foreground elements, no POV issues. Images 1 and 2 are closer shots of individual characters (woman only, man only), which could cause Seedream to focus on single characters instead of the two-person interaction needed for this line. Since all three images are recent and Image 0 already provides the ideal style reference with proper two-person café composition, selecting only this one reference is safest to avoid compositional reinforcement while maintaining the established webtoon style.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 40.06s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg
+
+
+================================================================================
+LINE 5: What is your hobby
+================================================================================
+
+Korean: 취미가 뭐예요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Images 1-4 have shown establishing shot, woman's face closeup, man's medium shot, and over-the-shoulder from woman's perspective. For image 5 with the lyric about hobbies, I'll show the reverse perspective: over-the-shoulder from BEHIND the man, looking at the woman as she asks her question. This creates visual variety by switching whose shoulder we're behind. The woman will be visible facing camera with an inquisitive, friendly expression as she asks about his hobby. The café environment remains visible with warm wooden table, coffee cups, window light, and soft-focused plants in background. This maintains conversation continuity while providing a distinctly different angle from the previous over-the-shoulder shot.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, over-the-shoulder perspective from behind a young man (showing his back of head and shoulder in foreground), looking across a small wooden café table at a young woman who faces the camera with a curious, friendly smile and inquisitive expression as she asks a question. Two coffee cups on the wooden table between them. Warm natural window lighting from the side, soft-focused potted plants visible in café background. Warm pastel color palette with soft pinks, yellows, and natural wood tones. Clean, inviting webtoon aesthetic. The woman is animated and engaged, leaning slightly forward. Cozy café interior with real environmental details.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-3
+Selected indices: [0, 2]
+Reasoning:
+Image 0 provides the full scene style with both characters clearly visible at the café table - clean, simple composition showing the two-person setup. Image 2 offers a medium shot of the man with straightforward framing that won't cause compositional conflicts. Both avoid problematic elements (no backs, no over-shoulder, no POV). Skipping Image 1 (woman close-up) and Image 3 (over-shoulder view) to avoid reinforcing single-character focus or the problematic over-shoulder framing that could cause Seedream to copy that angle. Two references provide sufficient style guidance while maintaining compositional safety.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 38.56s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_005.jpg
+
+
+================================================================================
+LINE 6: I like it too
+================================================================================
+
+Korean: 저도 좋아해요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Images 1-5 have shown: establishing two-shot, woman's smiling face closeup, man's medium shot, over-shoulder from behind woman showing man, and over-shoulder from behind man showing woman. For image 6 with the lyric 'I like it too,' this shows agreement/shared interest. To make this compositionally different, I'll show a two-person medium shot capturing both characters simultaneously from a side angle, showing them engaged in animated conversation across the table. This differs from image 1's front-facing establishing shot by being closer and from the side. The real environment shows the cozy café interior with the wooden table between them, coffee cups, a potted plant on the table, and warm window lighting from the side creating natural ambiance.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, side angle medium shot of a young woman and young man sitting across from each other at a small wooden café table, both visible in frame having an animated conversation. The woman sits on the left side gesturing warmly while speaking, the man sits on the right side leaning forward attentively with a friendly smile. Two coffee cups on the wooden table between them, a small potted plant centerpiece. Cozy café interior with warm natural window light streaming from the side, soft bokeh of café background with wooden furniture and green plants. Warm pastel color palette with soft pinks, yellows, and natural wood tones. Clean friendly Korean webtoon aesthetic, casual approachable mood, both characters engaged and connected in conversation.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-4
+Selected indices: [0, 2]
+Reasoning:
+Image 0 provides the overall café environment style with both characters visible in a clean, straightforward composition - perfect for establishing the warm webtoon aesthetic and color palette. Image 2 shows a medium shot of the young man with a friendly expression, offering clear character design reference without problematic framing. I'm avoiding Images 1, 3, and 4 because: Image 1 is a close-up that might overly influence the framing; Images 3 and 4 are both over-the-shoulder POV shots that would cause Seedream to copy that problematic composition and create duplicate characters. Using just 2 diverse references (wide establishing shot + medium character shot) provides strong style guidance while minimizing compositional interference for Line 6's scene.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 41.55s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_006.jpg
+
+
+================================================================================
+LINE 7: Where did you get that clothe
+================================================================================
+
+Korean: 그 옷 어디서 샀어요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Images 1-6 have shown various angles of the two characters conversing at their café table. For image 7, where the woman is asking about the man's clothing ('Where did you get that clothe'), I need a distinctly different composition that highlights this moment. I'll create a close-up detail shot focused on the man's upper body/torso area showing his clothing (shirt/sweater), with the woman's hands or partial figure visible in frame as she gestures toward or points at his outfit. This creates a compositionally unique image - a detail-focused shot rather than the face-to-face conversational angles we've been using. The real café environment remains visible but softer in the background (wooden table edge, blurred café interior). This visual approach naturally draws attention to the clothing being discussed while maintaining both characters' presence in the unified scene.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, close-up detail shot focusing on a young man's upper body and torso showing his casual shirt or sweater, a young woman's hand visible in frame gesturing toward or pointing at his clothing with interest, sitting at a café table. Warm wooden table surface visible in foreground, soft blurred café interior in background with warm lighting and plants. Warm pastel color palette with soft pinks, yellows, blues. Clean friendly webtoon aesthetic, natural window lighting, casual approachable mood. Both characters present in same unified scene, no split screen, real café environment details visible.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-5
+Selected indices: [0, 5]
+Reasoning:
+Image 0 provides the overall café environment style with both characters clearly visible at the table - a clean, simple composition showing the scene setup. Image 5 offers a side angle medium shot with both characters visible without any problematic foreground elements or POV framing. I'm avoiding Images 1-4 because: Image 1 focuses on only the woman (single character), Image 2 focuses on only the man (single character), Image 3 is over-the-shoulder from behind the woman (problematic POV), and Image 4 is over-the-shoulder from behind the man (problematic POV). Using only 2 references reduces compositional reinforcement while providing adequate style guidance for the café setting and character designs.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 38.99s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg
+
+
+================================================================================
+LINE 8: It's so pretty
+================================================================================
+
+Korean: 너무 예뻐요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Since image 7 was a close-up detail shot of the man's upper body/torso showing his clothing, image 8 needs to be compositionally very different. The lyric 'It's so pretty / 너무 예뻐요' is a compliment about the clothing just shown. This calls for the woman's reaction - showing her giving this compliment with an appreciative, admiring expression. I'll frame this as a medium shot from the man's perspective, showing the woman across the table with her hands gesturing expressively (perhaps pointing or indicating 'that shirt'), with café environment visible behind her (window with natural light, potted plants on windowsill, warm wooden interior). This contrasts sharply with image 7's close-up clothing detail by returning to a people-focused conversational shot that captures the social interaction and her warm, complimentary reaction.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, medium shot from across the table showing a young woman sitting at a café table, her face lit up with an appreciative admiring smile as she gives a compliment, one hand gesturing expressively toward the person across from her, warm genuine expression. Behind her, large café window with natural daylight streaming in, potted green plants on the windowsill, warm wooden café interior visible in background. The woman wears casual comfortable clothing. Soft pastel color palette with warm yellows and pinks from natural lighting. Clean friendly webtoon aesthetic, inviting and approachable mood, both characters sharing this moment of connection over coffee cups on the wooden table between them.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-6
+Selected indices: [1, 2]
+Reasoning:
+Image 1 shows the woman in a straightforward medium shot with clean composition - no compositional tricks, just good character design and café style. Image 6 (the clothing detail shot) is avoided because it's too specific a composition that could cause Seedream to generate another clothing close-up. Images 3 and 4 are over-shoulder shots which we must avoid. Image 5 is a side angle which could work but is less clean than images 1 and 2. Image 2 shows the man in a simple medium shot across the table - clean and straightforward. Together, images 1 and 2 provide both character designs in simple compositions without risky framing. Using only 2 refs reduces compositional reinforcement risk while maintaining style consistency.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 40.61s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_008.jpg
+
+
+================================================================================
+LINE 9: Do you want to be friends?
+================================================================================
+
+Korean: 우리 친구할래요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+This is image #9, the penultimate moment where the woman asks 'Do you want to be friends?' This is a crucial emotional beat requiring warmth and connection. Previous images showed: establishing shot, individual reactions, over-shoulder views, side angles, and detail shots. For compositional distinction, I'll create a LOW ANGLE shot looking UP at both characters sitting at the table together, which hasn't been used yet. This angle makes the moment feel significant and hopeful. The café environment will be visible with the ceiling lights, window details, and ambient décor above. Both characters are present since this is a conversation moment with 'you' in the lyric. The woman has a hopeful, friendly expression as she poses this friendship invitation, while the man is visible listening warmly. This low angle perspective is distinctly different from all previous shots and emphasizes the importance of this friendship proposal moment.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, low angle shot looking upward at a young woman and young man sitting across from each other at a café table, both visible in frame from below. The woman on the left has shoulder-length brown hair and wears a soft pink cardigan, leaning forward slightly with a hopeful warm smile and friendly expression as she speaks. The young man on the right wears a blue button-up shirt, visible listening with a gentle smile. Coffee cups on the wooden table between them. Camera angle is from below looking up, showing the café environment above including warm pendant lights, window with natural light, potted plants on shelves, and cozy café interior details. Soft pastel colors with warm peachy and golden lighting creating an inviting hopeful atmosphere. Clean friendly webtoon aesthetic, the moment of friendship invitation feeling significant and warm.
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-7
+Selected indices: [0, 5]
+Reasoning:
+Image 0 provides the overall café setting with both characters clearly visible sitting across from each other - a clean, simple composition that matches the 2-person scene. Image 5 is also a side angle showing both characters at the table together without problematic foreground elements. I'm avoiding images 1-4 and 7 because they focus on single characters, which could cause Seedream to generate only one person. Image 3 and 4 are dangerous over-shoulder/behind angles that would create composition copying issues. Image 6 is a close-up detail shot of clothing that doesn't show faces and could create framing problems. Using only 2 references keeps it safe while providing consistent style and character designs for the friendship invitation moment.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 45.26s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_009.jpg
+
+
+================================================================================
+LINE 10: Do you wanna drink coffee?
+================================================================================
+
+Korean: 커피 마실래요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+This is the final image, representing the coffee invitation that brings the entire conversation full circle. Unlike the previous low angle shot showing both characters from below, this image should be a warm, inviting close-up shot of the table itself, featuring the two coffee cups prominently in the foreground with both characters' hands reaching toward or holding their cups. The camera looks down at the table from above at a slight angle, showing the coffee cups, the wooden table texture, and both sets of hands in a gesture of sharing coffee together. In the soft-focused background, we see parts of both characters leaning in, creating an intimate, friendly moment. This composition is completely different from all previous shots - it's the only one that makes the coffee cups themselves the central focus, symbolizing the connection and friendship being formed. The real café environment is shown through the wooden table texture, the ceramic coffee cups with latte art or steam, perhaps a small plant or napkin on the table, and the warm window light casting gentle shadows.
+
+Seedream Prompt:
+Bright cheerful Korean webtoon style illustration, overhead angled shot looking down at a small wooden café table, two ceramic coffee cups prominently featured in the center foreground with steam rising from them, both a young woman's hand and young man's hand reaching toward or resting near the cups in a gesture of sharing coffee together, wooden table texture visible with warm grain patterns, small potted plant or napkin on table, soft-focused background shows parts of both people leaning in toward the table creating an intimate friendly atmosphere, warm natural window light casting gentle shadows across the table surface, cozy café setting, pastel color palette with warm browns and cream tones, clean friendly webtoon art style, inviting and warm mood symbolizing friendship and connection
+
+
+--------------------------------------------------------------------------------
+REFERENCE SELECTION
+--------------------------------------------------------------------------------
+
+Available images: 0-8
+Selected indices: [0, 5]
+Reasoning:
+Image 0 provides the establishing wide shot showing both characters clearly visible at the table with clean café environment - perfect for overall style reference without complex composition. Image 5 is a side-angle medium shot with both characters visible across from each other, providing good character design and café atmosphere reference. Both have simple, straightforward framing without over-shoulder shots, POV angles, or foreground elements that could cause duplication. Avoiding images 3 and 4 (over-shoulder shots), image 6 (close-up of single person that could cause compositional issues), and image 8 (low angle that might be copied). Using only 2 references to minimize compositional reinforcement while still providing strong style guidance for this coffee invitation moment.
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 46.79s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_010.jpg
+
+
+================================================================================
+GENERATION SUMMARY
+================================================================================
+
+Total Images Generated: 10
+Total Time: 380.97s
+Average Time per Image: 38.10s
+
