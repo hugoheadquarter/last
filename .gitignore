@@ -1,0 +1,23 @@
+# make a .gitignore
+cat > .gitignore <<'EOF'
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# build/output artifacts
+output/
+output copy/
+
+# large binaries you don't want in git
+*.mp3
+*.mp4
+*.jpg
+*.png
+*.mov
+EOF

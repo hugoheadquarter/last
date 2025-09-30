@@ -1,0 +1,1197 @@
+===./config/__init__.py===
+
+===./config/settings.py===
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load .env file BEFORE accessing environment variables
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
+class Config:
+    # API Keys
+    SUPABASE_URL = os.getenv("SUPABASE_URL")
+    SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+    ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+    SEEDREAM_API_KEY = os.getenv("SEEDREAM_API_KEY")
+    SEEDREAM_ENDPOINT = os.getenv("SEEDREAM_ENDPOINT")
+    
+    # Paths
+    BASE_DIR = Path(__file__).parent.parent
+    OUTPUT_DIR = BASE_DIR / "output"
+    FRAMES_DIR = OUTPUT_DIR / "frames"
+    VIDEOS_DIR = OUTPUT_DIR / "videos"
+    TEMP_DIR = OUTPUT_DIR / "temp"
+    FONTS_DIR = BASE_DIR / "fonts"
+    FONT_PATH = FONTS_DIR / "MaruBuri-Bold.ttf"
+    
+    # Video settings
+    VIDEO_WIDTH = 1080
+    VIDEO_HEIGHT = 1920
+    IMAGE_SIZE = 1080
+    FPS = 30
+    
+    # Layout settings
+    IMAGE_TOP_PADDING = 150
+    TEXT_START_Y = 1270  # 150 + 1080 + 40
+    TEXT_SPACING = 78    # 30px between lines + 48px font size
+    FONT_SIZE = 48
+    TEXT_COLOR = (255, 255, 255)  # White
+    
+    @classmethod
+    def create_directories(cls):
+        """Create necessary directories if they don't exist"""
+        cls.FRAMES_DIR.mkdir(parents=True, exist_ok=True)
+        cls.VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
+        cls.TEMP_DIR.mkdir(parents=True, exist_ok=True)
+
+config = Config()
+===./agents/style_planner.py===
+from utils.claude_client import ClaudeClient
+from models.data_models import SongMetadata, LyricLine, StyleGuide
+from typing import List
+
+class StylePlanner:
+    def __init__(self):
+        self.claude = ClaudeClient()
+    
+    def create_style_guide(self, song: SongMetadata, 
+                          all_lyrics: List[LyricLine],
+                          target_lyrics: List[LyricLine]) -> StyleGuide:
+        """Generate style guide for the video segment"""
+        
+        # Format lyrics as text
+        all_lyrics_text = "\n".join([
+            f"Line {l.line_number}: {l.english_text} / {l.korean_text}"
+            for l in all_lyrics
+        ])
+        
+        target_lyrics_text = "\n".join([
+            f"Line {l.line_number}: {l.english_text} / {l.korean_text}"
+            for l in target_lyrics
+        ])
+        
+        song_dict = {
+            'description': song.description,
+            'title': song.title,
+            'artist': song.artist
+        }
+        
+        style_data = self.claude.create_style_guide(
+            song_dict,
+            all_lyrics_text,
+            target_lyrics_text
+        )
+        
+        return StyleGuide(**style_data)
+===./agents/data_retriever.py===
+from utils.supabase_client import SupabaseClient
+from models.data_models import SongMetadata, LyricLine, VideoGenerationRequest
+from typing import List, Tuple
+from pathlib import Path
+from config.settings import config
+
+class DataRetriever:
+    def __init__(self):
+        self.supabase = SupabaseClient()
+    
+    def fetch_all_data(self, request: VideoGenerationRequest) -> Tuple[SongMetadata, List[LyricLine], List[LyricLine], Path]:
+        """
+        Fetch all necessary data for video generation
+        Returns: (song_metadata, all_lyrics, target_lyrics, audio_file_path)
+        """
+        # Fetch song metadata
+        song = self.supabase.get_song_metadata(request.song_id)
+        
+        # Fetch all lyrics for context
+        all_lyrics = self.supabase.get_all_lyrics_for_context(request.song_id)
+        
+        # Determine end_line if not specified
+        end_line = request.end_line or max(l.line_number for l in all_lyrics)
+        
+        # Fetch target lyrics
+        target_lyrics = self.supabase.get_lyrics(
+            request.song_id,
+            request.start_line,
+            end_line
+        )
+        
+        # Download audio file
+        audio_filename = f"song_{request.song_id}.mp3"
+        audio_path = config.TEMP_DIR / audio_filename
+        
+        if not audio_path.exists():
+            self.supabase.download_audio_file(song.audio_file_path, audio_path)
+        
+        return song, all_lyrics, target_lyrics, audio_path
+===./agents/video_compositor.py===
+from moviepy.editor import (
+    VideoFileClip, ImageClip, TextClip, CompositeVideoClip,
+    AudioFileClip, concatenate_videoclips
+)
+from models.data_models import GeneratedImage, LyricLine
+from typing import List
+from pathlib import Path
+from config.settings import config
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+from utils.text_utils import korean_to_romanization  # Add this import
+
+class VideoCompositor:
+    def __init__(self):
+        self.width = config.VIDEO_WIDTH
+        self.height = config.VIDEO_HEIGHT
+        self.image_size = config.IMAGE_SIZE
+        self.fps = config.FPS
+    
+    def create_text_image(self, text: str, y_position: int) -> np.ndarray:
+        """Create an image with text overlay"""
+        # Create transparent image
+        img = Image.new('RGBA', (self.width, 100), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        
+        # Load font
+        font = ImageFont.truetype(str(config.FONT_PATH), config.FONT_SIZE)
+        
+        # Get text bounding box for centering
+        bbox = draw.textbbox((0, 0), text, font=font)
+        text_width = bbox[2] - bbox[0]
+        x_position = (self.width - text_width) // 2
+        
+        # Draw text
+        draw.text((x_position, 10), text, font=font, fill=(255, 255, 255, 255))
+        
+        return np.array(img)
+    
+    def create_video_segment(self, image_data: GeneratedImage, 
+                            lyric: LyricLine) -> CompositeVideoClip:
+        """Create a single video segment with image and text"""
+        duration = image_data.end_time - image_data.start_time
+        
+        # Load and resize image to square
+        img_clip = (ImageClip(image_data.image_path)
+                   .set_duration(duration)
+                   .resize((self.image_size, self.image_size))
+                   .set_position(('center', config.IMAGE_TOP_PADDING)))
+        
+        # Create black background
+        bg_clip = (ImageClip(np.zeros((self.height, self.width, 3), dtype=np.uint8))
+                  .set_duration(duration))
+        
+        # Create text clips
+        english_clip = (ImageClip(self.create_text_image(lyric.english_text, 0))
+                       .set_duration(duration)
+                       .set_position(('center', config.TEXT_START_Y)))
+        
+        korean_clip = (ImageClip(self.create_text_image(lyric.korean_text, 0))
+                      .set_duration(duration)
+                      .set_position(('center', config.TEXT_START_Y + config.TEXT_SPACING)))
+        
+        # Get romanization using korean-romanizer
+        romanization = korean_to_romanization(lyric.korean_text)
+        roman_clip = (ImageClip(self.create_text_image(romanization, 0))
+                     .set_duration(duration)
+                     .set_position(('center', config.TEXT_START_Y + 2 * config.TEXT_SPACING)))
+        
+        # Composite all elements
+        composite = CompositeVideoClip([
+            bg_clip,
+            img_clip,
+            english_clip,
+            korean_clip,
+            roman_clip
+        ], size=(self.width, self.height))
+        
+        return composite
+    
+    def assemble_video(self, images: List[GeneratedImage],
+                      lyrics: List[LyricLine],
+                      audio_path: Path,
+                      output_path: Path) -> Path:
+        """Assemble final video with all segments"""
+        print("\n🎬 Assembling video...")
+        
+        # Create video segments
+        segments = []
+        for img_data in images:
+            # Find corresponding lyric
+            lyric = next(l for l in lyrics if l.line_number == img_data.line_number)
+            segment = self.create_video_segment(img_data, lyric)
+            segments.append(segment)
+        
+        # Concatenate all segments with crossfade
+        print("  → Concatenating segments with transitions...")
+        final_video = concatenate_videoclips(segments, method="compose")
+        
+        # Add audio
+        print("  → Adding audio track...")
+        audio = AudioFileClip(str(audio_path))
+        
+        # Trim audio to match video duration
+        start_time = images[0].start_time
+        end_time = images[-1].end_time
+        audio_segment = audio.subclip(start_time, end_time)
+        
+        final_video = final_video.set_audio(audio_segment)
+        
+        # Export
+        print(f"  → Exporting to {output_path}...")
+        final_video.write_videofile(
+            str(output_path),
+            fps=self.fps,
+            codec='libx264',
+            audio_codec='aac',
+            temp_audiofile=str(config.TEMP_DIR / 'temp-audio.m4a'),
+            remove_temp=True,
+            threads=4
+        )
+        
+        # Cleanup
+        final_video.close()
+        audio.close()
+        
+        print(f"✓ Video saved to {output_path}")
+        return output_path
+===./agents/__init__.py===
+
+===./agents/image_director.py===
+from utils.claude_client import ClaudeClient
+from utils.seedream_client import SeedreamClient
+from models.data_models import LyricLine, StyleGuide, GeneratedImage, ImagePromptDecision
+from typing import List, Optional
+from pathlib import Path
+from config.settings import config
+import time
+from tqdm import tqdm
+
+class ImageDirector:
+    def __init__(self):
+        self.claude = ClaudeClient()
+        self.seedream = SeedreamClient()
+    
+    def generate_all_images(self, target_lyrics: List[LyricLine],
+                           style_guide: StyleGuide,
+                           song_id: str) -> List[GeneratedImage]:
+        """Generate all images for the lyric lines"""
+        
+        generated_images = []
+        previous_image_path = None
+        previous_prompt = None
+        
+        # Create output directory for this song
+        frames_dir = config.FRAMES_DIR / song_id
+        frames_dir.mkdir(parents=True, exist_ok=True)
+        
+        for idx, lyric in enumerate(tqdm(target_lyrics, desc="Generating images")):
+            print(f"\n🎨 Generating image for Line {lyric.line_number}: {lyric.english_text}")
+            
+            start_time = time.time()
+            
+            if idx == 0:
+                # First image - no reference
+                print("  → Creating first image (no reference)")
+                prompt = self.claude.generate_first_prompt(
+                    lyric.dict(),
+                    style_guide.dict()
+                )
+                use_reference = False
+            else:
+                # Subsequent images - use previous as reference
+                print(f"  → Creating image with reference to line {target_lyrics[idx-1].line_number}")
+                decision = self.claude.generate_next_prompt(
+                    previous_prompt,
+                    lyric.dict(),
+                    style_guide.dict()
+                )
+                prompt = decision['seedream_prompt']
+                use_reference = decision['use_previous_as_reference']
+                print(f"  → Reasoning: {decision['creative_reasoning']}")
+            
+            # Generate image
+            print(f"  → Calling Seedream API...")
+            result = self.seedream.generate_image(
+                prompt=prompt,
+                reference_image_path=previous_image_path if use_reference else None
+            )
+            
+            # Download image
+            image_url = result['data'][0]['url']
+            image_filename = f"line_{lyric.line_number:03d}.jpg"
+            image_path = frames_dir / image_filename
+            
+            self.seedream.download_image(image_url, image_path)
+            
+            generation_time = time.time() - start_time
+            print(f"  ✓ Generated in {generation_time:.2f}s → {image_path}")
+            
+            # Store metadata
+            generated_images.append(GeneratedImage(
+                line_number=lyric.line_number,
+                image_path=str(image_path),
+                prompt_used=prompt,
+                start_time=lyric.start_time_seconds,
+                end_time=lyric.end_time_seconds,
+                used_reference=use_reference,
+                reference_image=str(previous_image_path) if previous_image_path else None,
+                generation_time=generation_time
+            ))
+            
+            # Update state for next iteration
+            previous_image_path = image_path
+            previous_prompt = prompt
+            
+            # Rate limiting
+            time.sleep(1)
+        
+        return generated_images
+===./utils/text_utils.py===
+from korean_romanizer.romanizer import Romanizer
+
+def korean_to_romanization(korean_text: str) -> str:
+    """
+    Convert Korean text to romanization using Revised Romanization of Korean
+    """
+    try:
+        r = Romanizer(korean_text)
+        return r.romanize()
+    except Exception as e:
+        print(f"Warning: Romanization failed for '{korean_text}': {e}")
+        return korean_text.lower()  # Fallback
+===./utils/seedream_client.py===
+import requests
+import base64
+from pathlib import Path
+from config.settings import config
+from typing import Optional
+import time
+
+class SeedreamClient:
+    def __init__(self):
+        self.api_key = config.SEEDREAM_API_KEY
+        self.endpoint = config.SEEDREAM_ENDPOINT
+        self.headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+    
+    def generate_image(self, prompt: str, 
+                      reference_image_path: Optional[Path] = None,
+                      size: str = "1080x1080") -> dict:
+        """Generate image with Seedream API"""
+        payload = {
+            "model": "seedream-4-0-250828",
+            "prompt": prompt,
+            "size": size,
+            "sequential_image_generation": "disabled",
+            "response_format": "url",
+            "watermark": False,
+            "stream": False
+        }
+        
+        # Add reference image if provided
+        if reference_image_path and reference_image_path.exists():
+            with open(reference_image_path, "rb") as img_file:
+                img_data = base64.b64encode(img_file.read()).decode()
+                # Determine image format
+                ext = reference_image_path.suffix.lower().replace('.', '')
+                payload["image"] = f"data:image/{ext};base64,{img_data}"
+        
+        response = requests.post(
+            self.endpoint,
+            headers=self.headers,
+            json=payload,
+            timeout=120
+        )
+        
+        response.raise_for_status()
+        return response.json()
+    
+    def download_image(self, url: str, output_path: Path) -> Path:
+        """Download generated image from URL"""
+        response = requests.get(url, timeout=60)
+        response.raise_for_status()
+        
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_bytes(response.content)
+        
+        return output_path
+===./utils/__init__.py===
+
+===./utils/supabase_client.py===
+from supabase import create_client, Client
+from config.settings import config
+from models.data_models import SongMetadata, LyricLine
+from typing import List, Optional
+import requests
+from pathlib import Path
+
+class SupabaseClient:
+    def __init__(self):
+        self.client: Client = create_client(
+            config.SUPABASE_URL,
+            config.SUPABASE_KEY
+        )
+    
+    def get_song_metadata(self, song_id: str) -> SongMetadata:
+        """Fetch song metadata from database"""
+        response = (
+            self.client.table("songs")
+            .select("*")
+            .eq("id", song_id)
+            .single()
+            .execute()
+        )
+        return SongMetadata(**response.data)
+    
+    def get_lyrics(self, song_id: str, start_line: int = 1, 
+                   end_line: Optional[int] = None) -> List[LyricLine]:
+        """Fetch lyrics for a song, optionally filtered by line range"""
+        query = (
+            self.client.table("lyrics")
+            .select("*")
+            .eq("song_id", song_id)
+            .order("line_number")
+        )
+        
+        if end_line:
+            query = query.gte("line_number", start_line).lte("line_number", end_line)
+        else:
+            query = query.gte("line_number", start_line)
+        
+        response = query.execute()
+        return [LyricLine(**line) for line in response.data]
+    
+    def get_all_lyrics_for_context(self, song_id: str) -> List[LyricLine]:
+        """Fetch ALL lyrics for context understanding"""
+        response = (
+            self.client.table("lyrics")
+            .select("*")
+            .eq("song_id", song_id)
+            .order("line_number")
+            .execute()
+        )
+        return [LyricLine(**line) for line in response.data]
+    
+    def download_audio_file(self, audio_path: str, output_path: Path) -> Path:
+        """Download audio file from Supabase storage"""
+        # Extract bucket and file path
+        # audio_path format: "albums/{album_id}/audio/{filename}"
+        bucket_name = audio_path.split('/')[0]
+        file_path = '/'.join(audio_path.split('/')[1:])
+        
+        # Get public URL
+        url = self.client.storage.from_(bucket_name).get_public_url(file_path)
+        
+        # Download file
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_bytes(response.content)
+        
+        return output_path
+===./utils/claude_client.py===
+from anthropic import Anthropic
+from config.settings import config
+import json
+
+class ClaudeClient:
+    def __init__(self):
+        self.client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
+        self.model = "claude-sonnet-4-5"
+    
+    def create_style_guide(self, song_metadata: dict, 
+                          all_lyrics: str, target_lyrics: str) -> dict:
+        """Generate initial style guide and story concept"""
+        prompt = f"""You're creating a lyric video for a Korean learning song.
+
+Full song context:
+{all_lyrics}
+
+Target segment we're generating:
+{target_lyrics}
+
+Song description: {song_metadata.get('description', 'N/A')}
+
+Create a visual foundation for this segment:
+1. What's the overall visual style? (art medium, colors, mood, aesthetic)
+2. What's happening in this segment of the song? (brief story summary)
+
+Respond in JSON format:
+{{
+  "visual_style": "description of art style, colors, mood",
+  "segment_story": "brief narrative of what's happening"
+}}
+
+Keep it simple - just style and vibe. No rigid rules about characters or settings.
+"""
+        
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=1000,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return json.loads(response.content[0].text)
+    
+    def generate_first_prompt(self, lyric_line: dict, style_guide: dict) -> str:
+        """Generate prompt for the first image"""
+        prompt = f"""Visual style: {style_guide['visual_style']}
+Story context: {style_guide['segment_story']}
+
+First lyric line: "{lyric_line['english_text']} / {lyric_line['korean_text']}"
+
+What should the opening image show? Generate a detailed Seedream prompt.
+The image will be 1080x1080 pixels (square format, 1:1).
+
+Respond with ONLY the Seedream prompt text, no JSON, no explanation.
+"""
+        
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=500,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return response.content[0].text.strip()
+    
+    def generate_next_prompt(self, previous_prompt: str, 
+                            current_lyric: dict, 
+                            style_guide: dict) -> dict:
+        """Generate prompt for subsequent images with creative reasoning"""
+        prompt = f"""Previous image prompt: "{previous_prompt}"
+
+Current lyric: "{current_lyric['english_text']} / {current_lyric['korean_text']}"
+
+Style guide: {style_guide['visual_style']}
+
+Looking at what you just generated, what should come next?
+Consider:
+- Should the scene continue or change?
+- What stays the same? What's different?
+- Does the lyric suggest movement, emotion shift, or location change?
+- How do you keep visual interest while maintaining flow?
+
+Respond in JSON format:
+{{
+  "creative_reasoning": "your thought process",
+  "seedream_prompt": "detailed prompt for Seedream (1080x1080, square)",
+  "use_previous_as_reference": true
+}}
+"""
+        
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=800,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return json.loads(response.content[0].text)
+===./models/__init__.py===
+
+===./models/data_models.py===
+from pydantic import BaseModel
+from typing import Optional, List
+from datetime import datetime
+
+class LyricLine(BaseModel):
+    id: str
+    song_id: str
+    line_number: int
+    english_text: str
+    korean_text: str
+    start_time_seconds: float
+    end_time_seconds: float
+    voice_over_file_path: Optional[str]
+    breakdown_data: Optional[dict]
+    is_published: bool
+
+class SongMetadata(BaseModel):
+    id: str
+    title: str
+    artist: Optional[str] = None  # Make it optional
+    description: Optional[str]
+    audio_file_path: str
+    duration_seconds: Optional[float] = None  # Also make this optional
+    artist_gender: Optional[str]
+    original_lyrics_text: Optional[str]
+    cover_image_prompt: Optional[str]
+
+class StyleGuide(BaseModel):
+    visual_style: str
+    segment_story: str
+
+class ImagePromptDecision(BaseModel):
+    line_number: int
+    creative_reasoning: str
+    seedream_prompt: str
+    use_previous_as_reference: bool
+
+class GeneratedImage(BaseModel):
+    line_number: int
+    image_path: str
+    prompt_used: str
+    start_time: float
+    end_time: float
+    used_reference: bool
+    reference_image: Optional[str] = None
+    generation_time: Optional[float] = None
+
+class VideoGenerationRequest(BaseModel):
+    song_id: str
+    start_line: int = 1
+    end_line: Optional[int] = None
+    resolution: str = "2K"
+    output_filename: Optional[str] = None
+===./test.py===
+# test_complete_pipeline.py
+"""
+Complete test script for lyric video generator
+Tests all components with detailed logging
+"""
+
+import os
+import sys
+from pathlib import Path
+import traceback
+from datetime import datetime
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent))
+
+def log(message, level="INFO"):
+    """Pretty logging with timestamps"""
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    symbols = {
+        "INFO": "ℹ️ ",
+        "SUCCESS": "✅",
+        "ERROR": "❌",
+        "WARNING": "⚠️ ",
+        "TEST": "🧪"
+    }
+    symbol = symbols.get(level, "  ")
+    print(f"[{timestamp}] {symbol} {message}")
+
+def test_environment():
+    """Test environment variables"""
+    log("Testing environment variables...", "TEST")
+    
+    required_vars = [
+        "SUPABASE_URL",
+        "SUPABASE_KEY", 
+        "ANTHROPIC_API_KEY",
+        "SEEDREAM_API_KEY",
+        "SEEDREAM_ENDPOINT"
+    ]
+    
+    missing = []
+    for var in required_vars:
+        value = os.getenv(var)
+        if not value:
+            missing.append(var)
+            log(f"Missing: {var}", "ERROR")
+        else:
+            masked = value[:10] + "..." if len(value) > 10 else value
+            log(f"Found: {var} = {masked}", "SUCCESS")
+    
+    if missing:
+        log(f"Missing environment variables: {', '.join(missing)}", "ERROR")
+        return False
+    
+    log("All environment variables present", "SUCCESS")
+    return True
+
+def test_dependencies():
+    """Test required packages"""
+    log("Testing Python dependencies...", "TEST")
+    
+    required_packages = {
+        "supabase": "supabase",
+        "anthropic": "anthropic",
+        "requests": "requests",
+        "moviepy.editor": "moviepy",
+        "PIL": "pillow",
+        "pydantic": "pydantic",
+        "dotenv": "python-dotenv",
+        "tqdm": "tqdm",
+        "korean_romanizer.romanizer": "korean-romanizer"
+    }
+    
+    missing = []
+    for import_name, package_name in required_packages.items():
+        try:
+            __import__(import_name)
+            log(f"Found: {package_name}", "SUCCESS")
+        except ImportError as e:
+            missing.append(package_name)
+            log(f"Missing: {package_name} - {str(e)}", "ERROR")
+    
+    if missing:
+        log(f"Install missing packages: pip install {' '.join(missing)}", "ERROR")
+        return False
+    
+    log("All dependencies installed", "SUCCESS")
+    return True
+
+def test_project_structure():
+    """Test project directories and files"""
+    log("Testing project structure...", "TEST")
+    
+    base_dir = Path(__file__).parent
+    
+    required_dirs = [
+        "config",
+        "agents", 
+        "utils",
+        "models",
+        "output",
+        "fonts"
+    ]
+    
+    required_files = [
+        "config/__init__.py",
+        "config/settings.py",
+        "agents/__init__.py",
+        "agents/data_retriever.py",
+        "agents/style_planner.py",
+        "agents/image_director.py",
+        "agents/video_compositor.py",
+        "utils/__init__.py",
+        "utils/supabase_client.py",
+        "utils/claude_client.py",
+        "utils/seedream_client.py",
+        "utils/text_utils.py",
+        "models/__init__.py",
+        "models/data_models.py",
+        "main.py",
+        "fonts/MaruBuri-Bold.ttf"
+    ]
+    
+    all_good = True
+    
+    for dir_name in required_dirs:
+        dir_path = base_dir / dir_name
+        if dir_path.exists():
+            log(f"Directory exists: {dir_name}", "SUCCESS")
+        else:
+            log(f"Directory missing: {dir_name}", "ERROR")
+            all_good = False
+    
+    for file_name in required_files:
+        file_path = base_dir / file_name
+        if file_path.exists():
+            log(f"File exists: {file_name}", "SUCCESS")
+        else:
+            log(f"File missing: {file_name}", "ERROR")
+            all_good = False
+    
+    return all_good
+
+def test_imports():
+    """Test importing project modules"""
+    log("Testing project imports...", "TEST")
+    
+    try:
+        from config.settings import config
+        log(f"Config imported - Base dir: {config.BASE_DIR}", "SUCCESS")
+        
+        from utils.supabase_client import SupabaseClient
+        log("SupabaseClient imported", "SUCCESS")
+        
+        from utils.claude_client import ClaudeClient
+        log("ClaudeClient imported", "SUCCESS")
+        
+        from utils.seedream_client import SeedreamClient
+        log("SeedreamClient imported", "SUCCESS")
+        
+        from utils.text_utils import korean_to_romanization
+        log("Text utils imported", "SUCCESS")
+        
+        from models.data_models import VideoGenerationRequest
+        log("Data models imported", "SUCCESS")
+        
+        from agents.data_retriever import DataRetriever
+        log("DataRetriever imported", "SUCCESS")
+        
+        return True
+        
+    except Exception as e:
+        log(f"Import error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_supabase():
+    """Test Supabase connection"""
+    log("Testing Supabase connection...", "TEST")
+    
+    try:
+        from utils.supabase_client import SupabaseClient
+        
+        client = SupabaseClient()
+        log("Supabase client created", "SUCCESS")
+        
+        # Test fetching a song
+        test_song_id = "8e36b8ba-a752-4717-8f55-78f1d4996c8c"
+        song = client.get_song_metadata(test_song_id)
+        log(f"Fetched song: '{song.title}' by {song.artist}", "SUCCESS")
+        log(f"  Duration: {song.duration_seconds}s", "INFO")
+        log(f"  Audio path: {song.audio_file_path}", "INFO")
+        
+        # Test fetching lyrics
+        lyrics = client.get_lyrics(test_song_id, start_line=1, end_line=3)
+        log(f"Fetched {len(lyrics)} lyric lines", "SUCCESS")
+        for lyric in lyrics:
+            log(f"  Line {lyric.line_number}: {lyric.english_text[:30]}...", "INFO")
+        
+        return True
+        
+    except Exception as e:
+        log(f"Supabase error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_claude():
+    """Test Claude API"""
+    log("Testing Claude API...", "TEST")
+    
+    try:
+        from utils.claude_client import ClaudeClient
+        
+        client = ClaudeClient()
+        log("Claude client created", "SUCCESS")
+        
+        # Simple test call
+        response = client.client.messages.create(
+            model="claude-sonnet-4-5",
+            max_tokens=100,
+            messages=[{
+                "role": "user",
+                "content": "Respond with exactly: 'API test successful'"
+            }]
+        )
+        
+        result = response.content[0].text
+        log(f"Claude response: {result}", "SUCCESS")
+        log(f"  Tokens used: {response.usage.input_tokens} in, {response.usage.output_tokens} out", "INFO")
+        
+        return True
+        
+    except Exception as e:
+        log(f"Claude API error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_seedream():
+    """Test Seedream API"""
+    log("Testing Seedream API...", "TEST")
+    
+    try:
+        from utils.seedream_client import SeedreamClient
+        from config.settings import config
+        
+        client = SeedreamClient()
+        log("Seedream client created", "SUCCESS")
+        
+        # Simple test generation
+        log("Generating test image (this takes ~3-5 seconds)...", "INFO")
+        result = client.generate_image(
+            prompt="a simple red apple on a white table, minimal, clean",
+            size="1080x1080"
+        )
+        
+        if result.get('data') and len(result['data']) > 0:
+            image_url = result['data'][0]['url']
+            log(f"Image generated successfully", "SUCCESS")
+            log(f"  URL: {image_url[:60]}...", "INFO")
+            
+            # Try to download it
+            test_path = config.TEMP_DIR / "test_image.jpg"
+            test_path.parent.mkdir(parents=True, exist_ok=True)
+            downloaded = client.download_image(image_url, test_path)
+            log(f"Image downloaded to: {downloaded}", "SUCCESS")
+            log(f"  File size: {downloaded.stat().st_size / 1024:.1f} KB", "INFO")
+            
+            return True
+        else:
+            log(f"Unexpected response format: {result}", "ERROR")
+            return False
+        
+    except Exception as e:
+        log(f"Seedream API error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_romanization():
+    """Test Korean romanization"""
+    log("Testing Korean romanization...", "TEST")
+    
+    try:
+        from utils.text_utils import korean_to_romanization
+        
+        test_cases = [
+            ("안녕하세요", "annyeonghaseyo"),
+            ("도와주세요", "dowajuseyo"),
+            ("감사합니다", "gamsahamnida")
+        ]
+        
+        all_good = True
+        for korean, expected in test_cases:
+            result = korean_to_romanization(korean)
+            if result.lower() == expected.lower():
+                log(f"'{korean}' → '{result}' ✓", "SUCCESS")
+            else:
+                log(f"'{korean}' → '{result}' (expected: {expected})", "WARNING")
+                all_good = False
+        
+        return all_good
+        
+    except Exception as e:
+        log(f"Romanization error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_font():
+    """Test font rendering"""
+    log("Testing font rendering...", "TEST")
+    
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+        from config.settings import config
+        
+        if not config.FONT_PATH.exists():
+            log(f"Font file not found: {config.FONT_PATH}", "ERROR")
+            return False
+        
+        log(f"Font file found: {config.FONT_PATH}", "SUCCESS")
+        
+        # Try to load font
+        font = ImageFont.truetype(str(config.FONT_PATH), 48)
+        log("Font loaded successfully", "SUCCESS")
+        
+        # Test rendering Korean text
+        img = Image.new('RGB', (500, 100), color='black')
+        draw = ImageDraw.Draw(img)
+        test_text = "안녕하세요 Hello"
+        draw.text((10, 10), test_text, font=font, fill='white')
+        
+        # Save test image
+        test_path = config.TEMP_DIR / "test_font.png"
+        test_path.parent.mkdir(parents=True, exist_ok=True)
+        img.save(test_path)
+        log(f"Test image saved: {test_path}", "SUCCESS")
+        
+        return True
+        
+    except Exception as e:
+        log(f"Font error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def test_minimal_pipeline():
+    """Run a minimal end-to-end test with 1 line"""
+    log("Testing minimal pipeline (1 line)...", "TEST")
+    log("This will take ~30-60 seconds due to API calls", "INFO")
+    
+    try:
+        from main import generate_lyric_video
+        from config.settings import config
+        
+        # Generate just line 1
+        test_song_id = "8e36b8ba-a752-4717-8f55-78f1d4996c8c"
+        
+        result = generate_lyric_video(
+            song_id=test_song_id,
+            start_line=1,
+            end_line=1
+        )
+        
+        if result.exists():
+            file_size = result.stat().st_size / (1024 * 1024)  # MB
+            log(f"Video created: {result}", "SUCCESS")
+            log(f"  File size: {file_size:.2f} MB", "INFO")
+            return True
+        else:
+            log("Video file not created", "ERROR")
+            return False
+        
+    except Exception as e:
+        log(f"Pipeline error: {str(e)}", "ERROR")
+        traceback.print_exc()
+        return False
+
+def main():
+    """Run all tests"""
+    print("\n" + "="*80)
+    print("LYRIC VIDEO GENERATOR - COMPLETE SYSTEM TEST")
+    print("="*80 + "\n")
+    
+    results = {}
+    
+    # Run tests
+    tests = [
+        ("Environment Variables", test_environment),
+        ("Python Dependencies", test_dependencies),
+        ("Project Structure", test_project_structure),
+        ("Module Imports", test_imports),
+        ("Supabase Connection", test_supabase),
+        ("Claude API", test_claude),
+        ("Seedream API", test_seedream),
+        ("Korean Romanization", test_romanization),
+        ("Font Rendering", test_font),
+    ]
+    
+    for test_name, test_func in tests:
+        print(f"\n{'─'*80}")
+        try:
+            results[test_name] = test_func()
+        except Exception as e:
+            log(f"Unexpected error in {test_name}: {str(e)}", "ERROR")
+            results[test_name] = False
+        print()
+    
+    # Summary
+    print("\n" + "="*80)
+    print("TEST SUMMARY")
+    print("="*80)
+    
+    passed = sum(1 for v in results.values() if v)
+    total = len(results)
+    
+    for test_name, result in results.items():
+        status = "✅ PASS" if result else "❌ FAIL"
+        print(f"{status} - {test_name}")
+    
+    print(f"\nTotal: {passed}/{total} tests passed")
+    
+    # Decide if we should run minimal pipeline
+    critical_tests = [
+        "Environment Variables",
+        "Python Dependencies", 
+        "Module Imports",
+        "Supabase Connection",
+        "Claude API",
+        "Seedream API"
+    ]
+    
+    critical_passed = all(results.get(t, False) for t in critical_tests)
+    
+    if critical_passed:
+        print("\n" + "="*80)
+        print("All critical tests passed! Running minimal pipeline test...")
+        print("="*80 + "\n")
+        
+        pipeline_result = test_minimal_pipeline()
+        
+        if pipeline_result:
+            print("\n" + "="*80)
+            print("🎉 ALL TESTS PASSED - SYSTEM READY!")
+            print("="*80)
+        else:
+            print("\n" + "="*80)
+            print("⚠️  Pipeline test failed - check logs above")
+            print("="*80)
+    else:
+        print("\n" + "="*80)
+        print("❌ Critical tests failed - fix issues before running pipeline")
+        print("="*80)
+        
+        print("\nFailed critical tests:")
+        for test in critical_tests:
+            if not results.get(test, False):
+                print(f"  - {test}")
+
+if __name__ == "__main__":
+    main()
+===./main.py===
+from agents.data_retriever import DataRetriever
+from agents.style_planner import StylePlanner
+from agents.image_director import ImageDirector
+from agents.video_compositor import VideoCompositor
+from models.data_models import VideoGenerationRequest
+from config.settings import config
+from pathlib import Path
+import json
+
+def generate_lyric_video(song_id: str, start_line: int = 1, 
+                        end_line: int = None) -> Path:
+    """
+    Main orchestration function for generating lyric videos
+    """
+    print("=" * 60)
+    print("🎵 LYRIC VIDEO GENERATOR")
+    print("=" * 60)
+    
+    # Create necessary directories
+    config.create_directories()
+    
+    # Create request
+    request = VideoGenerationRequest(
+        song_id=song_id,
+        start_line=start_line,
+        end_line=end_line
+    )
+    
+    # Step 1: Data Retrieval
+    print("\n📥 STEP 1: Fetching data from Supabase...")
+    retriever = DataRetriever()
+    song, all_lyrics, target_lyrics, audio_path = retriever.fetch_all_data(request)
+    print(f"✓ Song: {song.title} by {song.artist}")
+    print(f"✓ Generating lines {start_line} to {target_lyrics[-1].line_number}")
+    print(f"✓ Total lines to generate: {len(target_lyrics)}")
+    
+    # Step 2: Style Planning
+    print("\n🎨 STEP 2: Creating style guide...")
+    planner = StylePlanner()
+    style_guide = planner.create_style_guide(song, all_lyrics, target_lyrics)
+    print(f"✓ Visual Style: {style_guide.visual_style}")
+    print(f"✓ Story: {style_guide.segment_story}")
+    
+    # Step 3: Image Generation
+    print("\n🖼️  STEP 3: Generating images...")
+    director = ImageDirector()
+    images = director.generate_all_images(target_lyrics, style_guide, song_id)
+    print(f"✓ Generated {len(images)} images")
+    
+    # Step 4: Video Assembly
+    print("\n🎬 STEP 4: Assembling video...")
+    compositor = VideoCompositor()
+    
+    output_filename = f"song_{song_id}_lines_{start_line}-{target_lyrics[-1].line_number}.mp4"
+    output_path = config.VIDEOS_DIR / output_filename
+    
+    final_video = compositor.assemble_video(images, target_lyrics, audio_path, output_path)
+    
+    # Save metadata
+    metadata = {
+        "song_id": song_id,
+        "title": song.title,
+        "artist": song.artist,
+        "start_line": start_line,
+        "end_line": target_lyrics[-1].line_number,
+        "total_images": len(images),
+        "style_guide": style_guide.dict(),
+        "images": [img.dict() for img in images]
+    }
+    
+    metadata_path = config.VIDEOS_DIR / f"{output_filename}.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2))
+    
+    print("\n" + "=" * 60)
+    print("✅ VIDEO GENERATION COMPLETE!")
+    print(f"📹 Video: {final_video}")
+    print(f"📄 Metadata: {metadata_path}")
+    print("=" * 60)
+    
+    return final_video
+
+if __name__ == "__main__":
+    # Example usage
+    song_id = "8e36b8ba-a752-4717-8f55-78f1d4996c8c"  # "Help Me!" song
+    
+    # Generate lines 1-10
+    generate_lyric_video(
+        song_id=song_id,
+        start_line=1,
+        end_line=10
+    )
