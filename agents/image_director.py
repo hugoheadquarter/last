@@ -1,9 +1,8 @@
 from utils.claude_client import ClaudeClient
 from utils.seedream_client import SeedreamClient
-from agents.reference_selector import ReferenceSelector
 from utils.generation_logger import GenerationLogger
 from models.data_models import LyricLine, StyleGuide, GeneratedImage
-from typing import List, Optional
+from typing import List, Tuple
 from pathlib import Path
 from config.settings import config
 import time
@@ -13,16 +12,16 @@ class ImageDirector:
     def __init__(self):
         self.claude = ClaudeClient()
         self.seedream = SeedreamClient()
-        self.reference_selector = ReferenceSelector()
     
-    def generate_character_designs(self, style_guide: StyleGuide, song_id: str) -> List[Path]:
-        """Generate character design references (male and female portraits)"""
+    def generate_character_designs(self, style_guide: StyleGuide, song_id: str) -> Tuple[List[Path], List[str]]:
+        """Generate character design references and return paths + prompts"""
         print("\n🎨 GENERATING CHARACTER DESIGNS...")
         
         frames_dir = config.FRAMES_DIR / song_id
         frames_dir.mkdir(parents=True, exist_ok=True)
         
         character_refs = []
+        character_prompts = []
         
         # Generate male character
         print("  → Generating male character design...")
@@ -30,6 +29,7 @@ class ImageDirector:
             style_guide.dict(),
             gender="male"
         )
+        character_prompts.append(male_prompt)
         print(f"  Prompt: {male_prompt[:100]}...")
         
         male_result = self.seedream.generate_image(
@@ -43,7 +43,7 @@ class ImageDirector:
         character_refs.append(male_path)
         print(f"  ✓ Male character saved: {male_path}")
         
-        time.sleep(2)  # Rate limiting
+        time.sleep(2)
         
         # Generate female character
         print("  → Generating female character design...")
@@ -51,6 +51,7 @@ class ImageDirector:
             style_guide.dict(),
             gender="female"
         )
+        character_prompts.append(female_prompt)
         print(f"  Prompt: {female_prompt[:100]}...")
         
         female_result = self.seedream.generate_image(
@@ -66,7 +67,7 @@ class ImageDirector:
         
         print(f"\n✓ Character designs complete: {len(character_refs)} references created\n")
         
-        return character_refs
+        return character_refs, character_prompts
     
     def generate_all_images(self, target_lyrics: List[LyricLine],
                            style_guide: StyleGuide,
@@ -85,15 +86,17 @@ class ImageDirector:
         logger.log_style_guide(style_guide.dict())
         
         # STEP 1: Generate character designs
-        character_refs = self.generate_character_designs(style_guide, song_id)
+        character_refs, character_design_prompts = self.generate_character_designs(style_guide, song_id)
         logger.log("\n=== CHARACTER DESIGNS GENERATED ===")
         logger.log(f"Male: {character_refs[0]}")
-        logger.log(f"Female: {character_refs[1]}\n")
+        logger.log(f"Male Prompt: {character_design_prompts[0]}\n")
+        logger.log(f"Female: {character_refs[1]}")
+        logger.log(f"Female Prompt: {character_design_prompts[1]}\n")
         
         total_lines = len(target_lyrics)
         pipeline_start = time.time()
         
-        # STEP 2: Generate line images (all use character refs)
+        # STEP 2: Generate line images
         for idx, lyric in enumerate(tqdm(target_lyrics, desc="Generating images")):
             print(f"\n🎨 Generating image for Line {lyric.line_number}: {lyric.english_text}")
             
@@ -102,21 +105,21 @@ class ImageDirector:
             start_time = time.time()
             
             if idx == 0:
-                # First image
                 print("  → Creating first image with character references")
                 prompt = self.claude.generate_first_prompt(
                     lyric.dict(),
-                    style_guide.dict()
+                    style_guide.dict(),
+                    character_design_prompts
                 )
                 logger.log_prompt_generation(prompt)
                 
             else:
-                # Subsequent images
                 print(f"  → Creating image {idx+1} with character references")
                 decision = self.claude.generate_next_prompt(
                     previous_prompts,
                     lyric.dict(),
                     style_guide.dict(),
+                    character_design_prompts,
                     line_number=lyric.line_number,
                     total_lines=total_lines
                 )
@@ -126,7 +129,6 @@ class ImageDirector:
                 print(f"  → Reasoning: {reasoning[:150]}...")
                 logger.log_prompt_generation(prompt, reasoning)
             
-            # Always use character references (never previous line images)
             print(f"  → Using character design references")
             logger.log(f"  Reference: Character designs (male + female portraits)\n")
             
@@ -135,10 +137,9 @@ class ImageDirector:
             try:
                 result = self.seedream.generate_image(
                     prompt=prompt,
-                    reference_image_paths=character_refs  # Always use character designs
+                    reference_image_paths=character_refs
                 )
                 
-                # Download image
                 image_url = result['data'][0]['url']
                 image_filename = f"line_{lyric.line_number:03d}.jpg"
                 image_path = frames_dir / image_filename
@@ -150,7 +151,6 @@ class ImageDirector:
                 
                 logger.log_generation_result(True, generation_time, str(image_path))
                 
-                # Store metadata
                 generated_images.append(GeneratedImage(
                     line_number=lyric.line_number,
                     image_path=str(image_path),
@@ -162,7 +162,6 @@ class ImageDirector:
                     generation_time=generation_time
                 ))
                 
-                # Add to prompt history (but NOT to reference history)
                 previous_prompts.append(prompt)
                 
             except Exception as e:
@@ -171,7 +170,6 @@ class ImageDirector:
             
             time.sleep(1)
         
-        # Log final summary
         total_time = time.time() - pipeline_start
         logger.log_summary(len(generated_images), total_time)
         

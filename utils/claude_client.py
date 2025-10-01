@@ -8,48 +8,6 @@ class ClaudeClient:
     def __init__(self):
         self.client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
         self.model = "claude-sonnet-4-5"
-
-    def generate_character_design(self, style_guide: dict, gender: str) -> str:
-        """Generate a character design portrait for reference"""
-        
-        prompt = f"""Visual style: {style_guide['visual_style']}
-Story context: {style_guide['segment_story']}
-
-Create a CHARACTER DESIGN PORTRAIT for a {gender} character.
-
-This is a REFERENCE IMAGE that will be used to maintain character consistency across multiple scenes.
-
-REQUIREMENTS:
-- Clean portrait of a young {gender} character
-- Character should fill most of the frame
-- Simple, neutral background (slightly blurred, minimal)
-- Character facing forward or slightly angled (not profile, not back)
-- Friendly, approachable expression
-- Modern, casual clothing appropriate for the story
-- Focus on CLEAR CHARACTER FEATURES: face, hair, body type, clothing style
-
-STYLE:
-- Follow the visual style described above
-- Clean, simple composition
-- No complex environments or props
-- This is a character reference, not a scene
-
-FORBIDDEN:
-- NO text
-- NO complex backgrounds
-
-Image specs: 1080x1080 pixels
-
-Respond with ONLY the Seedream prompt for this character design.
-"""
-        
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=400,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        return response.content[0].text.strip()
     
     def _extract_json(self, text: str) -> dict:
         """Extract JSON from Claude's response, handling markdown code blocks"""
@@ -89,71 +47,140 @@ Song description: {song_metadata.get('description', 'N/A')}
 
 Analyze the lyrics:
 1. Is this a conversation between two people, or a solo narrative?
-2. What's the overall visual style? (art medium, colors, mood, aesthetic)
-3. What's happening in this segment? (brief story summary)
+2. What's happening in this segment? (brief story summary)
+
+FIXED VISUAL STYLE:
+You must use high-quality Korean webtoon art style with these characteristics:
+- Clean digital illustration with smooth linework
+- Soft, natural color palette (pastels, warm tones, muted colors)
+- Expressive faces with detailed eyes
+- Modern, trendy fashion
+- Atmospheric lighting and subtle gradients
+- Professional webtoon quality (think Lezhin, Naver Webtoon premium series)
 
 IMPORTANT RULES:
 - If this is a CONVERSATION (lyrics use "you/your", questions/responses between people):
   → Must feature TWO characters of OPPOSITE SEX (one male, one female)
-- Characters should be placed in REAL ENVIRONMENTS (cafe, park, street, room)
+- Characters should be placed in WEBTOON ENVIRONMENTS (cafe, park, street, room)
 - NO abstract colored backgrounds or gradient backgrounds
 - NO split-screen compositions
 
 Respond in JSON format:
 {{
-  "visual_style": "description of art style, colors, mood",
+  "visual_style": "High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
   "segment_story": "brief narrative including character genders if conversation",
   "is_conversation": true or false
 }}
+
+Note: visual_style field should always contain the exact text above for consistency.
 """
         
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=2000,
+            max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
         
         return self._extract_json(response.content[0].text)
     
-    def generate_first_prompt(self, lyric_line: dict, style_guide: dict) -> str:
+    def generate_character_design(self, style_guide: dict, gender: str) -> str:
+        """Generate a character design portrait for reference"""
+        
+        prompt = f"""High-quality Korean webtoon style
+- No background
+- The face should appear natural, without glittering or sparkling effects.
+- Professional webtoon quality 
+- IMPORTANT: Choose outfits that are appropriate and visually aligned with the theme of the song.
+
+Story context: {style_guide['segment_story']}
+
+Create a CHARACTER DESIGN PORTRAIT for a {gender} character in this webtoon style.
+
+This is a REFERENCE IMAGE for character consistency across scenes.
+
+REQUIREMENTS:
+- Young {gender} character (early 20s)
+- Character fills most of frame (shoulders and head visible)
+- Character facing forward or slightly angled (3/4 view)
+- Friendly, approachable expression
+- Modern Korean fashion (trendy, casual, stylish)
+- Clear features: face, hair, clothing details
+- Webtoon-quality rendering: smooth shading, clean lines, professional finish
+
+CLOTHING:
+- Specific modern outfit 
+- Fashionable colors (earth tones, pastels, neutrals)
+- This outfit stays consistent across all scenes
+- Make it memorable and suitable for casual meetings
+
+FORBIDDEN:
+- NO text
+
+Image specs: 1080x1080 pixels
+
+Respond with ONLY the Seedream prompt for this {gender} character in high-quality webtoon style.
+"""
+        
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=1000,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return response.content[0].text.strip()
+    
+    def generate_first_prompt(self, lyric_line: dict, style_guide: dict, 
+                             character_design_prompts: List[str]) -> str:
         """Generate prompt for the first image"""
         
-        # Extract is_conversation from style_guide dict
         is_conversation = style_guide.get('is_conversation', True)
         
-        # Build character rule based on conversation type
         if is_conversation:
-            character_rule = "- This is a conversation, so show TWO characters of OPPOSITE SEX (one male, one female)"
+            character_rule = "- Show TWO characters (male and female from the reference portraits)"
         else:
-            character_rule = "- Show the character(s) as described in the story"
+            character_rule = "- Show the character from the reference portrait"
         
         prompt = f"""Visual style: {style_guide['visual_style']}
 Story context: {style_guide['segment_story']}
 
 First lyric line: "{lyric_line['english_text']} / {lyric_line['korean_text']}"
 
-Create an opening image focused on the CHARACTERS in a REAL ENVIRONMENT.
+CHARACTER REFERENCE INFORMATION:
+You will receive reference portrait images. Here are the exact prompts used to create them:
+
+Male character prompt:
+{character_design_prompts[0]}
+
+Female character prompt:
+{character_design_prompts[1]}
+
+These references show what the characters LOOK LIKE (facial features, hair, outfits, style).
+Your job is to create a SCENE using these exact same characters.
+
+Create an opening scene focused on the CHARACTERS in a WEBTOON ENVIRONMENT.
 
 CHARACTER RULES:
 {character_rule}
-- Characters should fill significant frame space (not tiny in background)
-- People are the primary focus, environment provides context
+- Characters should look EXACTLY as described in the reference prompts above
+- SAME outfits, SAME hairstyles, SAME features
+- Characters should fill significant frame space
+- People are the primary focus
 
 ENVIRONMENT RULES:
-- Must be a REAL PLACE: cafe interior, park, street, room, etc.
+- Must be a WEBTOON PLACE: cafe interior, park, street, room, etc with details
 - NO solid color backgrounds
 - NO abstract gradient backgrounds
-- NO colored geometric backgrounds
 - Background should feel like an actual location
 
 COMPOSITION RULES:
 - NO split-screen compositions
 - NO divider lines between characters
-- Characters exist in the SAME unified space
-- Single cohesive scene, not separated portraits
+- Characters in the SAME unified space
+- Single cohesive scene
 
 FORBIDDEN:
 - NO text overlays
+- DO NOT change character appearance from references
 
 Image specs: 1080x1080 pixels (square format)
 
@@ -162,7 +189,7 @@ Respond with ONLY the Seedream prompt.
         
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=2000,
+            max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
         
@@ -171,24 +198,17 @@ Respond with ONLY the Seedream prompt.
     def generate_next_prompt(self, previous_prompts: List[str], 
                             current_lyric: dict, 
                             style_guide: dict,
+                            character_design_prompts: List[str],
                             line_number: int,
                             total_lines: int) -> dict:
-        """Generate prompt for subsequent images with full visual history"""
+        """Generate prompt for subsequent images"""
         
-        # Format all previous prompts
         prompts_history = "\n".join([
             f"Image {i+1}: {prompt[:120]}..."
             for i, prompt in enumerate(previous_prompts)
         ])
         
-        # Extract is_conversation
         is_conversation = style_guide.get('is_conversation', True)
-        
-        # Build character rule
-        if is_conversation:
-            character_continuity = "- Conversation scenes require OPPOSITE SEX characters (male and female)"
-        else:
-            character_continuity = "- Maintain character consistency"
         
         prompt = f"""You're creating image #{line_number} of {total_lines} in a cinematic sequence.
 
@@ -200,19 +220,29 @@ ALL PREVIOUS SCENE PROMPTS:
 Current lyric: "{current_lyric['english_text']} / {current_lyric['korean_text']}"
 Visual style: {style_guide['visual_style']}
 
-UNDERSTANDING CHARACTER REFERENCES:
-You will be provided with 2 character design portraits (male and female) as references.
-These ensure consistent character appearance across all images.
-The references show what the characters LOOK LIKE, not what scene to create.
+CHARACTER REFERENCE INFORMATION:
+You will receive reference portrait images. Here are the exact prompts used to create them:
+
+Male character prompt:
+{character_design_prompts[0]}
+
+Female character prompt:
+{character_design_prompts[1]}
+
+These references show what the characters LOOK LIKE (facial features, hair, outfits, style).
+Use these EXACT character descriptions in your scene.
 
 YOUR JOB:
-Create a NEW SCENE for this lyric using those same characters.
+Create a NEW SCENE for this lyric using those same characters with their exact appearance.
 
 SCENE REQUIREMENTS:
-- Place characters in a REAL ENVIRONMENT (cafe, park, street, room with details)
+- Place characters in a WEBTOON ENVIRONMENT (cafe, park, street, room with details)
+- Characters should look EXACTLY as described in the reference prompts
+- SAME outfits, SAME hairstyles, SAME features
 - Characters should fill significant frame space
 - NO abstract/solid color backgrounds
 - NO split-screen or divided compositions
+- NO divider lines between characters
 - Characters in unified space
 
 SCENE CONTINUITY:
@@ -224,94 +254,29 @@ CRITICAL: VISUAL VARIETY
 Look at previous scenes. Make this one DISTINCTLY DIFFERENT:
 - Different camera work
 - Different character positions/interactions
-- Different framing
 - Different character gestures/face expressions
-- Not just expression changes or slight variations
-- BUT do not change their outfit.
+- Different framing
+- NOT just expression changes or slight variations
+
+Think about how the scene composition, character arrangement, and perspective can tell the story differently.
 
 FORBIDDEN:
 - NO text
+- DO NOT change character appearance (outfits, hair, features)
+
+IMPORTANT: Characters should not look at the viewer. Instead, they must direct their gaze toward each other, toward objects in the environment, toward what they are gesturing at, etc.
 
 Respond in JSON:
 {{
   "creative_reasoning": "How is this scene different from previous ones?",
-  "seedream_prompt": "Describe the scene with characters from the reference portraits",
+  "seedream_prompt": "Describe the scene with characters matching the exact reference descriptions",
   "use_previous_as_reference": true
 }}
 """
         
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=2000,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        return self._extract_json(response.content[0].text)
-    
-    def select_reference_images(self, 
-                               prompts_analysis: str,
-                               current_lyric: dict,
-                               style_guide: dict,
-                               line_number: int,
-                               total_previous: int) -> dict:
-        """Select optimal reference images to avoid compositional repetition"""
-        
-        prompt = f"""You're selecting reference images for AI image generation.
-
-STORY CONTEXT: {style_guide['segment_story']}
-CURRENT LYRIC (Line {line_number}): "{current_lyric['english_text']} / {current_lyric['korean_text']}"
-
-PREVIOUS IMAGES:
-{prompts_analysis}
-
-CRITICAL UNDERSTANDING:
-Reference images provide style (art style, colors, character designs) to Seedream, BUT Seedream often COPIES compositional elements too. This is a problem.
-
-Example of what goes wrong:
-- Reference has "man's back in foreground, woman in background"
-- Seedream generates "man's back in foreground, woman in background" again
-- Result: duplicate characters, boring repetition
-
-YOUR TASK:
-Select 1-3 references that provide style WITHOUT compositional problems.
-
-AVOID SELECTING images with:
-- "Over-shoulder" framing
-- "From behind" angles
-- "Person's back" in foreground
-- "Foreground blur" with person
-- "POV" shots
-- Complex layered compositions
-- "Split-screen" or "divided" compositions
-- "Abstract background" or "colored background"
-
-These cause Seedream to copy the framing, creating duplicates.
-
-PREFER SELECTING images with:
-- Simple, clean compositions
-- Both characters clearly visible (no backs/foreground elements)
-- Straightforward framing
-- Real environments (cafe, park, etc.)
-
-OTHER RULES:
-- Character count must match (2 people scene → pick refs with 2 people)
-- Pick compositionally diverse refs (don't pick 3 similar images)
-- Prefer recent images (last 5) unless they're all similar
-- If all recent are similar → pick only 1
-- Fewer refs = safer (less compositional reinforcement)
-
-Respond in JSON:
-{{
-  "selected_indices": [0, 1, 2],
-  "reasoning": "Why these refs provide style without compositional problems"
-}}
-
-Indices are 0-based (0 = first image, {total_previous-1} = most recent)
-"""
-        
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=2000,
+            max_tokens=1000,
             messages=[{"role": "user", "content": prompt}]
         )
         

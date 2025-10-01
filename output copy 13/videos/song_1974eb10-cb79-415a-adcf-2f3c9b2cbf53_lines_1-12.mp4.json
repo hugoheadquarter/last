@@ -1,0 +1,135 @@
+{
+  "song_id": "1974eb10-cb79-415a-adcf-2f3c9b2cbf53",
+  "title": "Let's workout!",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 12,
+  "total_images": 12,
+  "style_guide": {
+    "visual_style": "High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
+    "segment_story": "A conversation between a male and female friend at the gym. The female invites the male to work out together, they discuss workout schedules and routines (he goes at 6pm, does weights and cardio for about an hour), then they exercise side by side - him doing bench press while she does squats - encouraging each other with motivational phrases to push harder and complete one more set together.",
+    "is_conversation": true
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_001.jpg",
+      "prompt_used": "# High-Quality Korean Webtoon Style Gym Scene - Two Characters\n\nA handsome young Korean male in his early 20s and an athletic young Korean female in her early 20s standing together inside a modern gym, having a friendly conversation near the entrance area. Both characters visible from shoulders up filling significant frame space, positioned naturally in the same unified environment.\n\n**Male Character (left side):**\n- Textured medium-length dark brown hair with soft bangs and subtle highlights\n- Friendly approachable expression with soft smile\n- Warm brown eyes with detailed sparkle highlights\n- Defined jawline, clear facial features\n- Wearing beige oversized knit sweater with visible white collared shirt underneath\n- Natural rosy blush on cheeks\n\n**Female Character (right side):**\n- Trendy Korean hairstyle with soft waves\n- Friendly approachable smile with detailed expressive eyes\n- Natural blush on cheeks, sparkle highlights in eyes\n- Athletic feminine build\n- Wearing stylish fitted pastel pink sports tank top\n- Shoulders and upper body visible\n\n**Environment - Modern Gym Interior:**\n- Real gym setting with visible equipment in background\n- Weight racks and exercise machines slightly blurred\n- Clean modern fitness center atmosphere\n- Large windows with natural daylight streaming in\n- Polished floors reflecting ambient light\n- Contemporary gym decor with neutral tones\n\n**Webtoon Premium Quality:**\n- Smooth digital illustration with clean professional linework\n- Soft natural color palette with warm muted tones\n- Atmospheric lighting with gentle rim light on both characters\n- Subtle gradients and smooth shading transitions\n- Depth of field effect - characters sharp, background softly blurred\n- Professional Naver/Lezhin webtoon rendering quality\n- No harsh outlines, painterly digital style\n- Natural skin texture with soft highlights\n\nSingle unified scene, both characters in same space, no split-screen, no dividers, no text, no speech bubbles, 1080x1080 pixels, square format, premium Korean webtoon aesthetic",
+      "start_time": 0.0,
+      "end_time": 5.594,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 33.650116205215454
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_002.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, medium close-up shot. A young athletic Korean female in early 20s in the foreground, wearing stylish fitted pastel pink sports tank top and matching leggings, trendy Korean hairstyle with soft waves, detailed expressive eyes with sparkle highlights, natural blush on cheeks, warm friendly smile with inviting expression, one hand gesturing welcomingly toward camera in friendly invitation pose. Behind her and slightly to the side, a handsome young Korean male in his early 20s, athletic build, textured medium-length dark brown hair with soft bangs, warm brown eyes, wearing beige oversized knit sweater with visible white collared shirt underneath, friendly smile looking at her with interested expression. Modern gym interior background with weight equipment, mirrors, and exercise machines slightly blurred in depth of field. Smooth digital illustration with clean professional linework, soft natural color palette with warm muted tones, atmospheric lighting with gentle rim light on characters, subtle gradients and smooth shading transitions, professional Naver webtoon rendering quality, no text, no speech bubbles, conversational moment capturing invitation energy",
+      "start_time": 5.594,
+      "end_time": 13.53,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 37.138007164001465
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_003.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, over-the-shoulder perspective shot. In the foreground right side, partial view of a handsome young Korean male in his early 20s from behind/side - his shoulder and side of head visible showing his textured medium-length dark brown hair with soft bangs and beige oversized knit sweater with white collared shirt underneath. In the mid-ground facing camera, a young athletic Korean female in early 20s with trendy Korean hairstyle with soft waves, wearing fitted pastel pink sports tank top and matching leggings, friendly smile with detailed expressive eyes featuring sparkle highlights, natural blush on cheeks, one hand raised casually in a conversational gesture as if explaining something, maintaining warm eye contact toward the male. Modern gym interior environment with exercise equipment slightly blurred in background - weight racks, mirrors, and gym machines visible. Soft natural gym lighting with warm tones. Smooth digital illustration with clean professional linework, atmospheric depth of field effect, professional Naver webtoon rendering quality, natural warm color palette with muted tones, no text, no speech bubbles, cinematic conversation framing",
+      "start_time": 13.53,
+      "end_time": 20.987,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 36.75698208808899
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_004.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, wide environmental shot. Modern fitness gym interior during early evening, large windows on left side showing dusky orange-pink sunset sky creating warm atmospheric lighting throughout space. In the mid-ground center-right, two characters standing side by side in casual conversation pose: a handsome young Korean male in his early 20s wearing beige oversized knit sweater with visible white collared shirt underneath, textured medium-length dark brown hair with soft bangs, looking down at his wrist/phone checking the time with friendly expression; beside him on his right, an athletic young Korean female in early 20s wearing fitted pastel pink sports tank top and matching leggings, soft wavy Korean hairstyle, looking at him attentively with friendly smile, hands clasped together naturally. Gym equipment visible in background and foreground (treadmills, weight racks, benches) creating depth. Warm golden hour lighting streaming through windows mixing with cool interior gym lights. Clean digital illustration with smooth shading, professional Naver webtoon quality, natural color palette with warm evening tones, atmospheric depth, detailed background environment. No text, no speech bubbles, unified scene composition, 1080x1080 pixels",
+      "start_time": 20.987,
+      "end_time": 29.131,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 36.73452615737915
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_005.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, medium shot from low angle perspective looking slightly upward. In the center-left, handsome young Korean male in early 20s with textured medium-length dark brown hair with soft bangs, warm brown eyes with expressive highlights, friendly smile, defined jawline with natural rosy blush. He wears beige oversized knit sweater with visible white collared shirt underneath. His right hand is raised to chest level with fingers gesturing expressively as he explains something, left hand also visible in animated conversational gesture. His body is turned slightly toward camera in 3/4 angle, appearing engaged and enthusiastic while talking. To his right side and slightly behind, young athletic Korean female in early 20s with soft wavy hairstyle, detailed sparkle eyes looking at him attentively and listening with interested expression, wearing fitted pastel pink sports tank top. Modern fitness gym interior background with weight racks, exercise equipment, and gym mirrors visible but softly blurred. Warm early evening lighting with soft rim light on both characters' hair. Clean digital illustration with smooth shading, professional Naver webtoon quality, natural warm color palette, atmospheric depth, no text, no speech bubbles, unified scene composition",
+      "start_time": 29.131,
+      "end_time": 36.721,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 40.869340896606445
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_006.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, straight-on medium shot with dynamic dual-action composition. Left side: handsome young Korean male in early 20s with athletic build, textured medium-length dark brown hair with soft bangs, wearing beige oversized knit sweater with visible white collared shirt underneath, holding a dumbbell mid-bicep curl with focused determined expression, defined jawline, warm brown eyes concentrating on form. Right side: young athletic Korean female in early 20s with soft wavy hairstyle, wearing fitted pastel pink sports tank top and matching leggings, running on treadmill with energetic focused expression, detailed expressive eyes, natural blush on cheeks, athletic feminine build in motion. Modern fitness gym interior background with weight racks, mirrors, and cardio equipment visible behind them, early evening warm lighting streaming through windows. Both characters actively exercising simultaneously, showing intensity and focus. Smooth digital illustration with clean professional linework, soft natural color palette with warm muted tones, atmospheric gym lighting, subtle gradients and smooth shading transitions, professional Naver webtoon rendering quality, no text, no speech bubbles, no harsh outlines, premium Korean webtoon aesthetic",
+      "start_time": 36.721,
+      "end_time": 44.528,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 36.185518980026245
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_007.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, medium close-up conversational shot from female's POV perspective. In the sharp-focused background center: handsome young Korean male in early 20s with textured medium-length dark brown hair with soft bangs, warm brown eyes with sparkle highlights, defined jawline, friendly expression. He wears black fitted athletic tank top showing athletic build. He is gesturing with his right hand near his wrist in a time-checking motion, explaining his workout duration, mouth slightly open mid-conversation, engaged friendly expression looking toward camera. In the soft-focused foreground bottom right: partial view of the female character's shoulder and side of her head with soft wavy hair, wearing pastel pink sports tank top, listening to his response. Modern gym interior background with weight equipment and mirrors softly blurred. Warm natural lighting from gym windows creating soft highlights. Clean digital illustration with smooth shading, professional Naver webtoon quality, natural warm color palette, atmospheric depth, painterly style with no harsh outlines, subtle gradients. Intimate conversational moment during their discussion. No text, no speech bubbles, 16:9 cinematic composition.",
+      "start_time": 44.528,
+      "end_time": 52.053,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 38.90431308746338
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_008.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, medium shot from slightly elevated side angle perspective. In the sharp-focus foreground, handsome young Korean male in early 20s with textured medium-length dark brown hair with soft bangs, warm brown eyes with multiple sparkle highlights, friendly soft smile, natural rosy blush on cheeks. He's wearing beige oversized knit sweater with visible white collared shirt underneath. His body is angled 3/4 toward camera, athletic build visible, one hand raised in animated conversational gesture near his wrist/watch area as if indicating time duration, expressive face mid-explanation. In the background slightly out of focus but clearly visible, young athletic Korean female in early 20s with soft wavy hairstyle, wearing pastel pink fitted sports tank top, standing in listening pose with attentive expression, gentle smile. Modern fitness gym interior environment surrounds them - visible weight racks, exercise equipment, mirrors on walls, warm evening lighting streaming through windows creating soft atmospheric glow. Smooth digital illustration with clean professional linework, soft natural warm color palette with muted tones, gentle rim lighting, subtle gradients and smooth shading transitions, depth of field effect with foreground sharp and background softly blurred, premium Naver webtoon rendering quality, no text, no speech bubbles, natural environmental setting",
+      "start_time": 52.053,
+      "end_time": 61.891,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 40.48595213890076
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_009.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, intimate low angle close-up shot from bench level perspective looking upward. In the center-left of frame: handsome young Korean male in early 20s lying back on weight bench doing bench press, face visible from below angle looking slightly upward, textured medium-length dark brown hair with soft bangs, warm brown eyes with sparkle highlights, friendly concentrated expression with natural rosy blush, wearing beige oversized knit sweater, athletic build visible. In the center-right of frame: young athletic Korean female in early 20s crouched beside the bench in spotting position, her face leaning in from the side at similar height to his face, soft wavy Korean hairstyle, detailed expressive eyes with sparkle highlights meeting his gaze, encouraging warm smile, natural blush on cheeks, wearing stylish pastel pink fitted sports tank top, athletic feminine build. Both faces prominently visible in same unified frame sharing an encouraging motivational moment, close personal proximity showing workout partnership dynamic. Background: blurred modern gym interior with warm evening lighting, weight rack and equipment slightly out of focus. Smooth digital painting with clean professional linework, soft natural color palette with warm muted tones, atmospheric lighting with gentle rim light on both characters' hair, subtle gradients and smooth shading transitions, premium Naver webtoon rendering quality, no harsh outlines, depth of field effect, no text, no speech bubbles, cinematic composition emphasizing togetherness and mutual encouragement",
+      "start_time": 61.891,
+      "end_time": 66.422,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 42.564775228500366
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_010.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, medium-wide side profile shot capturing dual-action workout moment. Left side of frame: handsome young Korean male in early 20s lying on inclined bench press, arms extended upward holding barbell with weight plates, wearing fitted light grey athletic t-shirt and black athletic shorts, textured medium-length dark brown hair with soft bangs, athletic build with defined arms, face showing concentrated effort with slight strain, profile view. Right side of frame: athletic young Korean female in early 20s in deep squat position holding dumbbells at shoulder level, wearing fitted pastel pink sports tank top and matching pink leggings, trendy Korean hairstyle with soft waves in high ponytail, athletic feminine build, face showing determined expression with focused eyes, profile view facing opposite direction. Both characters captured mid-rep showing peak physical effort. Modern fitness gym environment with professional equipment visible - bench press station on left, squat area on right, rubber gym flooring, mirror wall in background reflecting gym atmosphere, other blurred gym equipment in soft focus. Natural warm lighting from large windows creating gentle rim light on both characters' profiles. Dynamic composition showing synchronized workout effort and mutual motivation. Smooth digital illustration with clean professional linework, soft natural color palette with warm muted tones, atmospheric gym lighting with subtle gradients, professional Naver webtoon rendering quality, depth of field effect on background, no text, no speech bubbles, 16:9 cinematic composition",
+      "start_time": 66.422,
+      "end_time": 70.39,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 40.134726762771606
+    },
+    {
+      "line_number": 11,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_011.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, dynamic wide shot from slightly low angle perspective capturing celebratory moment. Center frame: handsome young Korean male in early 20s wearing grey fitted athletic tank top and black athletic shorts standing face-to-face with athletic Korean female in early 20s wearing pastel pink fitted sports tank top and matching pink leggings. Both characters shown full-body from knees up, positioned 2 feet apart facing each other directly. Male character features: textured medium-length dark brown hair with soft bangs, warm brown eyes with sparkle highlights, friendly bright smile showing teeth, defined jawline, athletic build with visible arm muscles. Female character features: soft wavy Korean hairstyle, expressive eyes with sparkle highlights, energetic wide smile, natural blush on cheeks, athletic feminine build. BOTH characters have their arms raised HIGH meeting in enthusiastic HIGH-FIVE gesture at center top of frame, hands making contact creating focal point. Body language: victorious energetic poses, slight forward lean showing excitement and accomplishment. Background: modern gym interior with bench press equipment visible to left side, squat rack visible to right side, large windows showing evening light, other gym equipment softly blurred in background depth, warm atmospheric lighting with golden hour glow streaming through windows, professional gym environment clearly visible but slightly out of focus. Smooth digital illustration with clean linework, soft natural color palette with warm tones, atmospheric lighting with rim light highlighting both characters' silhouettes, subtle gradients and smooth shading, premium Naver webtoon quality, no text, no speech bubbles, cinematic composition showing moment of mutual encouragement and triumph",
+      "start_time": 70.39,
+      "end_time": 74.243,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 43.08979892730713
+    },
+    {
+      "line_number": 12,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/line_012.jpg",
+      "prompt_used": "High-quality Korean webtoon style gym scene, intimate close-up shot at eye level capturing both characters' faces side by side filling the entire frame. Left side: handsome young Korean male in early 20s with textured medium-length dark brown hair with soft bangs, warm brown eyes with sparkle highlights, defined jawline, genuine warm smile showing slight breathlessness, wearing grey fitted athletic t-shirt. Right side: athletic young Korean female in early 20s with trendy Korean hairstyle in soft waves, detailed expressive eyes with sparkle highlights, natural rosy blush on cheeks, bright encouraging smile, wearing pastel pink fitted sports tank top. Both characters angled slightly toward each other, faces close together in friendly camaraderie, post-workout glow with slight perspiration sheen, genuine expressions of accomplishment and mutual respect. Soft gym lighting creating gentle highlights on their features, blurred modern gym equipment barely visible in deep background, warm atmospheric lighting with golden hour quality. Smooth digital painting with clean professional linework, soft natural warm color palette, subtle gradients and smooth shading transitions, premium Naver webtoon rendering quality, no harsh outlines, natural skin texture with soft highlights, shallow depth of field keeping focus on their faces, no text, no speech bubbles",
+      "start_time": 74.243,
+      "end_time": 92.227,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/1974eb10-cb79-415a-adcf-2f3c9b2cbf53/character_female.jpg')]",
+      "generation_time": 40.88029193878174
+    }
+  ]
+}
