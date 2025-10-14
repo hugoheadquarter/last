@@ -1,0 +1,115 @@
+{
+  "song_id": "5ff19021-397c-4f81-a90e-0e21376795ec",
+  "title": "Excuse me, I'm lost",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 10,
+  "total_images": 10,
+  "style_guide": {
+    "visual_style": "High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
+    "segment_story": "A Hispanic male tourist in Seoul approaches a local Korean female for directions to the train station. She kindly responds with detailed directions, explaining he should go straight, turn left and right at specific points, and reassures him it's very close - about ten minutes away.",
+    "is_conversation": true
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_001.jpg",
+      "prompt_used": "A young Hispanic male tourist in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver chain necklace, standing next to a young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing cream turtleneck sweater and long camel beige trench coat, both in a busy Seoul street scene with modern buildings, Korean signage, crosswalk markings, pedestrians in background, autumn afternoon lighting, the male gesturing politely while asking for directions, the female smiling warmly and pointing down the street helpfully, urban Seoul atmosphere with storefronts and street details, high-quality Korean webtoon style, clean digital illustration, professional manhwa art, smooth cel shading, clean precise linework, soft natural colors, expressive friendly faces, atmospheric lighting, detailed environmental background, modern fashion, cinematic composition with both characters prominently featured in unified scene, 1080x1080 pixels",
+      "start_time": 0.0,
+      "end_time": 3.191,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 30.184112071990967
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_002.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, medium-wide side angle shot on a modern Seoul street corner. A young Hispanic male tourist in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with simple geometric pattern and silver minimal chain necklace, standing with confused body language, one hand raised gesturing uncertainly, other hand holding a phone, looking toward a young Korean woman with a slightly helpless expression. The Korean woman in her early 20s with shoulder-length dark brown softly waved hair parted to the side, wearing cream-colored turtleneck sweater and long camel beige trench coat, turned toward him with attentive understanding expression, beginning to respond. Seoul street environment visible with Korean signage, modern buildings, street corner setting, crosswalk markings on ground. Clean digital illustration, soft natural colors, atmospheric urban lighting, expressive faces and body language, modern fashion, professional manhwa art style, smooth cel shading, detailed environmental context, characters filling significant frame space in unified scene.",
+      "start_time": 3.191,
+      "end_time": 7.121,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 42.42380499839783
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_003.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, close-up frontal angle shot on a modern Seoul street. A young Hispanic male tourist in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with simple geometric pattern and silver minimal chain necklace, stands in the foreground looking slightly uncertain with a questioning expression, one hand raised in a gentle questioning gesture near chest level. He gazes toward a young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing cream turtleneck sweater and long camel beige trench coat, who stands a few feet away in the mid-ground, facing him attentively with a kind listening expression. Modern Seoul street environment with storefronts, Korean signage, urban details visible in the background. Clean digital illustration with soft natural colors, smooth cel shading, clean precise linework, atmospheric lighting, expressive faces, detailed facial features, modern Seoul architecture, depth of field with foreground sharp and background slightly softer, professional manhwa art style, natural skin tones, warm afternoon light.",
+      "start_time": 7.121,
+      "end_time": 10.719,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 39.0679030418396
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_004.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, over-the-shoulder perspective shot on a modern Seoul street. View from behind a young Hispanic male tourist in his early 20s with short dark wavy hair, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with simple geometric pattern and silver minimal chain necklace - his right shoulder and back of head visible in foreground left side of frame, slightly out of focus. Center frame shows a young Korean woman in her early 20s facing toward him with warm welcoming smile, shoulder-length dark brown wavy hair parted to side, wearing cream turtleneck sweater and long camel beige trench coat, her gentle eyes looking at the tourist with kind helpful expression, one hand raised slightly in reassuring gesture. Background shows modern Seoul street with colorful Korean storefronts, street signs with Hangul characters, pedestrians walking past, late afternoon natural lighting creating warm atmosphere. Clean digital illustration with soft natural colors, smooth cel shading, professional manhwa art style, atmospheric depth of field, detailed urban environment, expressive faces, modern Seoul fashion, cinematic composition.",
+      "start_time": 10.719,
+      "end_time": 14.514,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 39.96269512176514
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_005.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide-angle low perspective shot on a modern Seoul street. A young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing a cream turtleneck sweater and long camel beige trench coat, stands in the foreground with her right arm extended forward, pointing straight ahead down the street with confidence and a helpful smile on her face, looking in the direction she's pointing. Beside her and slightly behind, a young Hispanic male in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing a beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver minimal chain necklace, stands looking in the same direction she's pointing with an attentive focused expression. Camera positioned low at ground level looking slightly up at the characters. Modern Seoul street stretches ahead with sidewalk, crosswalk markings, urban buildings, street signs, and trees lining the path. Bright daylight, clean digital illustration, soft natural colors, smooth cel shading, clean precise linework, atmospheric depth, professional manhwa art style, detailed environmental elements showing the straight path ahead, natural skin tones, expressive body language, dynamic composition with strong leading lines.",
+      "start_time": 14.514,
+      "end_time": 17.874,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 41.25235390663147
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_006.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, medium close-up three-quarter angle shot on a modern Seoul street corner. A young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing cream-colored turtleneck sweater and long camel beige trench coat, is actively pointing to the left with her right arm extended, her body turned slightly in that direction, natural makeup with gentle eyes looking toward where she's pointing, friendly helpful expression. Beside her, a young Hispanic male tourist in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver minimal chain necklace, is looking in the same direction she's pointing, attentive expression, slight nod. Modern Seoul street environment with contemporary storefronts, street signs, urban architecture visible in background. Clean digital illustration, soft natural daylight, expressive faces, smooth cel shading, professional manhwa art style, atmospheric depth, detailed character features, dynamic gesture composition.",
+      "start_time": 17.874,
+      "end_time": 21.657,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 35.696341037750244
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_007.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, bird's eye view high angle shot looking down at a modern Seoul street intersection corner. A young Hispanic male in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver chain necklace, stands on the left side looking down at the street corner where a young Korean woman is pointing. The Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing cream turtleneck sweater and long camel beige trench coat, has her right arm fully extended pointing toward the right direction of the intersection. The tourist is looking at where she's pointing with engaged expression, slightly leaning forward. Visible Seoul street details below: crosswalk zebra stripes, street corner pavement tiles, manhole covers, street lane markings. Urban Seoul atmosphere with realistic street textures. Clean digital cel shading, smooth gradients, soft natural daylight from above, professional manhwa illustration quality, detailed character features, expressive body language showing directional guidance, modern casual fashion, atmospheric street environment perspective",
+      "start_time": 21.657,
+      "end_time": 25.624,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 40.41768503189087
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_008.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, intimate close-up side profile shot on a modern Seoul street. A young Hispanic male in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver chain necklace, shown in left side profile looking right with expression of visible relief and gratitude. A young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, wearing cream turtleneck and camel beige trench coat, shown in right side profile looking left with warm reassuring smile and gentle encouraging expression. Both characters face each other in conversation, their faces\u5360\u64da the frame with soft-focused Seoul street scene visible between them in background - modern buildings, street signs, blurred pedestrians. Natural afternoon lighting, warm atmospheric glow, clean linework, smooth cel shading, professional digital webtoon art, expressive facial details, natural skin tones, modern Seoul urban environment, cinematic intimate framing, shallow depth of field effect on background.",
+      "start_time": 25.624,
+      "end_time": 29.15,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 36.54717707633972
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_009.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide three-quarter angle low perspective shot on a modern Seoul street corner. A young Korean woman in her early 20s with shoulder-length dark brown wavy hair parted to the side, warm friendly expression, wearing cream turtleneck sweater and long camel beige trench coat, stands on the left side with her right arm extended, pointing down the street toward the distance. Beside her on the right, a young Hispanic male in his early 20s with short dark wavy hair, warm brown eyes, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt with geometric pattern and silver minimal chain necklace, looks in the direction she's pointing with slightly concerned curious expression, one hand scratching his head. Both characters shown in three-quarter to full body view. Background shows detailed modern Seoul street stretching into distance with contemporary buildings, Korean signage, street lamps, urban details, autumn afternoon lighting. Clean digital illustration, soft natural colors, expressive character animation, atmospheric depth, professional manhwa art style, detailed environmental storytelling, natural poses, realistic proportions, warm sunlight casting soft shadows.",
+      "start_time": 29.15,
+      "end_time": 33.15,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 43.684930086135864
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/line_010.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, dramatic high-angle wide establishing shot on a modern Seoul street corner during daytime. In the near foreground on the right side, a young Korean woman in her early 20s stands turned three-quarters away from camera, watching someone leave - she has shoulder-length dark brown wavy hair parted to the side, wearing cream-colored turtleneck sweater and long camel beige trench coat, gentle satisfied smile on her face as she looks down the street. In the middle distance walking away from camera down the sidewalk, a young Hispanic male in his early 20s with short dark wavy hair, light tan skin, wearing beige oversized casual blazer over white graphic t-shirt, silver minimal chain necklace visible, walking confidently with his back to camera, one hand casually in pocket. The Seoul street stretches between them with modern buildings on both sides, street signs in Korean, crosswalk markings, urban trees, soft afternoon lighting casting long shadows, atmospheric depth showing the ten-minute walk ahead. Clean digital illustration with soft natural colors, smooth cel shading, detailed urban environment, cinematic composition with depth and scale, warm lighting, expressive character posing, professional manhwa art style, wide cinematic framing showing full environment and both characters at different distances.",
+      "start_time": 33.15,
+      "end_time": 36.684,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/5ff19021-397c-4f81-a90e-0e21376795ec/character_female.jpg')]",
+      "generation_time": 43.66847801208496
+    }
+  ]
+}

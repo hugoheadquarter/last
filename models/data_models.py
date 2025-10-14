@@ -50,5 +50,5 @@ class VideoGenerationRequest(BaseModel):
     song_id: str
     start_line: int = 1
     end_line: Optional[int] = None
-    resolution: str = "2K"
+    resolution: str = "4k"
     output_filename: Optional[str] = None

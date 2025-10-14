@@ -1,0 +1,175 @@
+{
+  "song_id": "27a30285-8cd7-443f-935c-0b12f0685403",
+  "title": "Please give me",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 16,
+  "total_images": 16,
+  "style_guide": {
+    "visual_style": "High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
+    "segment_story": "A solo traveler/shopper (male character with sunglasses, cool and confident style) navigating various daily situations in Korea - ordering at restaurants, shopping at stores, taking taxis, asking for help. He's learning and practicing polite Korean requests in real-world scenarios like supermarkets, cafes, and on the street.",
+    "is_conversation": false
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_001.jpg",
+      "prompt_used": "A young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, fashionable beige oversized shirt with brown leather jacket, confident warm expression, standing at a modern Korean cafe counter, leaning slightly forward with friendly body language, clean professional Korean webtoon art style with smooth cell shading and crisp linework, soft natural colors, facing a young Korean woman cafe worker in early 20s with soft layered hairstyle, wearing stylish beige cardigan over white t-shirt and delicate necklace, friendly approachable smile, standing behind the cafe counter, detailed cafe interior background with coffee machines, menu boards, wooden counter, plants, warm atmospheric lighting, cozy modern Seoul cafe aesthetic, both characters prominently featured in same unified space, no text, no split screen, single cohesive scene, high-quality digital webtoon illustration, 1080x1080 pixels",
+      "start_time": 6.187,
+      "end_time": 9.942,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 27.047821044921875
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_002.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, over-the-shoulder camera angle from behind a young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, standing at a modern Seoul cafe counter, his hand gesturing politely toward the counter. Across from him behind the counter stands a young Korean female cafe worker in early 20s with soft layered hairstyle, wearing stylish beige cardigan over white t-shirt and delicate necklace, friendly approachable smile, holding a menu, looking at the customer. Cozy cafe interior with wooden counter, espresso machine visible, menu boards on wall behind her, warm ambient lighting, soft natural colors, clean professional webtoon rendering with smooth cell shading and crisp linework, detailed cafe environment, contemporary Korean cafe aesthetic, depth of field with focus on the interaction, atmospheric lighting, professional digital webtoon illustration",
+      "start_time": 9.942,
+      "end_time": 12.988,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 32.78150677680969
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_003.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide front-facing camera angle of a retail store counter scene, clean digital art with soft natural colors and smooth cell shading. Left side: young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, standing at counter with his arm extended and finger pointing down at a small product/item on the counter surface, his gaze directed down at the item, friendly confident expression. Right side: young Korean woman in early 20s with modern trendy hairstyle with soft layers, wearing stylish beige cardigan over white t-shirt and delicate necklace, standing behind the retail counter, her hand reaching toward the item the customer is pointing at, warm friendly smile, looking down at the product on counter. Background: bright modern Korean retail store interior with shelves displaying various products, merchandise visible on wall displays, clean organized store aesthetic, natural daylight coming through windows, professional webtoon rendering with atmospheric lighting, contemporary Seoul shopping environment, detailed store counter with realistic depth, crisp linework and professional character design",
+      "start_time": 12.988,
+      "end_time": 16.93,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 39.806354999542236
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_004.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, medium side-view camera angle of a cozy Korean cafe/restaurant interior scene, warm ambient lighting from hanging pendant lights, a young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, seated at a wooden table with white tablecloth, left hand raised in polite requesting gesture pointing toward empty space on table where utensils would be, friendly expression on his face looking up and to the right, a young Korean woman server in early 20s standing beside the table on the right side, soft layered hairstyle, wearing beige cardigan over white t-shirt with delicate necklace, holding small notepad, warm attentive smile looking down at the customer, restaurant table has plates and cups visible, blurred background shows cafe interior with plants and warm wooden decor, natural depth of field, professional webtoon cell shading, clean digital illustration, soft natural colors, modern Korean aesthetic, atmospheric restaurant lighting, no text, no sparkles",
+      "start_time": 16.93,
+      "end_time": 19.983,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 36.648266077041626
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_005.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, low angle camera perspective looking up slightly at a ticket booth transaction scene, clean digital art with soft natural colors and atmospheric lighting. FOREGROUND: A young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, shown from behind and side angle, his hand reaching forward toward the ticket window counter, confident posture. MIDDLE GROUND: Modern Korean ticket booth counter with protective glass window, small transaction slot at bottom, sleek design. BACKGROUND: Young Korean woman in early 20s behind the glass window, soft layered hairstyle, wearing beige cardigan over white t-shirt with delicate necklace, friendly approachable smile, warm expression, looking down at the transaction area, her hands visible near the ticket slot. Ticket booth interior details visible through glass - computer monitor, ticket printer, event posters on wall behind her. Clean professional webtoon rendering with smooth cell shading and crisp linework, modern Seoul aesthetic, warm indoor lighting, depth of field effect, no text, no sparkles, characters not looking at viewer, natural interaction between customer and ticket seller.",
+      "start_time": 19.983,
+      "end_time": 23.428,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 42.51355600357056
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_006.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, dynamic rear three-quarter camera angle from inside a Korean taxi, view from behind the driver's seat area looking back at the passenger section. A young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, fashionable beige oversized shirt with brown leather jacket, sitting in the back seat leaning forward eagerly, one hand raised pointing toward the side window, mouth open mid-speech with animated expression, eyes focused intently on the window/street outside, other hand gripping the front passenger seat headrest for support. Detailed taxi interior with beige/grey cloth seats, safety handles, door panels, partial view of rearview mirror. Through the taxi windows, blurred bokeh effect of Seoul street scenery passing by - building facades, street signs, traffic lights creating motion blur and speed lines effect. Soft natural daylight filtering through windows, warm afternoon lighting, clean professional webtoon rendering with smooth cell shading and crisp linework, modern Korean urban atmosphere, sense of movement and urgency, no text, no glitter effects, cinematic composition",
+      "start_time": 23.428,
+      "end_time": 26.743,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 43.695157051086426
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_007.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide side-angle camera perspective of a modern Korean airport departure terminal exterior, bustling daytime scene with bright natural lighting, a yellow taxi parked at the curb with door open, young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses, beige oversized shirt with brown leather jacket stepping out of the taxi holding a rolling suitcase, confident posture looking toward the airport entrance, detailed airport terminal building in background with large glass windows and Korean signage, other travelers with luggage visible in the background creating busy atmosphere, clean digital webtoon art style with smooth cell shading and crisp linework, soft natural colors with beige and brown tones, modern urban airport environment, professional character design matching reference exactly, atmospheric depth with background details, contemporary Seoul Incheon airport aesthetic, no text, no speech bubbles",
+      "start_time": 26.743,
+      "end_time": 30.124,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 39.28051209449768
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_008.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, dramatic high-angle bird's eye view camera perspective looking straight down from above at a modern Korean subway station information booth, overhead shot showing a young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, leaning over a white counter surface from the customer side, looking down at colorful subway route maps spread across the counter, young Korean female clerk in early 20s with soft layered hairstyle wearing beige cardigan over white t-shirt and delicate necklace standing behind the information desk on the staff side, both characters' heads tilted downward studying the maps together, their hands gesturing at different colored subway lines on the maps, the counter covered with various sized Seoul subway maps showing red blue and green route lines, informational pamphlets and brochures visible, white tiled subway station floor visible around the booth, overhead fluorescent lighting creating soft shadows, clean professional webtoon art style with smooth cell shading and crisp linework, modern Seoul subway aesthetic with sleek contemporary design, natural interaction between traveler and helpful staff member, atmospheric subway station environment, detailed map graphics and station signage, characters filling significant frame space in this unique overhead angle, unified scene composition",
+      "start_time": 30.124,
+      "end_time": 33.358,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 39.02371621131897
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_009.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, medium-close frontal camera angle of a modern Korean retail store checkout counter transaction moment, clean digital art with soft natural lighting. In foreground, a young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, standing at counter with his right hand extended forward reaching toward camera angle, friendly confident expression, looking at the receipt being handed to him. Behind the counter, young Korean woman in early 20s with soft layered hairstyle, wearing beige cardigan over white t-shirt with delicate necklace, warm approachable smile, extending her hand forward holding a white receipt paper toward the male character, looking at him with friendly service expression. Modern retail counter with digital POS display screen visible, packaged products on shelves in soft-focus background, warm interior store lighting, professional webtoon rendering with smooth cell shading and crisp linework, natural color palette with earth tones, detailed counter surface and transaction moment, contemporary Seoul retail aesthetic, characters filling significant frame space in unified environment.",
+      "start_time": 33.358,
+      "end_time": 36.829,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 37.5463969707489
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_010.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, dramatic overhead bird's eye view camera angle looking straight down at a retail store counter transaction, close-up intimate framing, young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses on head, beige oversized shirt with brown leather jacket, his hand reaching across wooden counter to receive a brown paper shopping bag, female store clerk in early 20s with soft layered hairstyle wearing beige cardigan over white t-shirt and delicate necklace, her hands holding out the paper bag toward him, purchased items visible on counter surface between them (packaged snacks, drink bottles), both characters' faces partially visible from above looking down at the exchange, warm natural lighting, clean professional webtoon art style with smooth cell shading and crisp linework, modern Korean retail aesthetic, detailed hands and fabric textures, soft earth tone color palette, atmospheric depth, polite customer service moment captured from unique overhead perspective",
+      "start_time": 36.829,
+      "end_time": 40.42,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 37.501686811447144
+    },
+    {
+      "line_number": 11,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_011.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, dramatic low angle camera perspective from below counter level looking upward, modern Korean street market or boutique shop interior scene, wooden counter in lower foreground, young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, leaning forward eagerly across counter with hopeful animated expression, one hand gesturing toward displayed items, young Korean female shopkeeper in early 20s with soft layered hairstyle wearing beige cardigan over white t-shirt and delicate necklace standing behind counter with thoughtful considering expression, hand on chin, warm afternoon lighting streaming through shop window, shelves with colorful products visible in background, price tags on items, natural authentic interaction, clean professional webtoon rendering with smooth cell shading and crisp linework, soft natural colors, atmospheric depth, both characters looking at each other not at viewer, negotiation moment captured mid-conversation, Korean retail shopping atmosphere",
+      "start_time": 40.42,
+      "end_time": 43.805,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 39.29637002944946
+    },
+    {
+      "line_number": 12,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_012.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, intimate close-up dutch angle camera perspective tilted 15 degrees, focusing on counter-level transaction scene in modern Korean convenience store, left side shows young male character in early 20s wearing brown leather jacket over beige oversized shirt, his hand reaching toward counter with confident gesture, right side shows young Korean woman clerk in early 20s wearing beige cardigan over white t-shirt with delicate necklace, her hands carefully wrapping a purchase item in brown paper or plastic bag on clean white counter surface, detailed hand movements and wrapping action in center of frame, soft focus background shows convenience store shelves with colorful product packaging and modern register, warm interior lighting, natural skin tones, clean professional webtoon rendering with smooth cell shading and crisp linework, diagonal composition emphasizing the exchange moment, contemporary Seoul retail aesthetic, detailed fabric textures and finger positions, characters' faces partially visible in upper frame showing friendly interaction, atmospheric depth, no text, no sparkles",
+      "start_time": 43.805,
+      "end_time": 47.323,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 39.47763729095459
+    },
+    {
+      "line_number": 13,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_013.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide establishing camera angle showing a scenic outdoor Korean tourist location with traditional architecture or landmark visible in background, bright natural daylight with soft shadows, two full-figure characters in mid-ground filling significant frame space. Left side: young male character in his early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, confident friendly expression, extending his arm forward offering his smartphone/camera toward the other person, open gesture asking for help. Right side: young Korean woman in early 20s with soft layered hairstyle, wearing beige cardigan over white t-shirt with delicate necklace, friendly approachable smile, reaching out to receive the phone/camera, looking at the male character with helpful expression. Both characters positioned at slight angles to each other in natural conversational stance, Korean tourist destination environment with cherry blossom trees or traditional pavilion in soft focus background, tourists walking in distance, clean professional webtoon rendering with smooth cell shading, crisp linework, warm natural outdoor lighting, atmospheric depth, modern Korean street fashion, detailed clothing folds, no text, no sparkles, unified scenic space showing the moment of asking someone to take a photo",
+      "start_time": 47.323,
+      "end_time": 50.723,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 41.51647090911865
+    },
+    {
+      "line_number": 14,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_014.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, intimate medium-close side profile camera angle at eye level, capturing two characters in natural conversation at a Korean convenience store or small shop counter. Left side: young male character in early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, shown in three-quarter profile facing right, leaning forward slightly with attentive listening expression, one hand near his ear in 'can you repeat that?' gesture, eyebrows slightly raised showing concentration. Right side: young Korean woman in early 20s with soft layered hairstyle, wearing beige cardigan over white t-shirt with delicate necklace, shown in profile facing left toward the male character, mouth slightly open in mid-speech, one hand gesturing gently as if explaining something, patient and helpful expression. Shallow depth of field with blurred store shelves and products in background, warm indoor lighting, natural conversational body language, both characters looking at each other not at camera, soft natural colors with earth tones, clean professional webtoon rendering with smooth cell shading and crisp linework, atmospheric Korean retail environment, genuine human connection moment",
+      "start_time": 50.723,
+      "end_time": 54.464,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 38.40194296836853
+    },
+    {
+      "line_number": 15,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_015.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, wide environmental camera angle of a busy Korean street scene in daytime, young male character in his early 20s with textured black hair swept to the side wearing stylish round sunglasses pushed up on head, beige oversized shirt with brown leather jacket, standing on left side of frame with slightly confused expression, one hand raised in questioning gesture, facing a young Korean woman in early 20s with soft layered hairstyle wearing beige cardigan over white t-shirt and delicate necklace on right side of frame, she has patient understanding expression with hand gesturing as if explaining slowly, both characters looking at each other not at camera, busy Korean street background with Korean signage, shop fronts, blurred pedestrians walking by, modern Seoul architecture, clean digital webtoon art style with smooth cell shading and crisp linework, soft natural daylight, atmospheric urban environment, professional character design, detailed clothing folds, contemporary Korean street fashion, depth of field with focus on characters, vibrant yet natural color palette with earth tones, dynamic composition showing communication moment",
+      "start_time": 54.464,
+      "end_time": 57.819,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 38.184056758880615
+    },
+    {
+      "line_number": 16,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/line_016.jpg",
+      "prompt_used": "High-quality Korean webtoon style illustration, warm cinematic medium shot at eye level, intimate corner of a cozy Korean cafe interior with soft golden hour sunlight streaming through large windows in background, wooden tables and potted plants visible creating depth, two characters in profile facing each other in foreground filling significant frame space. Left side: young male character in early 20s with textured black hair swept to the side, wearing stylish round sunglasses pushed up on head, fashionable beige oversized shirt with brown leather jacket, looking directly at the female character with sincere vulnerable expression, one hand raised in gentle questioning gesture asking for help. Right side: young Korean woman in early 20s with modern trendy layered hairstyle, wearing stylish beige cardigan over white t-shirt with delicate necklace, leaning in attentively toward the male character with warm reassuring smile and kind eyes, body language open and helpful. Both characters positioned close together suggesting trust and connection, soft natural lighting creating warm atmosphere, cafe environment with blurred background details, professional webtoon rendering with smooth cell shading and clean linework, earth tone color palette, emotional moment of genuine human connection and mutual understanding, contemporary Seoul cafe aesthetic",
+      "start_time": 57.819,
+      "end_time": 60.819,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/27a30285-8cd7-443f-935c-0b12f0685403/character_female.jpg')]",
+      "generation_time": 38.29675889015198
+    }
+  ]
+}

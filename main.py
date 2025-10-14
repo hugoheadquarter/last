@@ -81,11 +81,11 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
 
 if __name__ == "__main__":
     # Example usage
-    song_id = "27a30285-8cd7-443f-935c-0b12f0685403"  # "Help Me!" song
+    song_id = "7b9f8181-d21c-44e0-8790-b0639936b0a5"  # "Help Me!" song
     
     # Generate lines 1-10
     generate_lyric_video(
         song_id=song_id,
         start_line=1,
-        end_line=16
+        end_line=12
     )

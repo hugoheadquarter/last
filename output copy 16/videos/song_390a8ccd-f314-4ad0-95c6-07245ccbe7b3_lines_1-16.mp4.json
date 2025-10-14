@@ -1,0 +1,175 @@
+{
+  "song_id": "390a8ccd-f314-4ad0-95c6-07245ccbe7b3",
+  "title": "What's your name?",
+  "artist": null,
+  "start_line": 1,
+  "end_line": 16,
+  "total_images": 16,
+  "style_guide": {
+    "visual_style": "High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
+    "segment_story": "A friendly first meeting between a young woman and young man. She approaches him with curiosity, asking about his name, age, and hobbies, complimenting him warmly. The conversation flows naturally as they discover shared interests. She admires his clothing, then suggests becoming friends over coffee. They continue bonding by discussing where they live, exchanging contact information, and talking about their favorite music. The segment captures the excitement and warmth of a new friendship beginning.",
+    "is_conversation": true
+  },
+  "images": [
+    {
+      "line_number": 1,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_001.jpg",
+      "prompt_used": "```\nHigh-quality Korean webtoon illustration, 1080x1080 pixels, two young people meeting in a cozy modern Korean cafe interior, warm afternoon atmosphere, a handsome young Korean man in his early 20s with soft brown hair swept to the side wearing a beige oversized knit cardigan over white t-shirt standing near a wooden table, a young woman in her early 20s with long wavy brown hair wearing a cozy beige cardigan over white turtleneck sweater with delicate gold necklace approaching him with a friendly warm smile, both characters filling significant frame space in a unified scene, natural friendly body language suggesting first meeting, cafe background with warm lighting, wooden furniture, potted plants on shelves, large windows with soft natural light, coffee cups on table, modern minimalist Korean cafe aesthetic, professional webtoon rendering with clean linework and soft cel shading, warm earth tone color palette with pastels, natural facial features, approachable expressions, contemporary Korean fashion, atmospheric lighting creating welcoming ambiance, polished digital illustration, no text, no sparkles, characters in same space interacting naturally, inviting comfortable setting\n```",
+      "start_time": 7.015,
+      "end_time": 12.874,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 30.5141019821167
+    },
+    {
+      "line_number": 2,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_002.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, over-the-shoulder shot from behind a young Korean man in his early 20s showing his shoulder and back of his soft brown hair in the foreground, focusing on a young woman in her early 20s sitting across from him in a cozy modern Korean cafe, she has long wavy brown hair with soft highlights, wearing a cozy beige cardigan over a white turtleneck sweater with delicate gold necklace, warm friendly smile on her face as she looks at him with genuine admiration, her eyes bright and engaged, leaning forward slightly in conversation, soft natural lighting from cafe windows, blurred cafe interior background with warm wooden furniture and plants, coffee cups on the table between them, professional webtoon rendering with clean linework and smooth gradient shading, warm color palette with earth tones and pastels, atmospheric depth, intimate conversational moment, natural expressions, contemporary Korean manhwa art style, polished digital illustration",
+      "start_time": 12.874,
+      "end_time": 17.013,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 38.703415870666504
+    },
+    {
+      "line_number": 3,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_003.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium close-up side profile shot of two young people sitting across from each other at a wooden cafe table, both visible in profile view from the side. On the left side, a young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing a cozy beige cardigan over a white turtleneck sweater with delicate gold necklace, leaning slightly forward with animated curious expression, mouth slightly open mid-question, eyes bright and engaged, looking across the table at the man. On the right side, a handsome young Korean man in his early 20s with modern trendy hairstyle with soft brown hair swept to the side, wearing a beige oversized knit cardigan over a white t-shirt, sitting relaxed with warm friendly smile, eyes focused on the woman, gentle attentive expression. Two white coffee cups on the wooden table between them. Cozy modern Korean cafe interior softly visible in background with warm lighting, indoor plants, and neutral tones. Professional webtoon rendering with smooth gradient shading, clean line art, soft cel shading, warm color palette with earth tones and pastels, natural atmospheric lighting from window, contemporary Korean fashion, polished digital painting style, cinematic composition capturing intimate conversational moment",
+      "start_time": 17.013,
+      "end_time": 21.302,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 37.99449706077576
+    },
+    {
+      "line_number": 4,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_004.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, close-up frontal shot of a young Korean woman in her early 20s in a cozy modern cafe, she fills most of the frame from chest up, leaning forward slightly with her elbows on a wooden table, warm surprised smile on her face with slightly widened gentle eyes showing admiration, long wavy brown hair with soft highlights falling naturally around her shoulders, wearing a cozy beige cardigan over a white turtleneck sweater with delicate gold necklace visible, her gaze directed toward the young man who is partially visible and slightly blurred in the right side of frame, showing his soft brown hair and beige knit cardigan, warm afternoon sunlight streaming through cafe windows creating soft golden highlights on her face, blurred cafe interior in background with plants and warm wooden tones, coffee cups on table between them, natural depth of field effect, clean webtoon linework with smooth gradient shading, professional manhwa art style, warm earthy color palette with soft pastels, atmospheric lighting, intimate conversational moment, no text, no sparkles",
+      "start_time": 21.302,
+      "end_time": 25.245,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 38.307260274887085
+    },
+    {
+      "line_number": 5,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_005.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium-wide shot from slightly elevated three-quarter angle showing two young people sitting across from each other at a wooden cafe table, warm cozy modern Korean cafe interior with soft window light and blurred cafe background details. Left side: young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing cozy beige cardigan over white turtleneck sweater with delicate gold necklace, leaning forward with both hands interlaced under her chin, warm engaged smile, eyes focused on the man with genuine interest and curiosity. Right side: handsome young Korean man in his early 20s with modern trendy soft brown hair swept to the side, wearing beige oversized knit cardigan over white t-shirt, leaning forward enthusiastically with animated expression, one hand gesturing expressively in the air as he talks about his hobby, friendly excited smile, natural engaged body language. Cafe table between them with two coffee cups, smartphones, warm wooden surface visible. Professional webtoon rendering with clean linework, soft cel shading, smooth gradient shading, natural colors, warm atmospheric lighting from window, depth of field with cafe environment softly detailed in background, contemporary Korean manhwa art style, polished digital illustration, characters looking at each other in natural conversation, dynamic composition showing connection and engagement.",
+      "start_time": 25.245,
+      "end_time": 29.854,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 38.31769394874573
+    },
+    {
+      "line_number": 6,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_006.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, close-up frontal shot of a young Korean man in his early 20s from chest up, positioned slightly off-center in frame, warm friendly smile with excited expression showing genuine enthusiasm, modern trendy hairstyle with soft brown hair swept to the side, wearing a beige oversized knit cardigan over a white t-shirt, his gaze directed toward the left side of frame where the woman sits (she is partially visible at edge of frame - her shoulder and side of her long wavy brown hair and beige cardigan visible), he is gesturing slightly with one hand in an animated conversational manner, cozy modern Korean cafe environment with soft bokeh lighting in background showing warm cafe ambiance, natural window light creating soft highlights, professional webtoon rendering with smooth gradient shading and clean line art, warm color palette with earth tones and soft pastels, atmospheric depth, intimate conversational moment capturing mutual interest and connection, contemporary Korean aesthetic, polished digital illustration",
+      "start_time": 29.854,
+      "end_time": 33.973,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 36.69946217536926
+    },
+    {
+      "line_number": 7,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_007.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium shot from slightly low angle in a cozy modern Korean cafe, a young Korean woman in her early 20s with long wavy brown hair wearing a beige cardigan over white turtleneck with delicate gold necklace, leaning forward slightly with one hand gesturing admiringly toward a young Korean man in his early 20s with soft brown hair swept to the side wearing a beige oversized knit cardigan over white t-shirt, the woman's eyes looking at his cardigan with genuine appreciation and warm smile, the man looking down at his own cardigan with modest pleased expression and shy smile, both seated at cafe table with coffee cups visible, warm natural lighting from large windows, soft bokeh cafe interior background with wooden furniture and hanging plants, clean digital webtoon art style with smooth gradient shading and defined linework, natural expressive faces, contemporary Korean fashion, warm earth tone color palette with soft pastels, atmospheric cafe ambiance, professional manhwa illustration quality",
+      "start_time": 33.973,
+      "end_time": 38.138,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 36.69706082344055
+    },
+    {
+      "line_number": 8,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_008.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium close-up shot from side angle in a cozy modern Korean cafe, young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing cozy beige cardigan over white turtleneck sweater with delicate gold necklace, natural makeup with soft pink lips, leaning slightly forward with one hand gently reaching out to touch or gesture at the sleeve of a young Korean man's beige oversized knit cardigan, her face showing admiration and delight with warm smile and sparkling eyes looking at the fabric, the young Korean man in his early 20s with modern trendy hairstyle with soft brown hair swept to the side, wearing beige oversized knit cardigan over white t-shirt, looking down at his own sleeve where she's indicating with pleased bashful expression and gentle smile, both seated at wooden cafe table with coffee cups visible in foreground, soft natural lighting from cafe windows, warm atmospheric cafe environment with blurred background showing cafe interior details, clean professional webtoon rendering with smooth gradient shading and defined linework, warm earth tone color palette, contemporary Korean fashion focus, natural poses, intimate friendly moment of compliment and appreciation, no text, no sparkles or glitter effects, high-quality manhwa illustration style",
+      "start_time": 38.138,
+      "end_time": 42.068,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 42.17233490943909
+    },
+    {
+      "line_number": 9,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_009.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium-wide shot from elevated 45-degree angle looking down at a cozy modern Korean cafe table, two young people seated across from each other, LEFT SIDE: young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing cozy beige cardigan over white turtleneck sweater with delicate gold necklace, leaning forward slightly with warm inviting smile, one hand raised in friendly open gesture toward the man, friendly enthusiastic expression, looking at him warmly, RIGHT SIDE: handsome young Korean man in his early 20s with modern trendy hairstyle soft brown hair swept to the side, wearing beige oversized knit cardigan over white t-shirt, leaning back slightly with bright happy smile, looking at her with delighted expression, both hands resting on table, round wooden cafe table between them with two coffee cups (latte art visible), small succulent plant, warm afternoon sunlight streaming through large windows in background, blurred cafe interior with plants and warm lighting, wooden furniture and shelves visible, cozy intimate atmosphere, professional webtoon rendering with clean linework and soft cel shading, warm color palette with beige browns and soft pastels, natural lighting, contemporary Korean manhwa art style, detailed environment, cinematic composition",
+      "start_time": 42.068,
+      "end_time": 49.933,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 39.97891402244568
+    },
+    {
+      "line_number": 10,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_010.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, first-person POV shot from the young woman's perspective in a cozy modern Korean cafe, foreground shows feminine hands with delicate fingers holding and presenting a warm coffee cup toward the viewer's direction, the coffee cup is ceramic in warm cream color with latte art visible on top, medium depth of field, across the small cafe table sits the handsome young Korean man in his early 20s, soft brown hair swept to the side, warm friendly smile as he looks at the offered coffee cup with pleasant surprised expression, wearing beige oversized knit cardigan over white t-shirt, natural body language leaning slightly forward showing interest, background shows soft-focused cafe interior with warm pendant lights, wooden furniture, and window light, afternoon ambiance, warm color palette with beige and cream tones, soft natural lighting from windows, professional webtoon rendering with clean linework and smooth cel shading, inviting and friendly atmosphere, capturing the moment of offering coffee to a new friend, contemporary Korean manhwa style, detailed environmental storytelling",
+      "start_time": 49.933,
+      "end_time": 56.794,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 38.95593023300171
+    },
+    {
+      "line_number": 11,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_011.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, low-angle shot looking slightly upward at two young people in a cozy modern Korean cafe, captured from diagonal perspective. In foreground-right, a young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing a cozy beige cardigan over a white turtleneck sweater and delicate gold necklace, leaning forward slightly with one hand raised in an enthusiastic friendly gesture, warm bright smile, eyes focused on the man with excited hopeful expression, natural makeup with soft pink lips. To her left-background, a handsome young Korean man in his early 20s with modern trendy hairstyle with soft brown hair swept to the side, wearing a beige oversized knit cardigan over a white t-shirt, leaning back slightly in his chair with welcoming smile, gentle eyes looking at her with interest and warmth, one hand resting on the cafe table. Behind them, detailed cafe interior with wooden tables, potted plants on shelves, large windows with natural daylight streaming in creating soft rim lighting, warm hanging pendant lights, coffee cups on table between them, atmospheric depth. Clean digital illustration with soft natural colors, smooth gradient shading, professional cel shading technique, defined clean linework, warm inviting atmosphere, contemporary Korean aesthetic, soft focus background with detailed foreground characters, natural lighting creating gentle highlights and shadows, high-quality manhwa style rendering",
+      "start_time": 56.794,
+      "end_time": 71.602,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 43.337149143218994
+    },
+    {
+      "line_number": 12,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_012.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, tight side profile shot of two young people in conversation in a cozy modern Korean cafe, left side shows a young Korean woman in her early 20s with long wavy brown hair with soft highlights wearing a cozy beige cardigan over a white turtleneck sweater and delicate gold necklace, right side shows a handsome young Korean man in his early 20s with modern trendy hairstyle with soft brown hair swept to the side wearing a beige oversized knit cardigan over a white t-shirt, both characters in sharp profile facing each other with gentle expressions and slight smiles, woman's face angled right toward the man, man's face angled left toward the woman, their profiles nearly parallel showing the intimacy of conversation, soft natural lighting illuminating their faces, warm atmospheric cafe background with blurred wooden tables and hanging plants visible between them, professional webtoon rendering with clean linework and smooth cel shading, natural facial features, warm earth tone color palette with beiges and soft browns, contemporary Korean fashion, depth of field effect with characters in focus, romantic friendship moment, genuine connection, soft bokeh effect on background elements, high-quality manhwa illustration style",
+      "start_time": 71.602,
+      "end_time": 76.411,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 36.956157207489014
+    },
+    {
+      "line_number": 13,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_013.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, exterior wide shot from street level looking through a large caf\u00e9 window into a cozy modern Korean caf\u00e9, view from outside on the sidewalk, the young Korean woman in her early 20s with long wavy brown hair wearing a cozy beige cardigan over white turtleneck and delicate gold necklace sits across from the young Korean man in his early 20s with soft brown hair swept to the side wearing a beige oversized knit cardigan over white t-shirt, both visible through the glass window at their table inside the warmly-lit caf\u00e9 interior, they are engaged in animated conversation gesturing naturally, blurred silhouettes of pedestrians walking past in the foreground on the street, caf\u00e9 window reflection showing evening street lights, warm golden interior caf\u00e9 lighting contrasting with cooler blue-tinted exterior evening ambiance, caf\u00e9 plants and d\u00e9cor visible inside through window, Korean neighborhood street setting, atmospheric depth with multiple layers of focus, cinematic composition, soft natural colors, clean digital illustration, professional webtoon rendering with detailed environment, realistic caf\u00e9 architecture with modern Korean design elements, establishing shot showing both interior and exterior space, no text, no sparkles",
+      "start_time": 76.411,
+      "end_time": 80.601,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 37.889569997787476
+    },
+    {
+      "line_number": 14,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_014.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, steep overhead angle shot looking down at a phone exchange moment in a cozy modern Korean cafe, young Korean man in his early 20s with soft brown hair swept to the side wearing beige oversized knit cardigan over white t-shirt holding his smartphone in his hand extended toward camera, screen visible showing empty contact form, young Korean woman in her early 20s with long wavy brown hair with soft highlights wearing cozy beige cardigan over white turtleneck sweater and delicate gold necklace reaching her hand toward the phone, both characters leaning close together over a cafe table, warm wooden table surface visible below with coffee cups in background, soft natural lighting from cafe windows, focused composition on the phone and hands in foreground with characters' smiling faces visible in mid-ground, warm friendly atmosphere, contemporary Korean fashion, clean digital webtoon art style with smooth gradient shading and defined linework, natural color palette with warm beige and brown tones, soft bokeh effect on background cafe interior, intimate moment of connection, professional manhwa illustration quality",
+      "start_time": 80.601,
+      "end_time": 84.985,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 39.99056077003479
+    },
+    {
+      "line_number": 15,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_015.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, medium shot at eye-level angle from the side of a cafe table, two young people engaged in animated conversation in a cozy modern Korean cafe. A handsome young Korean man in his early 20s with modern trendy soft brown hair swept to the side, wearing a beige oversized knit cardigan over a white t-shirt, leaning forward with elbows on the table, hands gesturing expressively, warm smile on his face, looking across at his conversation partner with genuine interest. Opposite him, a young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing a cozy beige cardigan over a white turtleneck sweater with delicate gold necklace, also leaning forward eagerly, one hand gesturing as she speaks, the other resting on the table, bright engaged expression. Between them on the wooden table are two coffee cups, a phone lying face-up, napkins. The background shows warm cafe interior with soft bokeh lighting, blurred cafe customers, wooden furniture, hanging plants, large windows with natural daylight streaming in. Both characters fill significant frame space, their body language showing enthusiasm and connection, neither looking at viewer. Professional webtoon rendering with clean linework, soft cel shading, warm natural color palette with earth tones, atmospheric cafe lighting creating intimate mood, high-quality manhwa illustration style, detailed environmental context.",
+      "start_time": 84.985,
+      "end_time": 88.716,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 40.3074049949646
+    },
+    {
+      "line_number": 16,
+      "image_path": "/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/line_016.jpg",
+      "prompt_used": "High-quality Korean webtoon illustration, 1080x1080 pixels, low-angle intimate close-up shot looking upward at two young people sharing wireless earbuds in a cozy modern Korean cafe, tight framing focused on their upper bodies and faces as they lean close together. Left side: young Korean woman in her early 20s with long wavy brown hair with soft highlights, wearing cozy beige cardigan over white turtleneck sweater with delicate gold necklace, eyes gently closed with peaceful content expression, soft smile, one white wireless earbud in her ear. Right side: young Korean man in his early 20s with modern trendy soft brown hair swept to the side, wearing beige oversized knit cardigan over white t-shirt, eyes closed peacefully, gentle smile, one white wireless earbud in his ear. Both characters leaning naturally toward each other in the intimate space of shared listening, soft natural lighting from cafe windows creating warm glow on their peaceful faces, blurred warm cafe background with bokeh effect showing wooden furniture and warm interior lights, phone visible at bottom edge of frame playing music, cozy intimate atmosphere, clean webtoon rendering with soft cel shading, professional digital illustration, warm earth tone color palette with beige and cream tones, natural facial features, contemporary Korean fashion, genuine moment of connection and music appreciation, smooth gradient shading, defined clean linework",
+      "start_time": 88.716,
+      "end_time": 93.441,
+      "used_reference": true,
+      "reference_image": "[PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_male.jpg'), PosixPath('/Users/dylankim/Desktop/supabase/last_hope/output/frames/390a8ccd-f314-4ad0-95c6-07245ccbe7b3/character_female.jpg')]",
+      "generation_time": 40.40857720375061
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+================================================================================
+LYRIC VIDEO GENERATION LOG
+================================================================================
+
+
+================================================================================
+STYLE GUIDE GENERATION
+================================================================================
+
+Visual Style:
+High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting
+
+Story Context:
+A young woman visits a cozy cafe and interacts with a male barista. She orders coffee, asks about menu options and amenities, enjoys her drink, and expresses gratitude. The scene progresses from ordering at the counter to receiving and tasting her beverage.
+
+
+=== CHARACTER DESIGNS GENERATED ===
+Male: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/character_male.jpg
+Male Prompt: A handsome young Korean male barista in his early 20s, friendly warm smile, shoulders and head portrait, wearing a cream-colored oversized knit sweater with brown canvas apron over it, soft brown hair with natural texture styled casually, gentle brown eyes, clean soft facial features, professional Korean webtoon manhwa art style, clean vector lines, smooth cell shading, soft lighting on face, warm color palette with earth tones, 3/4 view angle, approachable welcoming expression, detailed clothing folds and texture, high quality digital illustration, modern casual cafe worker aesthetic, no background, no sparkles, natural skin tone, professional webtoon rendering
+
+Female: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/character_female.jpg
+Female Prompt: High-quality Korean webtoon illustration, CHARACTER DESIGN PORTRAIT, young woman in early 20s, shoulders and head visible filling most of frame, facing forward in 3/4 view, friendly warm smile, approachable expression, soft gentle eyes looking at viewer, smooth clean facial features, natural matte skin tone without sparkles or glitter
+
+Long flowing brown hair with soft waves, modern Korean hairstyle, side-parted bangs framing face naturally
+
+Wearing beige cream-colored oversized knit cardigan sweater over white casual t-shirt, delicate gold necklace with small pendant, outfit in soft earth tones and neutrals, modern trendy casual Korean fashion style
+
+Professional webtoon quality rendering, clean smooth lines, soft cel shading, matte finish, detailed facial features, polished digital artwork, manhwa style illustration
+
+White background, no environmental elements, portrait focus, 1080x1080 pixels, clean composition, character reference sheet quality
+
+
+================================================================================
+LINE 1: One coffee, please
+================================================================================
+
+Korean: 커피 한 잔 주세요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Seedream Prompt:
+A cozy modern Korean cafe interior scene, young woman in beige oversized knit cardigan over white t-shirt with gold necklace and long wavy brown hair standing at wooden counter, facing handsome male barista in cream knit sweater with brown canvas apron and soft brown hair behind the counter, warm friendly interaction between them, cafe background with wooden shelves displaying coffee equipment and plants, warm pendant lighting overhead, espresso machine visible on counter, natural morning sunlight through large windows, soft atmospheric cafe ambiance, high-quality Korean webtoon manhwa art style, clean digital illustration, detailed character faces with expressive warm smiles, professional webtoon rendering with smooth cel shading and clean lines, modern casual aesthetic, soft natural color palette with earth tones and warm lighting, both characters prominently featured in unified cafe space, 3/4 view angles, welcoming coffee shop atmosphere, 1080x1080 pixels square format
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 36.05s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_001.jpg
+
+
+================================================================================
+LINE 2: Do you have iced coffee?
+================================================================================
+
+Korean: 아이스 커피 있어요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Image 1 showed the woman at the counter from a medium shot. For variety, Image 2 uses a different camera angle - an over-the-shoulder perspective from behind the barista, looking across the counter at the woman as she asks her question. This creates depth and shows the spatial relationship between customer and barista across the cafe counter. The woman is gesturing naturally as she speaks, and the barista is positioned in the foreground (back/side of head and shoulder visible) creating layered composition. This is distinctly different from the previous frontal medium shot.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, over-the-shoulder shot from behind the male barista looking across the cafe counter at the female customer, cozy modern Korean cafe interior with warm lighting, menu board visible on wall in background, coffee equipment and pastry display case on counter between them. Young woman in early 20s standing on customer side of counter, wearing beige oversized knit cardigan over white t-shirt with gold necklace, long flowing brown hair with soft waves and side-parted bangs, friendly curious expression, one hand raised in gentle questioning gesture near her chest, looking toward the barista with soft gentle eyes. Male barista's back of head and shoulder in foreground wearing cream oversized knit sweater with brown canvas apron, soft brown hair visible from behind. Wooden counter with coffee cups and saucers, warm ambient cafe lighting, plants and decor details, professional webtoon manhwa art style, clean vector lines, smooth cel shading, warm earth tone color palette, natural skin tones, depth of field composition, matte finish, no text, no sparkles, atmospheric cafe environment
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 37.28s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_002.jpg
+
+
+================================================================================
+LINE 3: I'll have a latte
+================================================================================
+
+Korean: 라떼 주세요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Image 1 showed the woman entering the cafe (wide establishing shot). Image 2 showed an over-the-shoulder view from behind the barista looking at the woman across the counter. For Image 3, I'm creating a distinctly different perspective: a close-up side profile shot focusing on the woman's face as she orders, with the barista visible but slightly blurred in the background behind the counter. This creates intimacy and emphasizes her speaking moment ('I'll have a latte'). The camera angle is much tighter, the composition is horizontal rather than the previous counter-focused framing, and we're capturing the active moment of her ordering with her mouth slightly open mid-speech and hand gesturing naturally.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, close-up side profile view, young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, gentle brown eyes looking toward the counter, mouth slightly open speaking her order, natural friendly expression, one hand raised in casual ordering gesture near chest level, soft natural skin tone without sparkles. In the background slightly out of focus, handsome young Korean male barista in early 20s with soft brown hair, wearing cream-colored oversized knit sweater with brown canvas apron, friendly attentive expression listening to her order, standing behind modern cafe counter. Cozy Korean cafe interior with warm lighting, wooden counter surface visible, coffee equipment softly blurred in background, espresso machine, cups on shelves, warm atmospheric cafe ambiance, natural window light casting soft glow, professional webtoon manhwa art style with clean lines and soft cel shading, warm earth tone color palette, intimate conversational moment, shallow depth of field effect, no text, no sparkles
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 36.61s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_003.jpg
+
+
+================================================================================
+LINE 4: Can I see the menu?
+================================================================================
+
+Korean: 메뉴 좀 볼 수 있을까요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Previous scenes showed: (1) woman entering cafe from distance, (2) over-shoulder view from barista's perspective across counter, (3) close-up side profile of woman looking down. This scene needs distinct variety - I'll create a medium shot from the woman's perspective, showing the barista's hands presenting/holding up a physical menu while his upper body and friendly face are visible. The camera angle is from across the counter looking at the barista, creating the reverse angle from image 2. The barista is actively engaged in the action of showing the menu, with his attention directed downward at the menu he's holding. This gives us a new perspective, new character positioning, and captures the specific moment of 'Can I see the menu?' with the barista literally presenting it.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, medium shot from customer's perspective across the cafe counter, handsome young Korean male barista in early 20s with soft brown hair and gentle brown eyes, wearing cream-colored oversized knit sweater with brown canvas apron, friendly warm smile on face, both hands holding up and presenting a menu board or menu card toward camera, his gaze directed downward at the menu he's displaying, upper body and torso visible behind the counter, professional cafe setting with coffee equipment and wooden counter visible in background, espresso machine and cafe accessories on counter surface, warm natural lighting from cafe windows, soft atmospheric cafe ambiance, clean digital illustration with smooth cel shading, modern casual Korean cafe aesthetic, earth tone color palette with warm browns and creams, character filling significant frame space, detailed clothing folds and textures, approachable welcoming body language, professional webtoon manhwa rendering style, no text, unified cafe environment
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 34.65s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_004.jpg
+
+
+================================================================================
+LINE 5: Is there anything sweet?
+================================================================================
+
+Korean: 달콤한 거 있어요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Previous scenes showed: (1) woman entering cafe wide shot, (2) over-shoulder from barista's perspective, (3) close-up side profile of woman, (4) medium shot of barista from customer perspective. For image 5 with the lyric 'Is there anything sweet?', I'm creating a distinctly different composition: a high-angle overhead shot looking down at the counter between them, showing the cafe counter surface with the menu, pastry display case, and their hands gesturing toward the sweet items. This bird's-eye view creates visual variety we haven't seen yet, emphasizing the interaction around the menu and sweets while showing both characters' upper bodies from above as they lean over the counter discussing options.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, overhead high-angle bird's-eye view shot looking down at cafe counter from above, young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, leaning forward over the counter from customer side, her hand pointing toward pastry display case, looking down at the sweets with curious interested expression. Across from her, handsome young Korean male barista in early 20s with soft brown hair styled casually, wearing cream-colored oversized knit sweater with brown canvas apron, leaning over counter from barista side, his hand gesturing toward glass display case filled with colorful pastries, macarons, cake slices, looking down at the display with friendly helpful expression. Between them on wooden counter surface: open menu book, small potted succulent, napkin holder. Glass pastry display case prominently featured with various colorful desserts visible - strawberry cake, chocolate brownies, pastel macarons, cream puffs. Warm cafe lighting, cozy atmosphere, clean vector lines, smooth cel shading, soft natural colors with earth tones and pastels, modern Korean cafe aesthetic, detailed counter setup, professional webtoon rendering, atmospheric overhead perspective, neither character looking at viewer
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 41.00s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_005.jpg
+
+
+================================================================================
+LINE 6: How much is it?
+================================================================================
+
+Korean: 얼마예요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Previous scenes showed: (1) establishing shot with woman entering, (2) over-shoulder from barista's back, (3) close-up side profile of woman ordering, (4) medium shot of barista responding, (5) overhead bird's-eye view of counter. For image 6 with the lyric 'How much is it?', I'll create a NEW ANGLE: a low-angle medium shot from the side of the counter, capturing both characters in profile as they look down at the payment area/register between them. This creates visual variety through: different height perspective (low angle vs previous overhead), both characters visible in same frame (unlike close-ups), side-by-side spatial relationship (new positioning), focus on the transaction moment with them looking at the register/payment area (not at each other or viewer). The woman will be reaching toward her bag/wallet while the barista gestures toward the register, creating natural interaction around the payment inquiry.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, low-angle medium side view shot from counter level, cozy modern Korean cafe interior with warm wooden counter surface in foreground, soft natural window lighting, professional webtoon rendering with clean lines and soft cel shading. Young woman in early 20s on left side of frame, long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, friendly expression looking down at counter area, one hand reaching toward small crossbody bag at her side in payment gesture. Handsome young Korean male barista in early 20s on right side of frame, soft brown hair with natural casual styling, wearing cream-colored oversized knit sweater with brown canvas apron, gentle brown eyes, warm professional smile, looking down at digital tablet register on counter between them, one hand gesturing toward payment screen. Modern cafe register and counter details visible between them, warm earth tone color palette, cozy atmospheric cafe lighting, both characters in natural conversational poses during transaction moment, detailed clothing folds and textures, matte finish without sparkles, professional manhwa quality digital illustration, unified cafe environment.
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 42.86s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_006.jpg
+
+
+================================================================================
+LINE 7: I'll pay by card
+================================================================================
+
+Korean: 카드로 계산할게요
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+This scene needs to show the payment moment. Previous scenes showed: (1) wide cafe interior with woman entering, (2) over-shoulder from barista's view, (3) close-up side profile of woman, (4) medium shot from customer perspective of barista, (5) overhead bird's-eye view of counter, (6) low-angle side view of cafe interior. For variety, I'll create a close-up angled shot focusing on the woman's hands holding a credit card at the card reader/payment terminal on the counter, with the barista's hands visible operating the payment system. This intimate detail shot of the transaction moment is distinctly different - it's a tight framing on the payment action itself, showing both characters' hands and upper bodies from a side-angled perspective across the counter. The woman is extending her card toward the terminal while the barista assists with the transaction, both looking down at the payment device rather than at each other or the viewer.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, close-up angled side shot across cafe counter, focus on payment transaction moment, young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, her hand extended holding credit card toward card payment terminal on wooden counter, gentle concentrated expression looking down at payment device, handsome young Korean male barista in early 20s with soft brown hair naturally styled, wearing cream-colored oversized knit sweater with brown canvas apron, his hands operating the payment terminal/card reader, friendly professional expression looking down at transaction, both characters' upper bodies and hands prominently visible, modern card reader device on counter between them, cozy cafe counter setting with warm wood tones, espresso machine blurred in background, soft natural lighting, clean digital illustration with smooth cel shading, warm earth tone color palette, detailed hand gestures and clothing folds, professional manhwa art style, atmospheric cafe ambiance, 3/4 angled perspective focusing on the payment interaction
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 35.27s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_007.jpg
+
+
+================================================================================
+LINE 8: Do you have Wi-Fi?
+================================================================================
+
+Korean: 와이파이 있어요?
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+Previous scenes showed: overhead view of counter, side views of interactions, close-up of payment. This scene introduces a new environmental element (Wi-Fi question) and shifts to a medium-wide shot showing the spatial relationship between the two characters. The barista is now gesturing/pointing toward something off-frame (likely a Wi-Fi sign or router), creating directional movement and breaking from the static counter exchanges. The woman is shown from a front-side angle looking toward where he's pointing, creating a natural eye-line match. This is the first scene showing fuller body language with pointing/directional gestures rather than just handling items.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, medium-wide shot from slight side angle, cozy modern Korean cafe interior with warm lighting, wooden counter visible on left side of frame, young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, standing in front of counter looking toward her right with curious interested expression, handsome young Korean male barista in early 20s with soft brown hair naturally styled, wearing cream-colored oversized knit sweater with brown canvas apron, standing behind counter, his arm raised and pointing toward upper right area of cafe wall with helpful friendly expression, both characters in 3/4 view, the woman's face turned toward where he's pointing, natural eye-line between gesture and her gaze, cafe details visible including wooden countertop, espresso machine on counter, minimalist pendant lights overhead, clean modern aesthetic with warm earth tones, soft natural lighting, professional webtoon rendering with clean lines and cel shading, matte finish, atmospheric depth, modern Korean cafe ambiance, characters filling significant frame space in natural conversational pose
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 37.37s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_008.jpg
+
+
+================================================================================
+LINE 9: It's delicious!
+================================================================================
+
+Korean: 맛있어요!
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+This scene shifts to a CLOSE-UP reaction shot focused primarily on the FEMALE CHARACTER's delighted expression as she tastes the coffee. Unlike previous scenes which showed wider shots of both characters across the counter or during payment, this is an intimate moment capturing her genuine reaction. The camera angle is from slightly above and to the side, creating a candid feel. The barista is visible but slightly blurred/softened in the background, watching her reaction with a pleased smile. This creates depth and shows his satisfaction at her enjoyment. The composition emphasizes her face, the cup she's holding near her lips, and her joyful expression - a key emotional beat in the sequence that's distinctly different from the transaction and serving moments.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, close-up intimate shot from slightly elevated side angle, young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, eyes closed or half-closed in pure delight, bright genuine smile showing joy and satisfaction, holding white ceramic coffee cup near her face with both hands, steam rising from cup, cheeks slightly flushed with happiness, natural matte skin tone, soft gentle features. In the softly blurred background behind her, handsome young Korean male barista in early 20s with soft brown hair and gentle brown eyes, wearing cream-colored oversized knit sweater with brown canvas apron, watching her with warm satisfied smile and pleased expression. Cozy modern Korean cafe interior setting with warm ambient lighting, soft bokeh effect on background cafe elements, wooden counter edge visible, warm earth tone color palette, atmospheric cafe environment, professional webtoon manhwa art style with clean vector lines and smooth cel shading, detailed facial expression showing genuine happiness, natural lighting highlighting her delighted reaction, high quality digital illustration with depth of field effect, candid moment capture
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 37.94s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_009.jpg
+
+
+================================================================================
+LINE 10: Thank you!
+================================================================================
+
+Korean: 감사합니다!
+
+
+--------------------------------------------------------------------------------
+CLAUDE PROMPT GENERATION
+--------------------------------------------------------------------------------
+
+Creative Reasoning:
+This is the final scene showing gratitude and farewell. Previous scenes showed: counter interactions, overhead views, payment, coffee being served, and the woman tasting her drink. For this conclusive moment, I'll create a warm farewell scene with a medium-wide shot from a side angle showing both characters at the counter. The woman will be holding her coffee cup, offering a grateful smile and slight bow toward the barista, while he responds with a warm smile and friendly wave or nod. This creates a natural ending with both characters visible, showing the completed transaction and positive interaction. The camera angle will be from the side of the counter, capturing both their body language and the cozy cafe atmosphere behind them, distinctly different from the close-ups and overhead shots used before.
+
+Seedream Prompt:
+High-quality Korean webtoon style illustration, medium-wide shot from side angle perspective, cozy modern Korean cafe interior, warm natural lighting from large windows, wooden counter with coffee equipment visible in background. Young woman in early 20s with long flowing brown hair with soft waves and side-parted bangs, wearing beige oversized knit cardigan over white t-shirt with delicate gold necklace, holding takeout coffee cup in both hands close to her chest, body turned toward the barista, offering grateful smile and slight polite bow, gentle expression of appreciation. Handsome young Korean male barista in early 20s with soft brown hair styled casually, wearing cream-colored oversized knit sweater with brown canvas apron, standing behind counter, warm friendly smile, one hand raised in friendly wave or acknowledging gesture, the two looking at each other across the counter space. Cafe background with menu boards, plants, warm wood tones, soft bokeh lighting effects, professional webtoon manhwa art style with clean lines, soft cel shading, warm earth tone color palette, natural skin tones without sparkles, matte finish, detailed clothing folds, cozy farewell atmosphere, genuine human connection moment, high quality digital illustration
+
+  Reference: Character designs (male + female portraits)
+
+
+--------------------------------------------------------------------------------
+GENERATION RESULT
+--------------------------------------------------------------------------------
+
+Status: SUCCESS
+Generation Time: 38.59s
+Image Path: /Users/dylankim/Desktop/supabase/last_hope/output/frames/98b8268a-9848-40f1-a06d-399db86ca9a4/line_010.jpg
+
+
+================================================================================
+GENERATION SUMMARY
+================================================================================
+
+Total Images Generated: 10
+Total Time: 387.72s
+Average Time per Image: 38.77s
+
