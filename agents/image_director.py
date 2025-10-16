@@ -1,8 +1,8 @@
 from utils.claude_client import ClaudeClient
 from utils.seedream_client import SeedreamClient
 from utils.generation_logger import GenerationLogger
-from models.data_models import LyricLine, StyleGuide, GeneratedImage
-from typing import List, Tuple
+from models.data_models import LyricLine, StyleGuide, GeneratedImage, CustomCreativeInput
+from typing import List, Tuple, Optional
 from pathlib import Path
 from config.settings import config
 import time
@@ -13,7 +13,8 @@ class ImageDirector:
         self.claude = ClaudeClient()
         self.seedream = SeedreamClient()
     
-    def generate_character_designs(self, style_guide: StyleGuide, song_id: str) -> Tuple[List[Path], List[str]]:
+    def generate_character_designs(self, style_guide: StyleGuide, song_id: str,
+                                  custom_input: Optional[CustomCreativeInput] = None) -> Tuple[List[Path], List[str]]:
         """Generate character design references and return paths + prompts"""
         print("\n🎨 GENERATING CHARACTER DESIGNS...")
         
@@ -25,10 +26,16 @@ class ImageDirector:
         
         # Generate male character
         print("  → Generating male character design...")
-        male_prompt = self.claude.generate_character_design(
-            style_guide.dict(),
-            gender="male"
-        )
+        if custom_input and custom_input.character_male_description:
+            print("  ℹ️  Using custom male character description")
+            male_prompt = custom_input.character_male_description
+        else:
+            print("  ℹ️  Auto-generating male character design")
+            male_prompt = self.claude.generate_character_design(
+                style_guide.dict(),
+                gender="male"
+            )
+        
         character_prompts.append(male_prompt)
         print(f"  Prompt: {male_prompt[:100]}...")
         
@@ -47,10 +54,16 @@ class ImageDirector:
         
         # Generate female character
         print("  → Generating female character design...")
-        female_prompt = self.claude.generate_character_design(
-            style_guide.dict(),
-            gender="female"
-        )
+        if custom_input and custom_input.character_female_description:
+            print("  ℹ️  Using custom female character description")
+            female_prompt = custom_input.character_female_description
+        else:
+            print("  ℹ️  Auto-generating female character design")
+            female_prompt = self.claude.generate_character_design(
+                style_guide.dict(),
+                gender="female"
+            )
+        
         character_prompts.append(female_prompt)
         print(f"  Prompt: {female_prompt[:100]}...")
         
@@ -71,7 +84,8 @@ class ImageDirector:
     
     def generate_all_images(self, target_lyrics: List[LyricLine],
                            style_guide: StyleGuide,
-                           song_id: str) -> List[GeneratedImage]:
+                           song_id: str,
+                           custom_input: Optional[CustomCreativeInput] = None) -> List[GeneratedImage]:
         """Generate all images for the lyric lines"""
         
         generated_images = []
@@ -85,8 +99,23 @@ class ImageDirector:
         logger = GenerationLogger(log_path)
         logger.log_style_guide(style_guide.dict())
         
+        # Log custom input if provided
+        if custom_input:
+            logger.log("\n=== CUSTOM INPUT PROVIDED ===")
+            if custom_input.story_description:
+                logger.log(f"Custom Story: {custom_input.story_description}")
+            if custom_input.character_male_description:
+                logger.log(f"Custom Male Character: {custom_input.character_male_description}")
+            if custom_input.character_female_description:
+                logger.log(f"Custom Female Character: {custom_input.character_female_description}")
+            if custom_input.is_conversation is not None:
+                logger.log(f"Is Conversation: {custom_input.is_conversation}")
+            logger.log("")
+        
         # STEP 1: Generate character designs
-        character_refs, character_design_prompts = self.generate_character_designs(style_guide, song_id)
+        character_refs, character_design_prompts = self.generate_character_designs(
+            style_guide, song_id, custom_input
+        )
         logger.log("\n=== CHARACTER DESIGNS GENERATED ===")
         logger.log(f"Male: {character_refs[0]}")
         logger.log(f"Male Prompt: {character_design_prompts[0]}\n")

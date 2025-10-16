@@ -17,13 +17,20 @@ class LyricLine(BaseModel):
 class SongMetadata(BaseModel):
     id: str
     title: str
-    artist: Optional[str] = None  # Make it optional
+    artist: Optional[str] = None
     description: Optional[str]
     audio_file_path: str
-    duration_seconds: Optional[float] = None  # Also make this optional
+    duration_seconds: Optional[float] = None
     artist_gender: Optional[str]
     original_lyrics_text: Optional[str]
     cover_image_prompt: Optional[str]
+
+class CustomCreativeInput(BaseModel):
+    """Optional custom input to override auto-generation"""
+    story_description: Optional[str] = None  # Custom story narrative
+    character_male_description: Optional[str] = None  # Custom male character
+    character_female_description: Optional[str] = None  # Custom female character
+    is_conversation: Optional[bool] = None  # Override conversation detection
 
 class StyleGuide(BaseModel):
     visual_style: str
@@ -52,3 +59,4 @@ class VideoGenerationRequest(BaseModel):
     end_line: Optional[int] = None
     resolution: str = "4k"
     output_filename: Optional[str] = None
+    custom_input: Optional[CustomCreativeInput] = None
