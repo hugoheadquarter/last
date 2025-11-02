@@ -49,8 +49,8 @@ class Config:
 config = Config()
 ===./agents/style_planner.py===
 from utils.claude_client import ClaudeClient
-from models.data_models import SongMetadata, LyricLine, StyleGuide
-from typing import List
+from models.data_models import SongMetadata, LyricLine, StyleGuide, CustomCreativeInput
+from typing import List, Optional
 
 class StylePlanner:
     def __init__(self):
@@ -58,8 +58,23 @@ class StylePlanner:
     
     def create_style_guide(self, song: SongMetadata, 
                           all_lyrics: List[LyricLine],
-                          target_lyrics: List[LyricLine]) -> StyleGuide:
-        """Generate style guide for the video segment"""
+                          target_lyrics: List[LyricLine],
+                          custom_input: Optional[CustomCreativeInput] = None) -> StyleGuide:
+        """Generate style guide for the video segment, using custom input if provided"""
+        
+        # If custom input provided, use it directly
+        if custom_input and custom_input.story_description:
+            print("  ℹ️  Using custom story description")
+            print(f"     Story: {custom_input.story_description[:100]}...")
+            
+            return StyleGuide(
+                visual_style="High-quality Korean webtoon style with clean digital illustration, soft natural colors, expressive faces, modern fashion, atmospheric lighting",
+                segment_story=custom_input.story_description,
+                is_conversation=custom_input.is_conversation if custom_input.is_conversation is not None else True
+            )
+        
+        # Otherwise, auto-generate as before
+        print("  ℹ️  Auto-generating story from lyrics")
         
         # Format lyrics as text
         all_lyrics_text = "\n".join([
@@ -320,8 +335,8 @@ class VideoCompositor:
 from utils.claude_client import ClaudeClient
 from utils.seedream_client import SeedreamClient
 from utils.generation_logger import GenerationLogger
-from models.data_models import LyricLine, StyleGuide, GeneratedImage
-from typing import List, Tuple
+from models.data_models import LyricLine, StyleGuide, GeneratedImage, CustomCreativeInput
+from typing import List, Tuple, Optional
 from pathlib import Path
 from config.settings import config
 import time
@@ -332,7 +347,8 @@ class ImageDirector:
         self.claude = ClaudeClient()
         self.seedream = SeedreamClient()
     
-    def generate_character_designs(self, style_guide: StyleGuide, song_id: str) -> Tuple[List[Path], List[str]]:
+    def generate_character_designs(self, style_guide: StyleGuide, song_id: str,
+                                  custom_input: Optional[CustomCreativeInput] = None) -> Tuple[List[Path], List[str]]:
         """Generate character design references and return paths + prompts"""
         print("\n🎨 GENERATING CHARACTER DESIGNS...")
         
@@ -344,10 +360,16 @@ class ImageDirector:
         
         # Generate male character
         print("  → Generating male character design...")
-        male_prompt = self.claude.generate_character_design(
-            style_guide.dict(),
-            gender="male"
-        )
+        if custom_input and custom_input.character_male_description:
+            print("  ℹ️  Using custom male character description")
+            male_prompt = custom_input.character_male_description
+        else:
+            print("  ℹ️  Auto-generating male character design")
+            male_prompt = self.claude.generate_character_design(
+                style_guide.dict(),
+                gender="male"
+            )
+        
         character_prompts.append(male_prompt)
         print(f"  Prompt: {male_prompt[:100]}...")
         
@@ -366,10 +388,16 @@ class ImageDirector:
         
         # Generate female character
         print("  → Generating female character design...")
-        female_prompt = self.claude.generate_character_design(
-            style_guide.dict(),
-            gender="female"
-        )
+        if custom_input and custom_input.character_female_description:
+            print("  ℹ️  Using custom female character description")
+            female_prompt = custom_input.character_female_description
+        else:
+            print("  ℹ️  Auto-generating female character design")
+            female_prompt = self.claude.generate_character_design(
+                style_guide.dict(),
+                gender="female"
+            )
+        
         character_prompts.append(female_prompt)
         print(f"  Prompt: {female_prompt[:100]}...")
         
@@ -390,7 +418,8 @@ class ImageDirector:
     
     def generate_all_images(self, target_lyrics: List[LyricLine],
                            style_guide: StyleGuide,
-                           song_id: str) -> List[GeneratedImage]:
+                           song_id: str,
+                           custom_input: Optional[CustomCreativeInput] = None) -> List[GeneratedImage]:
         """Generate all images for the lyric lines"""
         
         generated_images = []
@@ -404,8 +433,23 @@ class ImageDirector:
         logger = GenerationLogger(log_path)
         logger.log_style_guide(style_guide.dict())
         
+        # Log custom input if provided
+        if custom_input:
+            logger.log("\n=== CUSTOM INPUT PROVIDED ===")
+            if custom_input.story_description:
+                logger.log(f"Custom Story: {custom_input.story_description}")
+            if custom_input.character_male_description:
+                logger.log(f"Custom Male Character: {custom_input.character_male_description}")
+            if custom_input.character_female_description:
+                logger.log(f"Custom Female Character: {custom_input.character_female_description}")
+            if custom_input.is_conversation is not None:
+                logger.log(f"Is Conversation: {custom_input.is_conversation}")
+            logger.log("")
+        
         # STEP 1: Generate character designs
-        character_refs, character_design_prompts = self.generate_character_designs(style_guide, song_id)
+        character_refs, character_design_prompts = self.generate_character_designs(
+            style_guide, song_id, custom_input
+        )
         logger.log("\n=== CHARACTER DESIGNS GENERATED ===")
         logger.log(f"Male: {character_refs[0]}")
         logger.log(f"Male Prompt: {character_design_prompts[0]}\n")
@@ -1102,13 +1146,20 @@ class LyricLine(BaseModel):
 class SongMetadata(BaseModel):
     id: str
     title: str
-    artist: Optional[str] = None  # Make it optional
+    artist: Optional[str] = None
     description: Optional[str]
     audio_file_path: str
-    duration_seconds: Optional[float] = None  # Also make this optional
+    duration_seconds: Optional[float] = None
     artist_gender: Optional[str]
     original_lyrics_text: Optional[str]
     cover_image_prompt: Optional[str]
+
+class CustomCreativeInput(BaseModel):
+    """Optional custom input to override auto-generation"""
+    story_description: Optional[str] = None  # Custom story narrative
+    character_male_description: Optional[str] = None  # Custom male character
+    character_female_description: Optional[str] = None  # Custom female character
+    is_conversation: Optional[bool] = None  # Override conversation detection
 
 class StyleGuide(BaseModel):
     visual_style: str
@@ -1137,6 +1188,7 @@ class VideoGenerationRequest(BaseModel):
     end_line: Optional[int] = None
     resolution: str = "4k"
     output_filename: Optional[str] = None
+    custom_input: Optional[CustomCreativeInput] = None
 ===./test.py===
 # test_complete_pipeline.py
 """
@@ -1598,23 +1650,75 @@ def main():
 
 if __name__ == "__main__":
     main()
-===./main.py===
+===./create_video.py===
+"""
+assemble_video.py
+Simple script to assemble video from already-generated images
+Usage: python assemble_video.py
+"""
+
 from agents.data_retriever import DataRetriever
-from agents.style_planner import StylePlanner
-from agents.image_director import ImageDirector
 from agents.video_compositor import VideoCompositor
-from models.data_models import VideoGenerationRequest
+from models.data_models import VideoGenerationRequest, GeneratedImage, LyricLine
 from config.settings import config
 from pathlib import Path
+from typing import List
 import json
 
-def generate_lyric_video(song_id: str, start_line: int = 1, 
-                        end_line: int = None) -> Path:
+def find_existing_images(song_id: str, start_line: int, end_line: int, 
+                        lyrics: List[LyricLine]) -> List[GeneratedImage]:
+    """Find already-generated images for the given line range"""
+    frames_dir = config.FRAMES_DIR / song_id
+    
+    if not frames_dir.exists():
+        raise FileNotFoundError(f"Frames directory not found: {frames_dir}")
+    
+    images = []
+    missing_lines = []
+    
+    for lyric in lyrics:
+        image_filename = f"line_{lyric.line_number:03d}.jpg"
+        image_path = frames_dir / image_filename
+        
+        if not image_path.exists():
+            missing_lines.append(lyric.line_number)
+            continue
+        
+        images.append(GeneratedImage(
+            line_number=lyric.line_number,
+            image_path=str(image_path),
+            prompt_used="N/A - using existing image",
+            start_time=lyric.start_time_seconds,
+            end_time=lyric.end_time_seconds,
+            used_reference=True,
+            reference_image=None
+        ))
+    
+    if missing_lines:
+        raise FileNotFoundError(
+            f"Missing images for lines: {missing_lines}\n"
+            f"Expected location: {frames_dir}\n"
+            f"Generate these images first before assembling video."
+        )
+    
+    return images
+
+def assemble_from_existing_images(song_id: str, 
+                                  start_line: int = 1, 
+                                  end_line: int = None) -> Path:
     """
-    Main orchestration function for generating lyric videos
+    Assemble video from already-generated images
+    
+    Args:
+        song_id: Song ID from database
+        start_line: Starting lyric line number
+        end_line: Ending lyric line number (None = last line)
+        
+    Returns:
+        Path to generated video file
     """
     print("=" * 60)
-    print("🎵 LYRIC VIDEO GENERATOR")
+    print("🎬 VIDEO ASSEMBLY (FROM EXISTING IMAGES)")
     print("=" * 60)
     
     # Create necessary directories
@@ -1625,6 +1729,162 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
         song_id=song_id,
         start_line=start_line,
         end_line=end_line
+    )
+    
+    # Step 1: Fetch data (audio + lyrics only)
+    print("\n📥 STEP 1: Fetching data from Supabase...")
+    retriever = DataRetriever()
+    song, all_lyrics, target_lyrics, audio_path = retriever.fetch_all_data(request)
+    print(f"✓ Song: {song.title} by {song.artist}")
+    print(f"✓ Lines {start_line} to {target_lyrics[-1].line_number}")
+    print(f"✓ Total lines: {len(target_lyrics)}")
+    
+    # Step 2: Find existing images
+    print("\n🖼️  STEP 2: Loading existing images...")
+    images = find_existing_images(song_id, start_line, target_lyrics[-1].line_number, target_lyrics)
+    print(f"✓ Found {len(images)} existing images")
+    for img in images:
+        print(f"  - Line {img.line_number}: {Path(img.image_path).name}")
+    
+    # Step 3: Assemble video
+    print("\n🎬 STEP 3: Assembling video...")
+    compositor = VideoCompositor()
+    
+    output_filename = f"song_{song_id}_lines_{start_line}-{target_lyrics[-1].line_number}.mp4"
+    output_path = config.VIDEOS_DIR / output_filename
+    
+    final_video = compositor.assemble_video(images, target_lyrics, audio_path, output_path)
+    
+    # Save metadata
+    metadata = {
+        "song_id": song_id,
+        "title": song.title,
+        "artist": song.artist,
+        "start_line": start_line,
+        "end_line": target_lyrics[-1].line_number,
+        "total_images": len(images),
+        "assembled_from_existing": True,
+        "images": [img.dict() for img in images]
+    }
+    
+    metadata_path = config.VIDEOS_DIR / f"{output_filename}.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2))
+    
+    print("\n" + "=" * 60)
+    print("✅ VIDEO ASSEMBLY COMPLETE!")
+    print(f"📹 Video: {final_video}")
+    print(f"📄 Metadata: {metadata_path}")
+    print("=" * 60)
+    
+    return final_video
+
+if __name__ == "__main__":
+    # Edit these values:
+    SONG_ID = "5bda393c-4fb0-43a5-bb47-9f23bba063b2"  # Your song ID
+    START_LINE = 1
+    END_LINE = 8  # Or None for all lines
+    
+    try:
+        assemble_from_existing_images(
+            song_id=SONG_ID,
+            start_line=START_LINE,
+            end_line=END_LINE
+        )
+    except FileNotFoundError as e:
+        print(f"\n❌ ERROR: {e}")
+        print("\nMake sure images exist at:")
+        print(f"  {config.FRAMES_DIR / SONG_ID}/")
+        print("\nExpected files:")
+        for i in range(START_LINE, (END_LINE or START_LINE) + 1):
+            print(f"  - line_{i:03d}.jpg")
+    except Exception as e:
+        print(f"\n❌ UNEXPECTED ERROR: {e}")
+        import traceback
+        traceback.print_exc()
+===./main.py===
+from agents.data_retriever import DataRetriever
+from agents.style_planner import StylePlanner
+from agents.image_director import ImageDirector
+from agents.video_compositor import VideoCompositor
+from models.data_models import VideoGenerationRequest, CustomCreativeInput
+from config.settings import config
+from pathlib import Path
+from typing import Optional
+import json
+
+def generate_lyric_video(song_id: str, 
+                        start_line: int = 1, 
+                        end_line: Optional[int] = None,
+                        custom_story: Optional[str] = None,
+                        custom_male_character: Optional[str] = None,
+                        custom_female_character: Optional[str] = None,
+                        is_conversation: Optional[bool] = None) -> Path:
+    """
+    Main orchestration function for generating lyric videos
+    
+    Args:
+        song_id: Song ID from database
+        start_line: Starting lyric line number
+        end_line: Ending lyric line number (None = last line)
+        custom_story: Optional custom story description to override auto-generation
+        custom_male_character: Optional custom male character description
+        custom_female_character: Optional custom female character description
+        is_conversation: Optional override for conversation detection
+        
+    Returns:
+        Path to generated video file
+        
+    Examples:
+        # Fully automatic
+        generate_lyric_video("song-id", 1, 10)
+        
+        # Custom story only
+        generate_lyric_video(
+            "song-id", 1, 10,
+            custom_story="Two friends meeting at a cafe"
+        )
+        
+        # Full custom control
+        generate_lyric_video(
+            "song-id", 1, 10,
+            custom_story="College students studying together",
+            custom_male_character="Young man, glasses, navy hoodie",
+            custom_female_character="Young woman, ponytail, cream cardigan",
+            is_conversation=True
+        )
+    """
+    print("=" * 60)
+    print("🎵 LYRIC VIDEO GENERATOR")
+    print("=" * 60)
+    
+    # Create necessary directories
+    config.create_directories()
+    
+    # Build custom input if any provided
+    custom_input = None
+    if any([custom_story, custom_male_character, custom_female_character, is_conversation is not None]):
+        custom_input = CustomCreativeInput(
+            story_description=custom_story,
+            character_male_description=custom_male_character,
+            character_female_description=custom_female_character,
+            is_conversation=is_conversation
+        )
+        print("\n🎨 CUSTOM INPUT PROVIDED:")
+        if custom_story:
+            print(f"  📖 Story: {custom_story[:80]}...")
+        if custom_male_character:
+            print(f"  👨 Male Character: {custom_male_character[:80]}...")
+        if custom_female_character:
+            print(f"  👩 Female Character: {custom_female_character[:80]}...")
+        if is_conversation is not None:
+            print(f"  💬 Is Conversation: {is_conversation}")
+    
+    # Create request
+    request = VideoGenerationRequest(
+        song_id=song_id,
+        start_line=start_line,
+        end_line=end_line,
+        custom_input=custom_input
     )
     
     # Step 1: Data Retrieval
@@ -1638,14 +1898,15 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
     # Step 2: Style Planning
     print("\n🎨 STEP 2: Creating style guide...")
     planner = StylePlanner()
-    style_guide = planner.create_style_guide(song, all_lyrics, target_lyrics)
-    print(f"✓ Visual Style: {style_guide.visual_style}")
-    print(f"✓ Story: {style_guide.segment_story}")
+    style_guide = planner.create_style_guide(song, all_lyrics, target_lyrics, custom_input)
+    print(f"✓ Visual Style: {style_guide.visual_style[:80]}...")
+    print(f"✓ Story: {style_guide.segment_story[:80]}...")
+    print(f"✓ Is Conversation: {style_guide.is_conversation}")
     
     # Step 3: Image Generation
     print("\n🖼️  STEP 3: Generating images...")
     director = ImageDirector()
-    images = director.generate_all_images(target_lyrics, style_guide, song_id)
+    images = director.generate_all_images(target_lyrics, style_guide, song_id, custom_input)
     print(f"✓ Generated {len(images)} images")
     
     # Step 4: Video Assembly
@@ -1666,6 +1927,7 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
         "end_line": target_lyrics[-1].line_number,
         "total_images": len(images),
         "style_guide": style_guide.dict(),
+        "custom_input": custom_input.dict() if custom_input else None,
         "images": [img.dict() for img in images]
     }
     
@@ -1681,12 +1943,27 @@ def generate_lyric_video(song_id: str, start_line: int = 1,
     return final_video
 
 if __name__ == "__main__":
-    # Example usage
-    song_id = "830e1d7a-3b3b-492c-83d4-e2b233a1c00b"  # "Help Me!" song
-    
-    # Generate lines 1-10
     generate_lyric_video(
-        song_id=song_id,
+        song_id="625910fe-2050-407e-8abf-aed4e446d461",
         start_line=1,
-        end_line=10
+        end_line=16,
     )
+    
+    # Example 2: Custom story only
+    # generate_lyric_video(
+    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
+    #     start_line=1,
+    #     end_line=3,
+    #     custom_story="A lost tourist asking a friendly local for directions in Seoul, with the local patiently helping despite the language barrier"
+    # )
+    
+    # Example 3: Full custom control
+    # generate_lyric_video(
+    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
+    #     start_line=1,
+    #     end_line=3,
+    #     custom_story="Two college students studying Korean together in a university library, with one asking for help and the other explaining patiently",
+    #     custom_male_character="Young Korean man in early 20s, short neat black hair, round wire-frame glasses, wearing a gray university hoodie with a book logo, friendly and patient expression, holding a textbook, Korean webtoon style, soft colors, clean illustration",
+    #     custom_female_character="Young woman in early 20s, long brown hair in a ponytail, wearing a cream-colored cardigan over a white t-shirt and light blue jeans, confused but eager expression, holding a notebook, Korean webtoon style, soft colors, clean illustration",
+    #     is_conversation=True
+    # )

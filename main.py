@@ -2,6 +2,7 @@ from agents.data_retriever import DataRetriever
 from agents.style_planner import StylePlanner
 from agents.image_director import ImageDirector
 from agents.video_compositor import VideoCompositor
+from agents.drive_uploader import DriveUploader
 from models.data_models import VideoGenerationRequest, CustomCreativeInput
 from config.settings import config
 from pathlib import Path
@@ -14,7 +15,9 @@ def generate_lyric_video(song_id: str,
                         custom_story: Optional[str] = None,
                         custom_male_character: Optional[str] = None,
                         custom_female_character: Optional[str] = None,
-                        is_conversation: Optional[bool] = None) -> Path:
+                        is_conversation: Optional[bool] = None,
+                        upload_to_drive: bool = False,
+                        delete_after_upload: bool = True) -> Path:
     """
     Main orchestration function for generating lyric videos
     
@@ -26,6 +29,8 @@ def generate_lyric_video(song_id: str,
         custom_male_character: Optional custom male character description
         custom_female_character: Optional custom female character description
         is_conversation: Optional override for conversation detection
+        upload_to_drive: Whether to upload video to Google Drive
+        delete_after_upload: Whether to delete local video after upload (only if upload_to_drive=True)
         
     Returns:
         Path to generated video file
@@ -40,13 +45,18 @@ def generate_lyric_video(song_id: str,
             custom_story="Two friends meeting at a cafe"
         )
         
-        # Full custom control
+        # Upload to Drive and delete local copy
         generate_lyric_video(
             "song-id", 1, 10,
-            custom_story="College students studying together",
-            custom_male_character="Young man, glasses, navy hoodie",
-            custom_female_character="Young woman, ponytail, cream cardigan",
-            is_conversation=True
+            upload_to_drive=True,
+            delete_after_upload=True
+        )
+        
+        # Upload to Drive but keep local copy
+        generate_lyric_video(
+            "song-id", 1, 10,
+            upload_to_drive=True,
+            delete_after_upload=False
         )
     """
     print("=" * 60)
@@ -136,31 +146,33 @@ def generate_lyric_video(song_id: str,
     print(f"📄 Metadata: {metadata_path}")
     print("=" * 60)
     
+    # Step 5: Upload to Google Drive (optional)
+    if upload_to_drive:
+        print("\n📤 STEP 5: Uploading to Google Drive...")
+        try:
+            uploader = DriveUploader()
+            drive_result = uploader.upload_video(
+                video_path=final_video,
+                song_id=song_id,
+                delete_after_upload=delete_after_upload
+            )
+            print("\n" + "=" * 60)
+            print("✅ UPLOAD COMPLETE!")
+            print(f"🔗 View on Drive: {drive_result['video_link']}")
+            print("=" * 60)
+            
+        except Exception as e:
+            print(f"\n⚠️  Upload failed: {e}")
+            print(f"📹 Video saved locally: {final_video}")
+    
     return final_video
 
 if __name__ == "__main__":
     generate_lyric_video(
-        song_id="2cabb33e-00e7-4033-b113-719ac733cb98",
+        song_id="625910fe-2050-407e-8abf-aed4e446d461",
         start_line=1,
-        end_line=7,
-        is_conversation=False
+        end_line=8,
+        upload_to_drive=True,
     )
+
     
-    # Example 2: Custom story only
-    # generate_lyric_video(
-    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
-    #     start_line=1,
-    #     end_line=3,
-    #     custom_story="A lost tourist asking a friendly local for directions in Seoul, with the local patiently helping despite the language barrier"
-    # )
-    
-    # Example 3: Full custom control
-    # generate_lyric_video(
-    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
-    #     start_line=1,
-    #     end_line=3,
-    #     custom_story="Two college students studying Korean together in a university library, with one asking for help and the other explaining patiently",
-    #     custom_male_character="Young Korean man in early 20s, short neat black hair, round wire-frame glasses, wearing a gray university hoodie with a book logo, friendly and patient expression, holding a textbook, Korean webtoon style, soft colors, clean illustration",
-    #     custom_female_character="Young woman in early 20s, long brown hair in a ponytail, wearing a cream-colored cardigan over a white t-shirt and light blue jeans, confused but eager expression, holding a notebook, Korean webtoon style, soft colors, clean illustration",
-    #     is_conversation=True
-    # )

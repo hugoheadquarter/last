@@ -14,6 +14,10 @@ class Config:
     SEEDREAM_API_KEY = os.getenv("SEEDREAM_API_KEY")
     SEEDREAM_ENDPOINT = os.getenv("SEEDREAM_ENDPOINT")
     
+    # Google Drive Configuration
+    GOOGLE_DRIVE_CREDENTIALS_PATH = os.getenv("GOOGLE_DRIVE_CREDENTIALS_PATH")
+    GOOGLE_DRIVE_ROOT_FOLDER_ID = os.getenv("GOOGLE_DRIVE_ROOT_FOLDER_ID")
+    
     # Paths
     BASE_DIR = Path(__file__).parent.parent
     OUTPUT_DIR = BASE_DIR / "output"

@@ -127,9 +127,9 @@ def assemble_from_existing_images(song_id: str,
 
 if __name__ == "__main__":
     # Edit these values:
-    SONG_ID = "7b9f8181-d21c-44e0-8790-b0639936b0a5"  # Your song ID
+    SONG_ID = "5bda393c-4fb0-43a5-bb47-9f23bba063b2"  # Your song ID
     START_LINE = 1
-    END_LINE = 10  # Or None for all lines
+    END_LINE = 8  # Or None for all lines
     
     try:
         assemble_from_existing_images(
