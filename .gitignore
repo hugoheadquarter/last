@@ -20,4 +20,5 @@ output copy/
 *.jpg
 *.png
 *.mov
-EOF
+EOFcredentials/google-drive-oauth.json
+credentials/token.pickle

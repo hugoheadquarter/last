@@ -87,39 +87,31 @@ Note: visual_style field should always contain the exact text above for consiste
         """Generate a character design portrait for reference"""
         
         prompt = f"""High-quality Korean webtoon style
-- No background
-- The face should appear natural, without glittering or sparkling effects.
-- Professional webtoon quality 
-- IMPORTANT: Choose outfits that are appropriate and visually aligned with the theme of the song.
+    - No background
+    - The face should appear natural, without glittering or sparkling effects.
+    - Professional webtoon quality 
 
-Story context: {style_guide['segment_story']}
+    Story context: {style_guide['segment_story']}
 
-Create a CHARACTER DESIGN PORTRAIT for a {gender} character in this webtoon style.
+    Create a CHARACTER DESIGN PORTRAIT for a {gender} character in this webtoon style.
 
-This is a REFERENCE IMAGE for character consistency across scenes.
+    This is a REFERENCE IMAGE for character consistency across scenes.
 
-REQUIREMENTS:
-- Young {gender} character (early 20s)
-- Character fills most of frame (shoulders and head visible)
-- Character facing forward or slightly angled (3/4 view)
-- Friendly, approachable expression
-- Modern Korean fashion (trendy, casual, stylish)
-- Clear features: face, hair, clothing details
-- Webtoon-quality rendering: smooth shading, clean lines, professional finish
+    REQUIREMENTS:
+    - Young {gender} character (early 20s)
+    - Character fills most of frame (shoulders and head visible)
+    - Character facing forward or slightly angled (3/4 view)
+    - Friendly, approachable expression
+    - Clear features: face, hair, clothing details
+    - Webtoon-quality rendering: smooth shading, clean lines, professional finish
 
-CLOTHING:
-- Specific modern outfit 
-- Fashionable colors (earth tones, pastels, neutrals)
-- This outfit stays consistent across all scenes
-- Make it memorable and suitable for casual meetings
+    FORBIDDEN:
+    - NO text
 
-FORBIDDEN:
-- NO text
+    Image specs: 1080x1080 pixels
 
-Image specs: 1080x1080 pixels
-
-Respond with ONLY the Seedream prompt for this {gender} character in high-quality webtoon style.
-"""
+    Respond with ONLY the Seedream prompt for this {gender} character in high-quality webtoon style.
+    """
         
         response = self.client.messages.create(
             model=self.model,

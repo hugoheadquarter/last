@@ -17,6 +17,10 @@ class Config:
     SEEDREAM_API_KEY = os.getenv("SEEDREAM_API_KEY")
     SEEDREAM_ENDPOINT = os.getenv("SEEDREAM_ENDPOINT")
     
+    # Google Drive Configuration
+    GOOGLE_DRIVE_CREDENTIALS_PATH = os.getenv("GOOGLE_DRIVE_CREDENTIALS_PATH")
+    GOOGLE_DRIVE_ROOT_FOLDER_ID = os.getenv("GOOGLE_DRIVE_ROOT_FOLDER_ID")
+    
     # Paths
     BASE_DIR = Path(__file__).parent.parent
     OUTPUT_DIR = BASE_DIR / "output"
@@ -47,6 +51,178 @@ class Config:
         cls.TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 config = Config()
+===./main2.py===
+"""
+Batch Video Generator
+Process all published Korean songs and generate videos for lines 1-8
+"""
+
+from main import generate_lyric_video
+from utils.supabase_client import SupabaseClient
+from config.settings import config
+import time
+from datetime import datetime
+
+def get_all_published_korean_songs():
+    """Fetch all published Korean songs from Supabase"""
+    supabase = SupabaseClient()
+    
+    print("📥 Fetching all published Korean songs from database...")
+    
+    response = (
+        supabase.client.table("songs")
+        .select("id, title, language, is_published")
+        .eq("is_published", True)
+        .eq("language", "korean")
+        .order("created_at", desc=True)  # Newest first
+        .execute()
+    )
+    
+    songs = response.data
+    print(f"✓ Found {len(songs)} published Korean songs\n")
+    
+    return songs
+
+def process_all_songs():
+    """Process all songs and generate videos"""
+    
+    print("=" * 80)
+    print("🎬 BATCH VIDEO GENERATOR - ALL KOREAN SONGS")
+    print("=" * 80)
+    print(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    
+    # Fetch all songs
+    songs = get_all_published_korean_songs()
+    
+    if len(songs) == 0:
+        print("❌ No songs found!")
+        return
+    
+    # Configuration
+    START_LINE = 1
+    END_LINE = 8
+    UPLOAD_TO_DRIVE = True
+    DELETE_AFTER_UPLOAD = True
+    
+    print("⚙️  CONFIGURATION:")
+    print(f"  Lines: {START_LINE} to {END_LINE}")
+    print(f"  Upload to Drive: {UPLOAD_TO_DRIVE}")
+    print(f"  Delete after upload: {DELETE_AFTER_UPLOAD}")
+    print()
+    
+    # Stats tracking
+    successful = []
+    failed = []
+    skipped = []
+    
+    # Process each song
+    for idx, song in enumerate(songs, 1):
+        song_id = song['id']
+        title = song['title']
+        
+        print("\n" + "=" * 80)
+        print(f"📀 PROCESSING {idx}/{len(songs)}: {title}")
+        print(f"   Song ID: {song_id}")
+        print("=" * 80)
+        
+        try:
+            # Check if video already exists in Drive (optional check)
+            # You can add logic here to skip songs that are already processed
+            
+            # Generate video
+            start_time = time.time()
+            
+            generate_lyric_video(
+                song_id=song_id,
+                start_line=START_LINE,
+                end_line=END_LINE,
+                upload_to_drive=UPLOAD_TO_DRIVE,
+                delete_after_upload=DELETE_AFTER_UPLOAD
+            )
+            
+            elapsed = time.time() - start_time
+            
+            successful.append({
+                'song_id': song_id,
+                'title': title,
+                'time': elapsed
+            })
+            
+            print(f"\n✅ SUCCESS! Completed in {elapsed:.1f}s")
+            
+        except Exception as e:
+            print(f"\n❌ FAILED: {e}")
+            failed.append({
+                'song_id': song_id,
+                'title': title,
+                'error': str(e)
+            })
+            
+            # Continue with next song even if this one fails
+            print("   → Continuing with next song...")
+        
+        # Add a small delay between songs to avoid rate limits
+        if idx < len(songs):
+            print("\n⏳ Waiting 5 seconds before next song...")
+            time.sleep(5)
+    
+    # Final Report
+    print("\n\n" + "=" * 80)
+    print("📊 BATCH PROCESSING COMPLETE!")
+    print("=" * 80)
+    print(f"Finished at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    
+    print(f"✅ Successful: {len(successful)}/{len(songs)}")
+    print(f"❌ Failed: {len(failed)}/{len(songs)}")
+    print(f"⏭️  Skipped: {len(skipped)}/{len(songs)}")
+    
+    if successful:
+        print("\n" + "-" * 80)
+        print("✅ SUCCESSFUL SONGS:")
+        print("-" * 80)
+        for s in successful:
+            print(f"  ✓ {s['title']} ({s['time']:.1f}s)")
+    
+    if failed:
+        print("\n" + "-" * 80)
+        print("❌ FAILED SONGS:")
+        print("-" * 80)
+        for f in failed:
+            print(f"  ✗ {f['title']}")
+            print(f"    Error: {f['error']}")
+    
+    # Save report to file
+    report_path = config.VIDEOS_DIR / f"batch_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write("BATCH VIDEO GENERATION REPORT\n")
+        f.write("=" * 80 + "\n\n")
+        f.write(f"Total Songs: {len(songs)}\n")
+        f.write(f"Successful: {len(successful)}\n")
+        f.write(f"Failed: {len(failed)}\n")
+        f.write(f"Skipped: {len(skipped)}\n\n")
+        
+        f.write("SUCCESSFUL:\n")
+        for s in successful:
+            f.write(f"  - {s['title']} (ID: {s['song_id']})\n")
+        
+        f.write("\nFAILED:\n")
+        for fail in failed:
+            f.write(f"  - {fail['title']} (ID: {fail['song_id']})\n")
+            f.write(f"    Error: {fail['error']}\n")
+    
+    print(f"\n📄 Report saved: {report_path}")
+    print("\n" + "=" * 80)
+
+if __name__ == "__main__":
+    # Confirm before starting
+    print("\n⚠️  WARNING: This will process ALL published Korean songs!")
+    print("   Each video will be uploaded to Drive and local copy deleted.")
+    response = input("\n   Continue? (yes/no): ")
+    
+    if response.lower() in ['yes', 'y']:
+        process_all_songs()
+    else:
+        print("\n❌ Cancelled.")
 ===./agents/style_planner.py===
 from utils.claude_client import ClaudeClient
 from models.data_models import SongMetadata, LyricLine, StyleGuide, CustomCreativeInput
@@ -329,6 +505,69 @@ class VideoCompositor:
         
         print(f"✓ Video saved to {output_path}")
         return output_path
+===./agents/drive_uploader.py===
+"""
+Simple Drive Uploader
+Just uploads video file directly to Google Drive root folder
+"""
+
+from pathlib import Path
+from typing import Dict
+from utils.drive_client import DriveClient
+from config.settings import config
+
+class DriveUploader:
+    def __init__(self):
+        self.drive_client = DriveClient(
+            credentials_path=str(config.GOOGLE_DRIVE_CREDENTIALS_PATH),
+            root_folder_id=config.GOOGLE_DRIVE_ROOT_FOLDER_ID
+        )
+    
+    def upload_video(self, 
+                    video_path: Path,
+                    song_id: str,
+                    delete_after_upload: bool = True) -> Dict[str, str]:
+        """
+        Upload video directly to Drive root folder
+        
+        Args:
+            video_path: Path to the video file
+            song_id: Song ID (not used for folder creation anymore)
+            delete_after_upload: Whether to delete local file after upload
+            
+        Returns:
+            Dictionary with Drive file info
+        """
+        print("\n📤 UPLOADING TO GOOGLE DRIVE...")
+        
+        try:
+            # Upload video directly to root folder (no subfolder)
+            print(f"  → Uploading video: {video_path.name}...")
+            video_result = self.drive_client.upload_file(
+                file_path=video_path,
+                folder_id=self.drive_client.root_folder_id,  # ← Upload to root!
+                make_public=False
+            )
+            
+            print(f"\n✅ Upload complete!")
+            print(f"  🎬 Video: {video_result['web_view_link']}")
+            
+            # Delete local file if requested
+            if delete_after_upload:
+                print(f"\n🗑️  Deleting local file...")
+                size_mb = video_path.stat().st_size / (1024 * 1024)
+                video_path.unlink()
+                print(f"  ✓ Deleted: {video_path.name} ({size_mb:.2f} MB freed)")
+            
+            return {
+                'video_file_id': video_result['file_id'],
+                'video_link': video_result['web_view_link'],
+                'folder_id': self.drive_client.root_folder_id
+            }
+            
+        except Exception as e:
+            print(f"\n❌ Upload failed: {e}")
+            raise
 ===./agents/__init__.py===
 
 ===./agents/image_director.py===
@@ -628,7 +867,7 @@ class SeedreamClient:
                 self.endpoint,
                 headers=self.headers,
                 json=payload,
-                timeout=120
+                timeout=180
             )
             
             response.raise_for_status()
@@ -840,6 +1079,244 @@ class SupabaseClient:
             raise Exception(f"Could not download audio from any URL pattern. Path: {audio_path}")
         
         return output_path
+===./utils/drive_client.py===
+"""
+Google Drive Client using OAuth 2.0
+Handles authentication, folder creation, and file uploads
+"""
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from googleapiclient.errors import HttpError
+from pathlib import Path
+from typing import Optional, Dict
+import os
+import pickle
+
+class DriveClient:
+    # Scopes define what permissions we need
+    SCOPES = ['https://www.googleapis.com/auth/drive.file']
+    
+    def __init__(self, credentials_path: str, root_folder_id: Optional[str] = None):
+        """
+        Initialize Drive client with OAuth credentials
+        
+        Args:
+            credentials_path: Path to OAuth client secret JSON
+            root_folder_id: Optional root folder ID to organize uploads
+        """
+        self.credentials_path = Path(credentials_path)
+        self.root_folder_id = root_folder_id
+        self.token_path = self.credentials_path.parent / "token.pickle"
+        self.service = None
+        
+        self._authenticate()
+    
+    def _authenticate(self):
+        """Handle OAuth authentication flow"""
+        creds = None
+        
+        # Check if we have saved credentials
+        if self.token_path.exists():
+            print("  → Loading saved credentials...")
+            with open(self.token_path, 'rb') as token:
+                creds = pickle.load(token)
+        
+        # If credentials are invalid or don't exist, get new ones
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                print("  → Refreshing expired credentials...")
+                creds.refresh(Request())
+            else:
+                print("  → Starting OAuth flow (browser will open)...")
+                print("  → Please authorize the app in your browser")
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    str(self.credentials_path), self.SCOPES
+                )
+                creds = flow.run_local_server(port=0)
+                print("  ✓ Authorization successful!")
+            
+            # Save credentials for next time
+            with open(self.token_path, 'wb') as token:
+                pickle.dump(creds, token)
+            print(f"  ✓ Credentials saved to {self.token_path}")
+        
+        # Build the Drive service
+        self.service = build('drive', 'v3', credentials=creds)
+        print("  ✓ Drive client ready!")
+    
+    def create_folder(self, folder_name: str, parent_folder_id: Optional[str] = None) -> str:
+        """
+        Create a folder in Google Drive
+        
+        Args:
+            folder_name: Name of the folder to create
+            parent_folder_id: Optional parent folder ID
+            
+        Returns:
+            Created folder ID
+        """
+        try:
+            # Check if folder already exists
+            parent_id = parent_folder_id or self.root_folder_id
+            
+            if parent_id:
+                query = f"name='{folder_name}' and '{parent_id}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false"
+            else:
+                query = f"name='{folder_name}' and mimeType='application/vnd.google-apps.folder' and trashed=false"
+            
+            results = self.service.files().list(
+                q=query,
+                spaces='drive',
+                fields='files(id, name)'
+            ).execute()
+            
+            files = results.get('files', [])
+            
+            if files:
+                print(f"  → Folder '{folder_name}' already exists")
+                return files[0]['id']
+            
+            # Create new folder
+            file_metadata = {
+                'name': folder_name,
+                'mimeType': 'application/vnd.google-apps.folder'
+            }
+            
+            if parent_id:
+                file_metadata['parents'] = [parent_id]
+            
+            folder = self.service.files().create(
+                body=file_metadata,
+                fields='id, webViewLink'
+            ).execute()
+            
+            folder_id = folder.get('id')
+            print(f"  ✓ Created folder: {folder_name} (ID: {folder_id})")
+            
+            return folder_id
+            
+        except HttpError as error:
+            print(f"  ❌ Error creating folder: {error}")
+            raise
+    
+    def upload_file(self, 
+                   file_path: Path, 
+                   folder_id: Optional[str] = None,
+                   make_public: bool = False) -> Dict[str, str]:
+        """
+        Upload a file to Google Drive
+        
+        Args:
+            file_path: Path to the file to upload
+            folder_id: Optional folder ID to upload to
+            make_public: Whether to make the file publicly accessible
+            
+        Returns:
+            Dictionary with file_id, web_view_link, and download_link
+        """
+        try:
+            if not file_path.exists():
+                raise FileNotFoundError(f"File not found: {file_path}")
+            
+            file_name = file_path.name
+            mime_type = self._get_mime_type(file_path)
+            
+            file_metadata = {'name': file_name}
+            
+            if folder_id:
+                file_metadata['parents'] = [folder_id]
+            elif self.root_folder_id:
+                file_metadata['parents'] = [self.root_folder_id]
+            
+            media = MediaFileUpload(
+                str(file_path),
+                mimetype=mime_type,
+                resumable=True
+            )
+            
+            print(f"  → Uploading {file_name} ({file_path.stat().st_size / (1024*1024):.2f} MB)...")
+            
+            file = self.service.files().create(
+                body=file_metadata,
+                media_body=media,
+                fields='id, webViewLink, webContentLink'
+            ).execute()
+            
+            file_id = file.get('id')
+            web_view_link = file.get('webViewLink')
+            
+            print(f"  ✓ Upload complete! File ID: {file_id}")
+            
+            # Make public if requested
+            if make_public:
+                self._make_file_public(file_id)
+                download_link = f"https://drive.google.com/uc?export=download&id={file_id}"
+            else:
+                download_link = file.get('webContentLink', web_view_link)
+            
+            return {
+                'file_id': file_id,
+                'web_view_link': web_view_link,
+                'download_link': download_link,
+                'folder_id': folder_id
+            }
+            
+        except HttpError as error:
+            print(f"  ❌ Upload error: {error}")
+            raise
+    
+    def _make_file_public(self, file_id: str):
+        """Make a file publicly accessible"""
+        try:
+            self.service.permissions().create(
+                fileId=file_id,
+                body={
+                    'type': 'anyone',
+                    'role': 'reader'
+                }
+            ).execute()
+            print(f"  ✓ File made public")
+        except HttpError as error:
+            print(f"  ⚠️  Could not make file public: {error}")
+    
+    def _get_mime_type(self, file_path: Path) -> str:
+        """Get MIME type based on file extension"""
+        extension = file_path.suffix.lower()
+        mime_types = {
+            '.mp4': 'video/mp4',
+            '.json': 'application/json',
+            '.txt': 'text/plain',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.png': 'image/png',
+            '.mp3': 'audio/mpeg',
+        }
+        return mime_types.get(extension, 'application/octet-stream')
+    
+    def delete_file(self, file_id: str):
+        """Delete a file from Drive"""
+        try:
+            self.service.files().delete(fileId=file_id).execute()
+            print(f"  ✓ Deleted file: {file_id}")
+        except HttpError as error:
+            print(f"  ❌ Delete error: {error}")
+            raise
+    
+    def get_file_info(self, file_id: str) -> Dict:
+        """Get information about a file"""
+        try:
+            file = self.service.files().get(
+                fileId=file_id,
+                fields='id, name, mimeType, size, webViewLink, createdTime'
+            ).execute()
+            return file
+        except HttpError as error:
+            print(f"  ❌ Error getting file info: {error}")
+            raise
 ===./utils/claude_client.py===
 from anthropic import Anthropic
 from config.settings import config
@@ -930,39 +1407,31 @@ Note: visual_style field should always contain the exact text above for consiste
         """Generate a character design portrait for reference"""
         
         prompt = f"""High-quality Korean webtoon style
-- No background
-- The face should appear natural, without glittering or sparkling effects.
-- Professional webtoon quality 
-- IMPORTANT: Choose outfits that are appropriate and visually aligned with the theme of the song.
+    - No background
+    - The face should appear natural, without glittering or sparkling effects.
+    - Professional webtoon quality 
 
-Story context: {style_guide['segment_story']}
+    Story context: {style_guide['segment_story']}
 
-Create a CHARACTER DESIGN PORTRAIT for a {gender} character in this webtoon style.
+    Create a CHARACTER DESIGN PORTRAIT for a {gender} character in this webtoon style.
 
-This is a REFERENCE IMAGE for character consistency across scenes.
+    This is a REFERENCE IMAGE for character consistency across scenes.
 
-REQUIREMENTS:
-- Young {gender} character (early 20s)
-- Character fills most of frame (shoulders and head visible)
-- Character facing forward or slightly angled (3/4 view)
-- Friendly, approachable expression
-- Modern Korean fashion (trendy, casual, stylish)
-- Clear features: face, hair, clothing details
-- Webtoon-quality rendering: smooth shading, clean lines, professional finish
+    REQUIREMENTS:
+    - Young {gender} character (early 20s)
+    - Character fills most of frame (shoulders and head visible)
+    - Character facing forward or slightly angled (3/4 view)
+    - Friendly, approachable expression
+    - Clear features: face, hair, clothing details
+    - Webtoon-quality rendering: smooth shading, clean lines, professional finish
 
-CLOTHING:
-- Specific modern outfit 
-- Fashionable colors (earth tones, pastels, neutrals)
-- This outfit stays consistent across all scenes
-- Make it memorable and suitable for casual meetings
+    FORBIDDEN:
+    - NO text
 
-FORBIDDEN:
-- NO text
+    Image specs: 1080x1080 pixels
 
-Image specs: 1080x1080 pixels
-
-Respond with ONLY the Seedream prompt for this {gender} character in high-quality webtoon style.
-"""
+    Respond with ONLY the Seedream prompt for this {gender} character in high-quality webtoon style.
+    """
         
         response = self.client.messages.create(
             model=self.model,
@@ -1801,11 +2270,148 @@ if __name__ == "__main__":
         print(f"\n❌ UNEXPECTED ERROR: {e}")
         import traceback
         traceback.print_exc()
+===./test_drive_oauth.py===
+"""
+Test OAuth authentication with Google Drive
+Run this to verify your setup works before integrating
+"""
+
+import sys
+from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent))
+
+load_dotenv()
+
+from utils.drive_client import DriveClient
+
+def test_drive_oauth():
+    """Test OAuth flow and Drive operations"""
+    
+    print("=" * 60)
+    print("🔐 GOOGLE DRIVE OAUTH TEST")
+    print("=" * 60)
+    
+    # Get credentials from .env
+    credentials_path = os.getenv('GOOGLE_DRIVE_CREDENTIALS_PATH')
+    root_folder_id = os.getenv('GOOGLE_DRIVE_ROOT_FOLDER_ID')
+    
+    if not credentials_path:
+        print("❌ ERROR: GOOGLE_DRIVE_CREDENTIALS_PATH not set in .env")
+        return False
+    
+    credentials_path = Path(credentials_path)
+    if not credentials_path.exists():
+        print(f"❌ ERROR: Credentials file not found: {credentials_path}")
+        print(f"   Looking at: {credentials_path.absolute()}")
+        return False
+    
+    print(f"\n✓ Credentials file: {credentials_path}")
+    print(f"✓ Root folder ID: {root_folder_id or 'None (will upload to My Drive)'}")
+    
+    # Step 1: Authenticate
+    print("\n" + "─" * 60)
+    print("📋 Step 1: Authenticating with OAuth...")
+    print("─" * 60)
+    
+    try:
+        client = DriveClient(
+            credentials_path=str(credentials_path),
+            root_folder_id=root_folder_id
+        )
+        print("\n✅ Authentication successful!")
+    except Exception as e:
+        print(f"\n❌ Authentication failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+    
+    # Step 2: Create a test folder
+    print("\n" + "─" * 60)
+    print("📁 Step 2: Creating test folder...")
+    print("─" * 60)
+    
+    try:
+        test_folder_id = client.create_folder("Melos_OAuth_Test")
+        print(f"✅ Test folder created/found: {test_folder_id}")
+    except Exception as e:
+        print(f"❌ Folder creation failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+    
+    # Step 3: Create and upload a test file
+    print("\n" + "─" * 60)
+    print("📤 Step 3: Uploading test file...")
+    print("─" * 60)
+    
+    try:
+        # Create a small test file
+        test_file = Path("/tmp/melos_test.txt")
+        test_file.write_text("This is a test file from Melos Video Uploader!\nOAuth is working! 🎉")
+        
+        result = client.upload_file(
+            file_path=test_file,
+            folder_id=test_folder_id,
+            make_public=False
+        )
+        
+        print(f"\n✅ Upload successful!")
+        print(f"  📄 File ID: {result['file_id']}")
+        print(f"  🔗 View Link: {result['web_view_link']}")
+        
+        # Cleanup test file
+        test_file.unlink()
+        
+    except Exception as e:
+        print(f"❌ Upload failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+    
+    # Step 4: Get file info
+    print("\n" + "─" * 60)
+    print("ℹ️  Step 4: Verifying upload...")
+    print("─" * 60)
+    
+    try:
+        file_info = client.get_file_info(result['file_id'])
+        print(f"✅ File verified in Drive:")
+        print(f"  Name: {file_info['name']}")
+        print(f"  Size: {file_info.get('size', 'N/A')} bytes")
+        print(f"  Created: {file_info['createdTime']}")
+    except Exception as e:
+        print(f"❌ Verification failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+    
+    # Success!
+    print("\n" + "=" * 60)
+    print("🎉 ALL TESTS PASSED!")
+    print("=" * 60)
+    print("\n✓ OAuth authentication works")
+    print("✓ Folder creation works")
+    print("✓ File upload works")
+    print("✓ File verification works")
+    print("\n📁 Test folder in Drive: Melos_OAuth_Test")
+    print("🔗 Check it out:", result['web_view_link'])
+    print("\n✅ Ready to integrate with video generator!")
+    
+    return True
+
+if __name__ == "__main__":
+    success = test_drive_oauth()
+    sys.exit(0 if success else 1)
 ===./main.py===
 from agents.data_retriever import DataRetriever
 from agents.style_planner import StylePlanner
 from agents.image_director import ImageDirector
 from agents.video_compositor import VideoCompositor
+from agents.drive_uploader import DriveUploader
 from models.data_models import VideoGenerationRequest, CustomCreativeInput
 from config.settings import config
 from pathlib import Path
@@ -1818,7 +2424,9 @@ def generate_lyric_video(song_id: str,
                         custom_story: Optional[str] = None,
                         custom_male_character: Optional[str] = None,
                         custom_female_character: Optional[str] = None,
-                        is_conversation: Optional[bool] = None) -> Path:
+                        is_conversation: Optional[bool] = None,
+                        upload_to_drive: bool = False,
+                        delete_after_upload: bool = True) -> Path:
     """
     Main orchestration function for generating lyric videos
     
@@ -1830,6 +2438,8 @@ def generate_lyric_video(song_id: str,
         custom_male_character: Optional custom male character description
         custom_female_character: Optional custom female character description
         is_conversation: Optional override for conversation detection
+        upload_to_drive: Whether to upload video to Google Drive
+        delete_after_upload: Whether to delete local video after upload (only if upload_to_drive=True)
         
     Returns:
         Path to generated video file
@@ -1844,13 +2454,18 @@ def generate_lyric_video(song_id: str,
             custom_story="Two friends meeting at a cafe"
         )
         
-        # Full custom control
+        # Upload to Drive and delete local copy
         generate_lyric_video(
             "song-id", 1, 10,
-            custom_story="College students studying together",
-            custom_male_character="Young man, glasses, navy hoodie",
-            custom_female_character="Young woman, ponytail, cream cardigan",
-            is_conversation=True
+            upload_to_drive=True,
+            delete_after_upload=True
+        )
+        
+        # Upload to Drive but keep local copy
+        generate_lyric_video(
+            "song-id", 1, 10,
+            upload_to_drive=True,
+            delete_after_upload=False
         )
     """
     print("=" * 60)
@@ -1940,30 +2555,35 @@ def generate_lyric_video(song_id: str,
     print(f"📄 Metadata: {metadata_path}")
     print("=" * 60)
     
+    # Step 5: Upload to Google Drive (optional)
+    if upload_to_drive:
+        print("\n📤 STEP 5: Uploading to Google Drive...")
+        try:
+            uploader = DriveUploader()
+            drive_result = uploader.upload_video(
+                video_path=final_video,
+                song_id=song_id,
+                delete_after_upload=delete_after_upload
+            )
+            print("\n" + "=" * 60)
+            print("✅ UPLOAD COMPLETE!")
+            print(f"🔗 View on Drive: {drive_result['video_link']}")
+            print("=" * 60)
+            
+        except Exception as e:
+            print(f"\n⚠️  Upload failed: {e}")
+            print(f"📹 Video saved locally: {final_video}")
+    
     return final_video
 
 if __name__ == "__main__":
     generate_lyric_video(
-        song_id="625910fe-2050-407e-8abf-aed4e446d461",
+        song_id="f45fe486-128a-4acc-b77b-1afda459d574",
         start_line=1,
         end_line=16,
+        custom_story="Digital illustration of a fierce pink cartoon teddy bear with a hyperpop street attitude walking through a lively Seoul city crosswalk, wearing edgy fashion like a black sleeveless top with a cracked heart emblem, a spiked choker, a pleated mini skirt with a chain, fishnet stockings, chunky platform boots, the bear’s determined expression showing bold confidence while surrounded by colorful Korean storefront signs, bright daylight reflections, and dynamic crowds, vibrant urban hues with saturated yellows, blues, and pinks, strong bold outlines and lively cartoon detailing, square composition with the bear dominating the center as it strides forward with attitude, capturing the playful chaos of pop culture and punk energy in a Seoul city vibe. IMPORTANT: The bear is the main character in the story. You dont even have to make two human charactesr appear. put focus on the bear.",
+        upload_to_drive=False,
     )
+
     
-    # Example 2: Custom story only
-    # generate_lyric_video(
-    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
-    #     start_line=1,
-    #     end_line=3,
-    #     custom_story="A lost tourist asking a friendly local for directions in Seoul, with the local patiently helping despite the language barrier"
-    # )
-    
-    # Example 3: Full custom control
-    # generate_lyric_video(
-    #     song_id="8e36b8ba-a752-4717-8f55-78f1d4996c8c",
-    #     start_line=1,
-    #     end_line=3,
-    #     custom_story="Two college students studying Korean together in a university library, with one asking for help and the other explaining patiently",
-    #     custom_male_character="Young Korean man in early 20s, short neat black hair, round wire-frame glasses, wearing a gray university hoodie with a book logo, friendly and patient expression, holding a textbook, Korean webtoon style, soft colors, clean illustration",
-    #     custom_female_character="Young woman in early 20s, long brown hair in a ponytail, wearing a cream-colored cardigan over a white t-shirt and light blue jeans, confused but eager expression, holding a notebook, Korean webtoon style, soft colors, clean illustration",
-    #     is_conversation=True
-    # )
+#5f406392-77a2-43e3-b928-cf8ef62a291a

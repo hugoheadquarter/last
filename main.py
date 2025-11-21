@@ -169,10 +169,12 @@ def generate_lyric_video(song_id: str,
 
 if __name__ == "__main__":
     generate_lyric_video(
-        song_id="625910fe-2050-407e-8abf-aed4e446d461",
+        song_id="54278559-b036-446a-ab2a-30f8ea069729",
         start_line=1,
-        end_line=8,
-        upload_to_drive=True,
+        end_line=16,
+        #custom_story="Digital illustration of a fierce pink cartoon teddy bear with a hyperpop street attitude walking through a lively Seoul city crosswalk, wearing edgy fashion like a black sleeveless top with a cracked heart emblem, a spiked choker, a pleated mini skirt with a chain, fishnet stockings, chunky platform boots, the bear’s determined expression showing bold confidence while surrounded by colorful Korean storefront signs, bright daylight reflections, and dynamic crowds, vibrant urban hues with saturated yellows, blues, and pinks, strong bold outlines and lively cartoon detailing, square composition with the bear dominating the center as it strides forward with attitude, capturing the playful chaos of pop culture and punk energy in a Seoul city vibe. IMPORTANT: The bear is the main character in the story. Also You dont have to make two human charactesr appear in every scene - just make one of them appear when you think it's natural. put focus on the bear. Also do not make the body of a bear look like human. The teddy bear body stays as a teddy bear, regardless of what clothe she wears.",
+        upload_to_drive=False,
     )
 
     
+#5f406392-77a2-43e3-b928-cf8ef62a291a
